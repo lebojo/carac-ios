@@ -52,12 +52,20 @@ struct CreateAnExerciseView: View {
         }
         .navigationTitle("Create an exercise")
         .safeAreaInset(edge: .bottom) {
-            Button("Save now", systemImage: "calendar.badge.plus") {
-                modelContext.insert(newExercise)
-                mainViewState.mainPath.removeLast()
+            HStack {
+                Button("Save now", systemImage: "calendar.badge.plus") {
+                    modelContext.insert(newExercise)
+                    mainViewState.mainPath.removeLast()
+                }
+                .buttonStyle(.bordered)
+                .padding()
+
+                Button("Fake exercice", systemImage: "gear") {
+                    modelContext.insert(sampleExercise)
+                    mainViewState.mainPath.removeLast()
+                    mainViewState.mainPath.append(Session(exercises: [sampleExercise]))
+                }
             }
-            .buttonStyle(.bordered)
-            .padding()
             .frame(maxWidth: .infinity)
             .background(.background)
         }

@@ -13,34 +13,56 @@ struct ExerciseListView: View {
     var body: some View {
         List {
             Section {
-                Button {
-                    exercise.sets.append(ExerciseSet(id: Int.random(in: 1...1000000)))
-                } label: {
-                    Text("Add Set")
+                ForEach(exercise.sets.sorted { $0.id < $1.id }) { set in
+                    SetView(set: set)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                if let setIndex = exercise.sets.firstIndex(of: set) {
+                                    deleteSets(at: [setIndex])
+                                }
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                 }
-
-                if exercise.sets.count > 1 {
-                    Button {
-                        exercise.sets.removeLast()
-                    } label: {
-                        Text("Remove Set")
-                    }
-                }
+                .onDelete(perform: deleteSets)
             } header: {
-                Text(exercise.name)
+                HStack {
+                    Text(exercise.name)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("\(exercise.sets.count)")
+                }
             } footer: {
-                Text("\(exercise.sets.count) Sets")
-            }
-
-            ForEach(exercise.sets) { set in
-                SetView(set: set)
+                HStack {
+                    Button {
+                        withAnimation {
+                            exercise.sets.append(ExerciseSet(
+                                id: (exercise.sets.last?.id ?? 0) + 1,
+                                reps: exercise.sets.last?.reps ?? 1,
+                                weight: exercise.sets.last?.weight ?? 1
+                            ))
+                        }
+                    } label: {
+                        Text("Add Set")
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 25.0))
-        .shadow(radius: 5)
+        .shadow(color: .primary, radius: 5)
         .padding()
     }
-    //            .navigationTitle("Caca") TODO: Fix crash
+
+    //            .navigationTitle("Test") TODO: Fix crash
+
+    private func deleteSets(at offsets: IndexSet) {
+        withAnimation {
+            exercise.sets.remove(atOffsets: offsets)
+        }
+    }
 }
 
 #Preview {

@@ -35,7 +35,9 @@ struct HomeView: View {
                         )
                     } else {
                         Button {
-                            mainViewState.mainPath.append(MainState.Session(exercise: todayExercises))
+                            let session = Session(exercises: todayExercises)
+                            modelContext.insert(session)
+                            mainViewState.mainPath.append(session)
                         } label: {
                             Text("Today exercices: \(todayExercises.count)")
                         }
@@ -60,10 +62,11 @@ struct HomeView: View {
                 switch state {
                 case .createExercise:
                     CreateAnExerciseView()
-                case .Session(let exercises):
-                    SessionView(exercises: exercises)
                 }
             }
+            .navigationDestination(for: Session.self, destination: { session in
+                SessionView(session: session)
+            })
             .onBoarding(isPresented: exercises.isEmpty) // TODO: Change to UserDefaults
         }
     }
@@ -86,4 +89,5 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .modelContainer(for: Exercise.self, inMemory: true)
+        .environmentObject(sampleMainViewState)
 }

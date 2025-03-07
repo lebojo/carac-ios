@@ -4,15 +4,8 @@
     "%@" : {
 
     },
-    "%lld Sets" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld Sets"
-          }
-        }
-      }
+    "%lld" : {
+
     },
     "Add Set" : {
       "localizations" : {
@@ -64,6 +57,15 @@
         }
       }
     },
+    "Delete" : {
+
+    },
+    "Dimanche" : {
+
+    },
+    "End session" : {
+
+    },
     "Every %@" : {
       "localizations" : {
         "fr" : {
@@ -73,6 +75,9 @@
           }
         }
       }
+    },
+    "Fake exercice" : {
+
     },
     "Hey, welcome to Carac!" : {
       "localizations" : {
@@ -104,16 +109,6 @@
         }
       }
     },
-    "Remove Set" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retirer un set"
-          }
-        }
-      }
-    },
     "Repeat" : {
       "localizations" : {
         "fr" : {
@@ -134,6 +129,9 @@
         }
       }
     },
+    "Save" : {
+
+    },
     "Save now" : {
       "localizations" : {
         "fr" : {
@@ -144,15 +142,8 @@
         }
       }
     },
-    "Set %lld" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set: %lld"
-          }
-        }
-      }
+    "Terminate the session now and save all your stats ?" : {
+
     },
     "This week" : {
       "localizations" : {
@@ -175,7 +166,14 @@
       }
     },
     "Today exercices: %lld" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exercices: %lld"
+          }
+        }
+      }
     },
     "TODO" : {
       "localizations" : {

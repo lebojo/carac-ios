@@ -10,7 +10,6 @@ import SwiftUI
 
 enum MainState: Hashable {
     case createExercise
-    case Session(exercise: [Exercise])
 }
 
 class MainViewState: ObservableObject {

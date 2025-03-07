@@ -12,18 +12,22 @@ struct SetView: View {
     @Bindable var set: ExerciseSet
 
     var body: some View {
-        Section("Set \(set.id)") {
-            Stepper("Weight: \(set.weight.formatted())kg", value: Binding(get: {
+        VStack {
+            Stepper(value: Binding(get: {
                 set.weight
             }, set: { value in
                 set.weight = value
-            }), step: 0.5)
+            }), in: 0 ... 200, step: 0.5) {
+                Label("Weight: \(set.weight.formatted())kg", systemImage: "dumbbell.fill")
+            }
 
-            Stepper("Reps: \(set.reps)", value: Binding(get: {
+            Stepper(value: Binding(get: {
                 set.reps
             }, set: { value in
                 set.reps = value
-            }))
+            }), in: 0 ... 200) {
+                Label("Reps: \(set.reps)", systemImage: "arrow.triangle.2.circlepath")
+            }
         }
     }
 }
