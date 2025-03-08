@@ -5,6 +5,7 @@
 //  Created by Jordan on 07.03.2025.
 //
 
+import Charts
 import SwiftUI
 
 struct ExerciseListView: View {
@@ -24,6 +25,7 @@ struct ExerciseListView: View {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
+                        .listRowSeparator(.hidden)
                 }
                 .onDelete(perform: deleteSets)
             } header: {
@@ -33,30 +35,13 @@ struct ExerciseListView: View {
                     Text("\(exercise.sets.count)")
                 }
             } footer: {
-                HStack {
-                    Button {
-                        withAnimation {
-                            exercise.sets.append(ExerciseSet(
-                                id: (exercise.sets.last?.id ?? 0) + 1,
-                                reps: exercise.sets.last?.reps ?? 1,
-                                weight: exercise.sets.last?.weight ?? 1
-                            ))
-                        }
-                    } label: {
-                        Text("Add Set")
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
+                AddSetsButton(exercise: exercise)
+                    .listRowSeparator(.hidden)
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: 25.0))
-        .shadow(color: .primary, radius: 5)
-        .padding()
+        .listStyle(.plain)
+        .background()
     }
-
-    //            .navigationTitle("Test") TODO: Fix crash
 
     private func deleteSets(at offsets: IndexSet) {
         withAnimation {
@@ -67,4 +52,5 @@ struct ExerciseListView: View {
 
 #Preview {
     ExerciseListView(exercise: sampleExercise)
+        .padding()
 }

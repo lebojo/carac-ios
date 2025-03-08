@@ -11,7 +11,7 @@ struct CreateAnExerciseView: View {
     @EnvironmentObject var mainViewState: MainViewState
     @Environment(\.modelContext) private var modelContext
 
-    @State private var newExercise = Exercise()
+    @State private var newExercise = Exercise(days: [RepeatDay.today])
 
     var body: some View {
         Form {
@@ -24,33 +24,26 @@ struct CreateAnExerciseView: View {
                     }
                     .multilineTextAlignment(.trailing)
                 }
+
+                Toggle("Is repeated", isOn: Binding(get: {
+                    !newExercise.days.contains(RepeatDay.noRepeat.rawValue)
+                }, set: { isEnabled in
+                    if isEnabled {
+                        newExercise.days = [RepeatDay.today.rawValue]
+                    } else {
+                        newExercise.days = [RepeatDay.noRepeat.rawValue]
+                    }
+                }))
             }
 
-            Section("Repeat") {
-                ForEach(RepeatDay.allCases, id: \.self) { day in
-                    if day != .noRepeat {
-                        Button {
-                            if let index = newExercise.days.firstIndex(of: day.rawValue) {
-                                newExercise.days.remove(at: index)
-                            } else {
-                                newExercise.days.append(day.rawValue)
-                            }
-                        } label: {
-                            HStack {
-                                Text("Every \(day.rawValue)")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .foregroundStyle(.foreground)
-                                if newExercise.days.contains(day.rawValue) {
-                                    Image(systemName: "checkmark.arrow.trianglehead.counterclockwise")
-                                        .foregroundStyle(.green)
-                                }
-                            }
-                        }
-                    }
+            if !newExercise.days.contains(RepeatDay.noRepeat.rawValue) {
+                Section("Repeat") {
+                    RepeatDayPicker(newExercise: newExercise)
                 }
             }
         }
         .navigationTitle("Create an exercise")
+        .animation(.default, value: newExercise.days)
         .safeAreaInset(edge: .bottom) {
             HStack {
                 Button("Save now", systemImage: "calendar.badge.plus") {
@@ -59,6 +52,7 @@ struct CreateAnExerciseView: View {
                 }
                 .buttonStyle(.bordered)
                 .padding()
+                .disabled(newExercise.name.isEmpty)
 
                 Button("Fake exercice", systemImage: "gear") {
                     modelContext.insert(sampleExercise)

@@ -14,6 +14,7 @@ struct caracApp: App {
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
+            Session.self,
             Exercise.self,
             ExerciseSet.self
         ])

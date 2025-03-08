@@ -12,7 +12,7 @@ struct SetView: View {
     @Bindable var set: ExerciseSet
 
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             Stepper(value: Binding(get: {
                 set.weight
             }, set: { value in
@@ -29,5 +29,10 @@ struct SetView: View {
                 Label("Reps: \(set.reps)", systemImage: "arrow.triangle.2.circlepath")
             }
         }
+        .cardStyle()
     }
+}
+
+#Preview {
+    SetView(set: ExerciseSet(id: 1))
 }

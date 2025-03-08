@@ -21,8 +21,16 @@ struct SessionView: View {
             ForEach(session.exercises) { exercise in
                 ExerciseListView(exercise: exercise)
             }
+
+            VStack {
+                SessionChart(weights: session.exercises.flatMap { $0.sets.map(\.weight) },
+                             reps: session.exercises.flatMap { $0.sets.map(\.reps) })
+                .padding()
+                .frame(height: 150)
+            }
         }
         .tabViewStyle(.page)
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
         .safeAreaInset(edge: .bottom) {
             Button {
                 showConfirmation.toggle()

@@ -10,6 +10,7 @@ import SwiftUI
 
 enum MainState: Hashable {
     case createExercise
+    case globalSettings
 }
 
 class MainViewState: ObservableObject {

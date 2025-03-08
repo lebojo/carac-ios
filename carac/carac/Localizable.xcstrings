@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-
-    },
     "%lld" : {
 
     },
@@ -37,6 +34,9 @@
         }
       }
     },
+    "Chill, it's %@. You have nothing to do today." : {
+
+    },
     "Create an exercise" : {
       "localizations" : {
         "fr" : {
@@ -58,9 +58,6 @@
       }
     },
     "Delete" : {
-
-    },
-    "Dimanche" : {
 
     },
     "End session" : {
@@ -85,6 +82,20 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hey, bienvenue sur Carac"
+          }
+        }
+      }
+    },
+    "Is repeated" : {
+
+    },
+    "Monday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lundi"
           }
         }
       }
@@ -119,6 +130,9 @@
         }
       }
     },
+    "Reps" : {
+
+    },
     "Reps: %lld" : {
       "localizations" : {
         "fr" : {
@@ -141,6 +155,15 @@
           }
         }
       }
+    },
+    "Set" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Stats" : {
+
     },
     "Terminate the session now and save all your stats ?" : {
 
@@ -176,14 +199,13 @@
       }
     },
     "TODO" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TODO"
-          }
-        }
-      }
+
+    },
+    "Waw" : {
+
+    },
+    "Weight" : {
+
     },
     "Weight: %@kg" : {
       "localizations" : {

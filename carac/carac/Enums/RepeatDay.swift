@@ -34,7 +34,7 @@ enum RepeatDay: String, CaseIterable {
         case 6:
             return .friday
         case 7:
-            return .sunday
+            return .saturday
         default:
             fatalError("Invalid weekday")
         }
