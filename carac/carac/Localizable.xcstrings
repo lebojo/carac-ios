@@ -58,6 +58,9 @@
         }
       }
     },
+    "Customization" : {
+
+    },
     "Delete" : {
 
     },
@@ -91,6 +94,9 @@
       }
     },
     "Is repeated" : {
+
+    },
+    "Modify the exercise" : {
 
     },
     "Monday" : {
@@ -181,6 +187,9 @@
           }
         }
       }
+    },
+    "Tint color" : {
+
     },
     "Today" : {
       "localizations" : {

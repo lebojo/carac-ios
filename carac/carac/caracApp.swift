@@ -10,6 +10,8 @@ import SwiftUI
 
 @main
 struct caracApp: App {
+    @AppStorage("tintColor") var tintColor = "#007AFF"
+
     @StateObject var mainViewState = MainViewState()
 
     var sharedModelContainer: ModelContainer = {
@@ -30,6 +32,7 @@ struct caracApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .tint(Color(hex: tintColor) ?? .blue)
                 .environmentObject(mainViewState)
         }
         .modelContainer(sharedModelContainer)
