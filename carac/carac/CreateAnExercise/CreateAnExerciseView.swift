@@ -44,24 +44,9 @@ struct CreateAnExerciseView: View {
         }
         .navigationTitle("Create an exercise")
         .animation(.default, value: newExercise.days)
-        .safeAreaInset(edge: .bottom) {
-            HStack {
-                Button("Save now", systemImage: "calendar.badge.plus") {
-                    modelContext.insert(newExercise)
-                    mainViewState.mainPath.removeLast()
-                }
-                .buttonStyle(.bordered)
-                .padding()
-                .disabled(newExercise.name.isEmpty)
-
-                Button("Fake exercice", systemImage: "gear") {
-                    modelContext.insert(sampleExercise)
-                    mainViewState.mainPath.removeLast()
-                    mainViewState.mainPath.append(Session(exercises: [sampleExercise]))
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .background(.background)
+        .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newExercise.name.isEmpty) {
+            modelContext.insert(newExercise)
+            mainViewState.homePath.removeLast()
         }
     }
 }

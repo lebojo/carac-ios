@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-enum MainState: Hashable {
+enum HomeState: Hashable {
     case createExercise
     case globalSettings
 }
 
 class MainViewState: ObservableObject {
-    @Published var mainPath = NavigationPath()
+    @Published var homePath = NavigationPath()
 }

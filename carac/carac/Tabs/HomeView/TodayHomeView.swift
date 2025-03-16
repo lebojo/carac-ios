@@ -34,7 +34,7 @@ struct TodayHomeView: View {
         let session = Session(exercises: exercises)
 
         modelContext.insert(session)
-        mainViewState.mainPath.append(session)
+        mainViewState.homePath.append(session)
     }
 }
 

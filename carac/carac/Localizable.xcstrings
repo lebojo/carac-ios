@@ -25,6 +25,7 @@
       }
     },
     "Carac Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -73,7 +74,10 @@
         }
       }
     },
-    "Fake exercice" : {
+    "Exercises" : {
+
+    },
+    "Global settings" : {
 
     },
     "Hey, welcome to Carac!" : {
@@ -199,9 +203,6 @@
       }
     },
     "TODO" : {
-
-    },
-    "Waw" : {
 
     },
     "Weight" : {

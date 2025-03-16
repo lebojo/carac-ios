@@ -46,7 +46,7 @@ struct SessionView: View {
                 primaryButton: .cancel(),
                 secondaryButton: .default(Text("Save"), action: {
                     try! modelContext.save()
-                    mainViewState.mainPath.removeLast()
+                    mainViewState.homePath.removeLast()
                 })
             )
         }

@@ -37,7 +37,7 @@ struct OnBoardingModifier: ViewModifier {
                         .padding()
 
                     Button {
-                        mainViewState.mainPath.append(MainState.createExercise)
+                        mainViewState.homePath.append(HomeState.createExercise)
                         isOnboardingShown = false
                     } label: {
                         Label("Create an exercise", systemImage: "plus")

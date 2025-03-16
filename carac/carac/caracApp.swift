@@ -5,8 +5,8 @@
 //  Created by Jordan on 02.03.2025.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct caracApp: App {
@@ -29,7 +29,7 @@ struct caracApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            MainTabView()
                 .environmentObject(mainViewState)
         }
         .modelContainer(sharedModelContainer)

@@ -14,6 +14,7 @@ struct GlobalSettingsView: View {
         List {
             Text("TODO")
         }
+        .navigationTitle("Settings")
     }
 }
 

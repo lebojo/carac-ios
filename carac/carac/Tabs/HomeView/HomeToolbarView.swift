@@ -12,9 +12,9 @@ struct HomeToolbarView: View {
 
     var body: some View {
         Button {
-            mainViewState.mainPath.append(MainState.createExercise)
+            mainViewState.homePath.append(HomeState.globalSettings)
         } label: {
-            Label("Create an exercise", systemImage: "plus")
+            Label("Global settings", systemImage: "gear")
         }
     }
 }

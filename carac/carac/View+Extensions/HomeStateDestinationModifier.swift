@@ -17,7 +17,7 @@ extension View {
 struct HomeStateDestinationModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .navigationDestination(for: MainState.self) { state in
+            .navigationDestination(for: HomeState.self) { state in
                 switch state {
                 case .createExercise:
                     CreateAnExerciseView()
