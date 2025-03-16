@@ -83,6 +83,9 @@
     "Global settings" : {
 
     },
+    "Global stats" : {
+
+    },
     "Hey, welcome to Carac!" : {
       "localizations" : {
         "fr" : {
@@ -129,6 +132,9 @@
           }
         }
       }
+    },
+    "No stats for now 🙁" : {
+
     },
     "Repeat" : {
       "localizations" : {
@@ -211,7 +217,7 @@
         }
       }
     },
-    "TODO" : {
+    "Total exercises: %lld" : {
 
     },
     "Weight" : {

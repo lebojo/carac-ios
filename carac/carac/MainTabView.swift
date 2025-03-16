@@ -27,7 +27,7 @@ struct MainTabView: View {
                     }
                     .tag("Carac Home")
 
-                Text("TODO")
+                StatisticsView()
                     .tabItem {
                         Label("Stats", systemImage: "chart.bar.xaxis.ascending")
                     }
