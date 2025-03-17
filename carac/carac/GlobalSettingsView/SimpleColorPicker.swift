@@ -26,8 +26,8 @@ struct SimpleColorPicker: View {
                             .fill(color)
                             .clipShape(Circle())
                             .overlay {
-                                if color == selection {
-                                    Circle().stroke(Color.secondary, lineWidth: 3)
+                                if color.hex == selection.hex {
+                                    Circle().stroke(.black, lineWidth: 3)
                                 }
                             }
                     }
