@@ -19,6 +19,7 @@ struct GlobalSettingsView: View {
                     tintColor = $0.hex
                 }))
             }
+            HelpUsSection()
         }
         .navigationTitle("Settings")
     }
