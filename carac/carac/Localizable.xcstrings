@@ -86,6 +86,9 @@
     "Global stats" : {
 
     },
+    "Help us" : {
+
+    },
     "Hey, welcome to Carac!" : {
       "localizations" : {
         "fr" : {
@@ -136,6 +139,9 @@
     "No stats for now" : {
 
     },
+    "Rate the app" : {
+
+    },
     "Repeat" : {
       "localizations" : {
         "fr" : {
@@ -145,6 +151,9 @@
           }
         }
       }
+    },
+    "Report a bug" : {
+
     },
     "Reps" : {
 

@@ -33,6 +33,7 @@ struct MainTabView: View {
                     }
                     .tag("Carac teristics")
             }
+            .sideBarAdaptableIfAvailable()
             .navigationTitle(navigationTitle)
             .toolbar { HomeToolbarView() }
             .homeStateDestination()
@@ -43,6 +44,23 @@ struct MainTabView: View {
                 SessionView(session: session)
             })
             //                .onBoarding(isPresented: exercises.isEmpty) // TODO: Change to UserDefaults
+        }
+    }
+}
+
+extension View {
+    func sideBarAdaptableIfAvailable() -> some View {
+        modifier(SidebarAdaptableIfAvailable())
+    }
+}
+
+struct SidebarAdaptableIfAvailable: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content
+                .tabViewStyle(.sidebarAdaptable)
+        } else {
+            content
         }
     }
 }

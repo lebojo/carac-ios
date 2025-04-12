@@ -20,7 +20,13 @@ struct caracApp: App {
             Exercise.self,
             ExerciseSet.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: {
+            #if DEBUG
+            true
+            #else
+            false
+            #endif
+        }())
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
