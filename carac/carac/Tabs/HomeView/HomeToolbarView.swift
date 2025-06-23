@@ -12,7 +12,7 @@ struct HomeToolbarView: View {
 
     var body: some View {
         Button {
-            mainViewState.homePath.append(HomeState.globalSettings)
+            mainViewState.selectedState = .globalSettings
         } label: {
             Label("Global settings", systemImage: "gear")
         }

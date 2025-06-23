@@ -12,14 +12,18 @@ struct StatisticsView: View {
     @Query private var exercises: [Exercise]
 
     var body: some View {
-        List {
-            if !exercises.isEmpty {
-                Section("Global stats") {
-                    Text("Total exercises: \(exercises.count)")
+        NavigationStack {
+            List {
+                if !exercises.isEmpty {
+                    Section("Global stats") {
+                        Text("Total exercises: \(exercises.count)")
+                    }
+                } else {
+                    ContentUnavailableView("No stats for now", systemImage: "chart.line.downtrend.xyaxis")
                 }
-            } else {
-                ContentUnavailableView("No stats for now", systemImage: "chart.line.downtrend.xyaxis")
             }
+            .navigationTitle("Carac teristics")
+            .toolbar { HomeToolbarView() }
         }
     }
 }

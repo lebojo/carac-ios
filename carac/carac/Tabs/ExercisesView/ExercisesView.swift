@@ -14,19 +14,23 @@ struct ExercisesView: View {
     @Query private var exercises: [Exercise]
 
     var body: some View {
-        List(exercises) { exercise in
-            Button {
-                mainViewState.homePath.append(exercise)
-            } label: {
-                HStack {
-                    Text(exercise.name)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Image(systemName: "chevron.right")
+        NavigationStack {
+            List(exercises) { exercise in
+                Button {
+                    mainViewState.selectedExercise = exercise
+                } label: {
+                    HStack {
+                        Text(exercise.name)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Image(systemName: "chevron.right")
+                    }
                 }
             }
-        }
-        .bottomButton(title: "Create an exercise", systemName: "plus") {
-            mainViewState.homePath.append(HomeState.createExercise)
+            .bottomButton(title: "Create an exercise", systemName: "plus") {
+                mainViewState.selectedState = .createExercise
+            }
+            .navigationTitle("Carac Exercise\(exercises.count > 1 ? "s" : "")")
+            .toolbar { HomeToolbarView() }
         }
     }
 }

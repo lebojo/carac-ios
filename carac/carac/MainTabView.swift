@@ -8,60 +8,31 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @EnvironmentObject var mainViewState: MainViewState
-
-    @State private var navigationTitle = "Carac Home"
+    @State private var selectedTab = 1
 
     var body: some View {
-        NavigationStack(path: $mainViewState.homePath) {
-            TabView(selection: $navigationTitle) {
-                ExercisesView()
-                    .tabItem {
-                        Label("Exercises", systemImage: "figure.strengthtraining.traditional")
-                    }
-                    .tag("Carac exercises")
+        TabView(selection: $selectedTab) {
+            ExercisesView()
+                .tabItem {
+                    Label("Exercises", systemImage: "figure.strengthtraining.traditional")
+                }
+                .tag(0)
 
-                HomeView()
-                    .tabItem {
-                        Label("Carac", systemImage: "house.fill")
-                    }
-                    .tag("Carac Home")
+            HomeView()
+                .tabItem {
+                    Label("Carac", systemImage: "house.fill")
+                }
+                .tag(1)
 
-                StatisticsView()
-                    .tabItem {
-                        Label("Stats", systemImage: "chart.bar.xaxis.ascending")
-                    }
-                    .tag("Carac teristics")
-            }
-            .sideBarAdaptableIfAvailable()
-            .navigationTitle(navigationTitle)
-            .toolbar { HomeToolbarView() }
-            .homeStateDestination()
-            .navigationDestination(for: Exercise.self) { exercise in
-                ModifyAnExercise(exercise: exercise)
-            }
-            .navigationDestination(for: Session.self, destination: { session in
-                SessionView(session: session)
-            })
-            //                .onBoarding(isPresented: exercises.isEmpty) // TODO: Change to UserDefaults
+            StatisticsView()
+                .tabItem {
+                    Label("Stats", systemImage: "chart.bar.xaxis.ascending")
+                }
+                .tag(2)
         }
-    }
-}
-
-extension View {
-    func sideBarAdaptableIfAvailable() -> some View {
-        modifier(SidebarAdaptableIfAvailable())
-    }
-}
-
-struct SidebarAdaptableIfAvailable: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 18.0, *) {
-            content
-                .tabViewStyle(.sidebarAdaptable)
-        } else {
-            content
-        }
+        .sideBarAdaptableIfAvailable()
+        .homeStateDestination()
+        //                .onBoarding(isPresented: exercises.isEmpty) // TODO: Change to UserDefaults
     }
 }
 

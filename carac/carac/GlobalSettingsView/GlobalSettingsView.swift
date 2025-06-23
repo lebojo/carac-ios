@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct GlobalSettingsView: View {
+    @EnvironmentObject var mainViewState: MainViewState
+
     @AppStorage("tintColor") var tintColor = "#007AFF"
 
     var body: some View {
-        List {
-            Section("Customization") {
-                SimpleColorPicker(selection: Binding(get: {
-                    Color(hex: tintColor) ?? .blue
-                }, set: {
-                    tintColor = $0.hex
-                }))
+        NavigationStack {
+            List {
+                Section("Customization") {
+                    SimpleColorPicker(selection: Binding(get: {
+                        Color(hex: tintColor) ?? .blue
+                    }, set: {
+                        tintColor = $0.hex
+                    }))
+                }
+                HelpUsSection()
             }
-            HelpUsSection()
+            .navigationTitle("Settings")
+            .closeButton()
         }
-        .navigationTitle("Settings")
     }
 }
 

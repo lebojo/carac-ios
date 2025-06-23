@@ -8,22 +8,30 @@
 import Foundation
 import SwiftUI
 
-extension View {
-    public func homeStateDestination() -> some View {
+public extension View {
+    func homeStateDestination() -> some View {
         modifier(HomeStateDestinationModifier())
     }
 }
 
 struct HomeStateDestinationModifier: ViewModifier {
+    @EnvironmentObject var mainViewState: MainViewState
+
     func body(content: Content) -> some View {
         content
-            .navigationDestination(for: HomeState.self) { state in
+            .fullScreenCover(item: $mainViewState.selectedState) { state in
                 switch state {
                 case .createExercise:
                     CreateAnExerciseView()
                 case .globalSettings:
                     GlobalSettingsView()
                 }
+            }
+            .fullScreenCover(item: $mainViewState.selectedExercise) { exercise in
+                ModifyAnExercise(exercise: exercise)
+            }
+            .fullScreenCover(item: $mainViewState.selectedSession) { session in
+                SessionView(session: session)
             }
     }
 }

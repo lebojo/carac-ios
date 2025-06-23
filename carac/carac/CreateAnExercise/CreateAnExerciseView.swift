@@ -14,39 +14,42 @@ struct CreateAnExerciseView: View {
     @State private var newExercise = Exercise(days: [RepeatDay.today])
 
     var body: some View {
-        Form {
-            Section("Carac") {
-                HStack {
-                    Text("Name")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    TextField(text: $newExercise.name) {
-                        Text("Curl Series")
+        NavigationStack {
+            Form {
+                Section("Carac") {
+                    HStack {
+                        Text("Name")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        TextField(text: $newExercise.name) {
+                            Text("Curl Series")
+                        }
+                        .multilineTextAlignment(.trailing)
                     }
-                    .multilineTextAlignment(.trailing)
+
+                    Toggle("Is repeated", isOn: Binding(get: {
+                        !newExercise.days.contains(RepeatDay.noRepeat.rawValue)
+                    }, set: { isEnabled in
+                        if isEnabled {
+                            newExercise.days = [RepeatDay.today.rawValue]
+                        } else {
+                            newExercise.days = [RepeatDay.noRepeat.rawValue]
+                        }
+                    }))
                 }
 
-                Toggle("Is repeated", isOn: Binding(get: {
-                    !newExercise.days.contains(RepeatDay.noRepeat.rawValue)
-                }, set: { isEnabled in
-                    if isEnabled {
-                        newExercise.days = [RepeatDay.today.rawValue]
-                    } else {
-                        newExercise.days = [RepeatDay.noRepeat.rawValue]
+                if !newExercise.days.contains(RepeatDay.noRepeat.rawValue) {
+                    Section("Repeat") {
+                        RepeatDayPicker(newExercise: newExercise)
                     }
-                }))
-            }
-
-            if !newExercise.days.contains(RepeatDay.noRepeat.rawValue) {
-                Section("Repeat") {
-                    RepeatDayPicker(newExercise: newExercise)
                 }
             }
-        }
-        .navigationTitle("Create an exercise")
-        .animation(.default, value: newExercise.days)
-        .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newExercise.name.isEmpty) {
-            modelContext.insert(newExercise)
-            mainViewState.homePath.removeLast()
+            .navigationTitle("Create an exercise")
+            .closeButton()
+            .animation(.default, value: newExercise.days)
+            .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newExercise.name.isEmpty) {
+                modelContext.insert(newExercise)
+                mainViewState.selectedState = nil
+            }
         }
     }
 }

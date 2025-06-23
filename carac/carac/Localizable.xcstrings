@@ -24,8 +24,10 @@
         }
       }
     },
+    "Carac Exercise%@" : {
+
+    },
     "Carac Home" : {
-      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -35,7 +37,13 @@
         }
       }
     },
+    "Carac teristics" : {
+
+    },
     "Chill, it's %@. You have nothing to do today." : {
+
+    },
+    "Close" : {
 
     },
     "Create an exercise" : {
@@ -100,6 +108,9 @@
       }
     },
     "Is repeated" : {
+
+    },
+    "It's the best way to help us ❤️" : {
 
     },
     "Modify the exercise" : {
@@ -180,6 +191,9 @@
           }
         }
       }
+    },
+    "Session %@" : {
+
     },
     "Set" : {
 

@@ -18,16 +18,20 @@ struct SessionView: View {
 
     var body: some View {
         TabView {
-            ForEach(session.exercises) { exercise in
-                ExerciseListView(exercise: exercise)
-            }
+            NavigationStack {
+                ForEach(session.exercises) { exercise in
+                    ExerciseListView(exercise: exercise)
+                }
 
-            VStack {
-                SessionChart(weights: session.exercises.flatMap { $0.sets.map(\.weight) },
-                             reps: session.exercises.flatMap { $0.sets.map(\.reps) })
-                .padding()
-                .frame(height: 150)
+                VStack {
+                    SessionChart(weights: session.exercises.flatMap { $0.sets.map(\.weight) },
+                                 reps: session.exercises.flatMap { $0.sets.map(\.reps) })
+                    .padding()
+                    .frame(height: 150)
+                }
             }
+            .navigationTitle("Session \(session.date, style: .date)")
+            .closeButton()
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
@@ -46,7 +50,7 @@ struct SessionView: View {
                 primaryButton: .cancel(),
                 secondaryButton: .default(Text("Save"), action: {
                     try! modelContext.save()
-                    mainViewState.homePath.removeLast()
+                    mainViewState.selectedState = nil
                 })
             )
         }

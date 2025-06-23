@@ -5,12 +5,15 @@
 //  Created by Jordan on 08.03.2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct TodayHomeView: View {
     @Environment(\.modelContext) private var modelContext
 
     @EnvironmentObject var mainViewState: MainViewState
+
+    @State private var session: Session?
 
     let exercises: [Exercise]
 
@@ -30,11 +33,29 @@ struct TodayHomeView: View {
         }
     }
 
+//    private func createSession() {
+//        session = Session(exercises: exercises)
+//
+//        if let session {
+//            modelContext.insert(session)
+//            mainViewState.selectedSession = session
+//        }
+//    }
     private func createSession() {
-        let session = Session(exercises: exercises)
+        let newSession = Session()
+        modelContext.insert(newSession)
 
-        modelContext.insert(session)
-        mainViewState.homePath.append(session)
+        // Si vous avez les IDs des exercices
+        let exerciseIDs = exercises.map { $0.persistentModelID }
+
+        for exerciseID in exerciseIDs {
+            if let contextExercise = modelContext.model(for: exerciseID) as? Exercise {
+                newSession.exercises.append(contextExercise)
+            }
+        }
+
+        session = newSession
+        mainViewState.selectedSession = newSession
     }
 }
 

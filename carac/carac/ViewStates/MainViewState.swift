@@ -8,11 +8,19 @@
 import Foundation
 import SwiftUI
 
-enum HomeState: Hashable {
+enum HomeState: String, Identifiable {
+    var id: String { rawValue }
+
     case createExercise
     case globalSettings
 }
 
 class MainViewState: ObservableObject {
-    @Published var homePath = NavigationPath()
+    @Published var selectedState: HomeState?
+    @Published var selectedExercise: Exercise?
+    @Published var selectedSession: Session?
+
+    func backHome() {
+        selectedState = nil
+    }
 }
