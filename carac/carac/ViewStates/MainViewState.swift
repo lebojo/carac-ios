@@ -22,5 +22,7 @@ class MainViewState: ObservableObject {
 
     func backHome() {
         selectedState = nil
+        selectedExercise = nil
+        selectedSession = nil
     }
 }
