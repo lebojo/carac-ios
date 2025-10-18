@@ -25,11 +25,13 @@ struct AddSetsButton: View {
         HStack {
             Button {
                 withAnimation {
-                    exercise.sets.append(ExerciseSet(
-                        id: (exercise.sets.last?.id ?? 0) + 1,
-                        reps: exercise.sets.last?.reps ?? 10,
-                        weight: nextWeight
-                    ))
+                    exercise.sets.append(
+                        ExerciseSet(
+                            id: (exercise.sets.last?.id ?? 0) + 1,
+                            reps: exercise.sets.last?.reps ?? 10,
+                            weight: nextWeight
+                        )
+                    )
                 }
             } label: {
                 Text("Add Set")

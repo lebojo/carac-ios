@@ -11,18 +11,21 @@ import SwiftUI
 enum HomeState: String, Identifiable {
     var id: String { rawValue }
 
-    case createExercise
+    case createTraining
     case globalSettings
 }
 
 class MainViewState: ObservableObject {
     @Published var selectedState: HomeState?
     @Published var selectedExercise: Exercise?
-    @Published var selectedSession: Session?
+    @Published var selectedTraining: Training?
+
+    @Published var currentSession: Session?
 
     func backHome() {
         selectedState = nil
         selectedExercise = nil
-        selectedSession = nil
+        selectedTraining = nil
+        currentSession = nil
     }
 }

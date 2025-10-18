@@ -9,24 +9,24 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    @Query private var exercises: [Exercise]
+    @Query private var trainings: [Training]
 
-    var todayExercises: [Exercise] {
-        exercises.filter { $0.days.contains(RepeatDay.today.rawValue) }
+    var todayTrainings: [Training] {
+        trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }
     }
 
     var body: some View {
         NavigationStack {
             List {
-                Section("Today") {
-                    TodayHomeView(exercises: todayExercises)
-                }
-
-                if !exercises.isEmpty {
-                    Section("This week") {
-                        WeekHomeView(exercises: exercises)
-                    }
-                }
+//                Section("Today") {
+//                    TodayHomeView(exercises: todayExercises)
+//                }
+//
+//                if !exercises.isEmpty {
+//                    Section("This week") {
+//                        WeekHomeView(exercises: exercises)
+//                    }
+//                }
             }
             .navigationTitle("Carac Home")
             .toolbar { HomeToolbarView() }

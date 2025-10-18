@@ -37,10 +37,10 @@ struct OnBoardingModifier: ViewModifier {
                         .padding()
 
                     Button {
-                        mainViewState.selectedState = .createExercise
+                        mainViewState.selectedState = .createTraining
                         isOnboardingShown = false
                     } label: {
-                        Label("Create an exercise", systemImage: "plus")
+                        Label("Create a Training", systemImage: "plus")
                     }
                 }
             }

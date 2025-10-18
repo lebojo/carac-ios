@@ -18,7 +18,8 @@ struct caracApp: App {
         let schema = Schema([
             Session.self,
             Exercise.self,
-            ExerciseSet.self
+            ExerciseSet.self,
+            Training.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: {
             #if DEBUG

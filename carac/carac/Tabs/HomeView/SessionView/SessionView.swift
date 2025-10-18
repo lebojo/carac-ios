@@ -19,16 +19,16 @@ struct SessionView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                ForEach(session.exercises) { exercise in
+                ForEach(session.training.exercises) { exercise in
                     ExerciseListView(exercise: exercise)
                 }
 
-                VStack {
-                    SessionChart(weights: session.exercises.flatMap { $0.sets.map(\.weight) },
-                                 reps: session.exercises.flatMap { $0.sets.map(\.reps) })
-                    .padding()
-                    .frame(height: 150)
-                }
+//                VStack {
+//                    SessionChart(weights: session.training.exercises.flatMap { $0.sets.map(\.weight) },
+//                                 reps: session.training.exercises.flatMap { $0.sets.map(\.reps) })
+//                    .padding()
+//                    .frame(height: 150)
+//                }
             }
             .navigationTitle("Session \(session.date, style: .date)")
             .closeButton()
@@ -59,10 +59,9 @@ struct SessionView: View {
 
 #Preview {
     NavigationStack {
-        SessionView(session:
-            Session(exercises:
-                [Exercise(name: "Abdos au sol", days: [RepeatDay.today]),
-                 Exercise(name: "Curl des biceps", days: [RepeatDay.today])]))
-            .navigationTitle("Dimanche")
+        SessionView(
+            session: Session(training: sampleTraining)
+        )
+        .navigationTitle("Dimanche")
     }
 }

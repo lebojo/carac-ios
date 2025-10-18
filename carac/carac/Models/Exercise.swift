@@ -11,12 +11,12 @@ import SwiftData
 @Model
 final class Exercise: Identifiable {
     var name: String
-    var days: [String]
+    var weightSteps: Double
     @Relationship(deleteRule: .cascade) var sets: [ExerciseSet]
 
-    init(name: String = "", days: [RepeatDay] = [RepeatDay.noRepeat], sets: [ExerciseSet] = [ExerciseSet(id: 0)]) {
+    init(name: String = "", weightSteps: Double = 1, sets: [ExerciseSet] = []) {
         self.name = name
+        self.weightSteps = weightSteps
         self.sets = sets
-        self.days = days.map(\.rawValue)
     }
 }

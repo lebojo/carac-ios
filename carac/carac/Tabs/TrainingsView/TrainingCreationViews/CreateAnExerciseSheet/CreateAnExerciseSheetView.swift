@@ -7,15 +7,17 @@
 
 import SwiftUI
 
-struct CreateAnExerciseView: View {
+struct CreateAnExerciseSheetView: View {
     @EnvironmentObject var mainViewState: MainViewState
     @Environment(\.modelContext) private var modelContext
 
-    @State private var newExercise = Exercise(days: [RepeatDay.today])
+    @State private var newExercise = Exercise()
+    
+    @Binding var isPresented: Bool
 
     var body: some View {
-        NavigationStack {
-            Form {
+        NavigationView {
+            List {
                 Section("Carac") {
                     HStack {
                         Text("Name")
@@ -25,30 +27,19 @@ struct CreateAnExerciseView: View {
                         }
                         .multilineTextAlignment(.trailing)
                     }
-
-                    Toggle("Is repeated", isOn: Binding(get: {
-                        !newExercise.days.contains(RepeatDay.noRepeat.rawValue)
-                    }, set: { isEnabled in
-                        if isEnabled {
-                            newExercise.days = [RepeatDay.today.rawValue]
-                        } else {
-                            newExercise.days = [RepeatDay.noRepeat.rawValue]
-                        }
-                    }))
                 }
-
-                if !newExercise.days.contains(RepeatDay.noRepeat.rawValue) {
-                    Section("Repeat") {
-                        RepeatDayPicker(newExercise: newExercise)
-                    }
+                
+                Section {
+                    Stepper("Wheight step: **\(newExercise.weightSteps.formatted())**", value: $newExercise.weightSteps, step: 0.1)
+                } footer: {
+                    Text("Wheight step is used to precisely measure the weight of the exercise.")
                 }
             }
             .navigationTitle("Create an exercise")
             .closeButton()
-            .animation(.default, value: newExercise.days)
             .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newExercise.name.isEmpty) {
                 modelContext.insert(newExercise)
-                mainViewState.selectedState = nil
+                isPresented = false
             }
         }
     }
@@ -56,6 +47,6 @@ struct CreateAnExerciseView: View {
 
 #Preview {
     NavigationStack {
-        CreateAnExerciseView()
+        CreateAnExerciseSheetView(isPresented: .constant(true))
     }
 }

@@ -26,26 +26,9 @@ struct ModifyAnExercise: View {
                         }
                         .multilineTextAlignment(.trailing)
                     }
-                    
-                    Toggle("Is repeated", isOn: Binding(get: {
-                        !exercise.days.contains(RepeatDay.noRepeat.rawValue)
-                    }, set: { isEnabled in
-                        if isEnabled {
-                            exercise.days = [RepeatDay.today.rawValue]
-                        } else {
-                            exercise.days = [RepeatDay.noRepeat.rawValue]
-                        }
-                    }))
-                }
-                
-                if !exercise.days.contains(RepeatDay.noRepeat.rawValue) {
-                    Section("Repeat") {
-                        RepeatDayPicker(newExercise: exercise)
-                    }
                 }
             }
             .navigationTitle("Modify the exercise")
-            .animation(.default, value: exercise.days)
             .bottomButton(title: "Update now", systemName: "pencil.and.outline", disabled: exercise.name.isEmpty) {
                 do {
                     try modelContext.save()
