@@ -12,15 +12,7 @@ struct TrainingCreationView: View {
     @EnvironmentObject var mainViewState: MainViewState
     @Environment(\.modelContext) private var modelContext
 
-    @State private var newTraining = Training("")
-
-    @Query(filter: #Predicate<Exercise> { $0.sets.isEmpty })
-    private var exercises: [Exercise]
-
-    private let columns: [GridItem] = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-    ]
+    @State private var newTraining = Training("", repeatDays: [RepeatDay.today])
 
     var body: some View {
         NavigationView {
@@ -50,34 +42,12 @@ struct TrainingCreationView: View {
                     }
                 }
 
-                Section("Exercises \(newTraining.exercises.count)") {
-                    LazyVGrid(columns: columns, spacing: 0) {
-                        ForEach(exercises) { exercise in
-                            let isSelected = newTraining.exercises.contains(
-                                where: { $0.id == exercise.id })
-                            Button("\(exercise.name)") {
-                                if isSelected {
-                                    if let index = newTraining.exercises
-                                        .firstIndex(of: exercise)
-                                    {
-                                        newTraining.exercises.remove(at: index)
-                                    }
-                                } else {
-                                    newTraining.exercises.append(exercise)
-                                }
-                            }
-                            .padding()
-                            .buttonStyle(.exerciseButton(isSelected))
-                        }
-
-                        NewExerciseButton()
-                    }
-                }
+                ExercisesGridSection(trainingExercises: $newTraining.exercises)
             }
             .closeButton()
             .navigationTitle("New training")
             .animation(.easeInOut, value: newTraining.exercises)
-            .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newTraining.exercises.isEmpty) {
+            .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newTraining.exercises.isEmpty || newTraining.title.isEmpty) {
                 modelContext.insert(newTraining)
 
                 mainViewState.selectedState = nil
