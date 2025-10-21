@@ -15,10 +15,10 @@ struct AddSetsButton: View {
             return 1
         }
         guard lastSet.reps > 8 else {
-            return lastSet.weight - 0.5
+            return lastSet.weight - exercise.weightSteps
         }
 
-        return lastSet.reps >= 12 ? lastSet.weight + 0.5 : lastSet.weight
+        return lastSet.reps >= 12 ? lastSet.weight + exercise.weightSteps : lastSet.weight
     }
 
     var body: some View {
