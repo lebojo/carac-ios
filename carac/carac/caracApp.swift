@@ -22,11 +22,11 @@ struct caracApp: App {
             Training.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: {
-            #if DEBUG
-            true
-            #else
+//            #if DEBUG
+//            true
+//            #else
             false
-            #endif
+//            #endif
         }())
 
         do {

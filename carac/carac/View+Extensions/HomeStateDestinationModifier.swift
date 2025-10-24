@@ -31,6 +31,9 @@ struct HomeStateDestinationModifier: ViewModifier {
                 exercise in
                 ModifyAnExercise(exercise: exercise)
             }
+            .fullScreenCover(item: $mainViewState.selectedTraining) { training in
+                TrainingModificationView(training: training)
+            }
             .fullScreenCover(item: $mainViewState.currentSession) { session in
                 SessionView(session: session)
             }

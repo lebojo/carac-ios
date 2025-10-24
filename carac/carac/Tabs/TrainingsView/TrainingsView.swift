@@ -12,11 +12,15 @@ struct TrainingsView: View {
     @EnvironmentObject var mainViewState: MainViewState
 
     @Query private var trainings: [Training]
+    
+    private var singleTrainings: [Training] {
+        trainings.filter { $0.sessions.isEmpty }
+    }
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(trainings, id: \.persistentModelID) { training in
+                ForEach(singleTrainings, id: \.persistentModelID) { training in
                     Button {
                         mainViewState.selectedTraining = training
                     } label: {
