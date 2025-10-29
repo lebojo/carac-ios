@@ -36,9 +36,9 @@ struct TodayHomeView: View {
                     createSession(training)
                 } label: {
                     if todaySessions.isEmpty {
-                        Text("Start a \(training.title)")
+                        Label("Start your \(training.title)", systemImage: "plus.app")
                     } else {
-                        Text("Start a new \(training.title) session")
+                        Label("Start a new \(training.title) session", systemImage: "plus.diamond")
                     }
                 }
             }
@@ -54,23 +54,9 @@ struct TodayHomeView: View {
     private func createSession(_ training: Training) {
         session = Session(training: Training(from: training))
         if let session {
-            modelContext.insert(session)
             mainViewState.currentSession = session
         } else {
             print("Error while creating Session")
         }
     }
 }
-
-//#Preview {
-//    List {
-//        Section("Test empty") {
-//            TodayHomeView(exercises: [])
-//                .environmentObject(sampleMainViewState)
-//        }
-//        Section("Test fill") {
-//            TodayHomeView(exercises: [sampleExercise, sampleExercise])
-//                .environmentObject(sampleMainViewState)
-//        }
-//    }
-//}
