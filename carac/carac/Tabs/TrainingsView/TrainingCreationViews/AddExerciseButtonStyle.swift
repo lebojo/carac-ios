@@ -21,6 +21,7 @@ struct ExerciseButtonStyle: ButtonStyle {
             .foregroundStyle(.white)
             .background(isActive ? .green : .accentColor.opacity(0.2))
             .clipShape(RoundedRectangle(cornerRadius: 16))
+            .contentShape(RoundedRectangle(cornerRadius: 16))
             .opacity(configuration.isPressed ? 0.8 : 1)
             .scaleEffect(configuration.isPressed ? 0.98 : 1)
             .lineLimit(2, reservesSpace: true)
