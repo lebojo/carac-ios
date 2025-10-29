@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct TrainingsView: View {
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var mainViewState: MainViewState
 
     @Query private var trainings: [Training]
@@ -29,6 +30,12 @@ struct TrainingsView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             Image(systemName: "chevron.right")
                         }
+                    }
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        let trainingToDelete = singleTrainings[index]
+                        modelContext.delete(trainingToDelete)
                     }
                 }
             }
