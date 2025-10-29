@@ -29,11 +29,7 @@ struct ExerciseListView: View {
                 }
                 .onDelete(perform: deleteSets)
             } header: {
-                HStack {
-                    Text(exercise.name)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(exercise.sets.count)")
-                }
+                    Text("Sets: \(exercise.sets.count)")
             } footer: {
                 AddSetsButton(exercise: exercise)
                     .listRowSeparator(.hidden)

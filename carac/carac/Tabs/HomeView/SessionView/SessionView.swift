@@ -20,43 +20,46 @@ struct SessionView: View {
     }
 
     var body: some View {
-        NavigationView {
-            TabView {
+        TabView {
+            NavigationView {
                 List {
                     ForEach(session.training.exercises) { exercise in
                         Text(exercise.name)
-                            .tint(exercise.sets.count > 1 ? .gray : .primary)
+                            .foregroundStyle(exercise.sets.count > 1 ? .gray : .primary)
                     }
                     .onMove(perform: moveExercises)
                 }
+                .closeButton()
                 .toolbar {
-                    EditButton()
+                    ToolbarItem(placement: .topBarLeading) {
+                        EditButton()
+                    }
                 }
                 .navigationTitle("Session of \(session.date.formatted(.dateTime.day().month()))")
-                
-                ForEach($session.training.exercises) { exercise in
+            }
+
+            ForEach($session.training.exercises) { exercise in
+                NavigationView {
                     ExerciseListView(exercise: exercise)
                 }
+            }
 
-                //                VStack {
-                //                    SessionChart(weights: session.training.exercises.flatMap { $0.sets.map(\.weight) },
-                //                                 reps: session.training.exercises.flatMap { $0.sets.map(\.reps) })
-                //                    .padding()
-                //                    .frame(height: 150)
-                //                }
+//                VStack {
+//                    SessionChart(weights: session.training.exercises.flatMap { $0.sets.map(\.weight) },
+//                                 reps: session.training.exercises.flatMap { $0.sets.map(\.reps) })
+//                    .padding()
+//                    .frame(height: 150)
+//                }
+        }
+        .tabViewStyle(.page)
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                showConfirmation.toggle()
+            } label: {
+                Label("Save now", systemImage: "opticaldisc")
             }
-            .navigationTitle("Session \(session.date.formatted(.dateTime.day().month()))")
-            .closeButton()
-            .tabViewStyle(.page)
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-            .safeAreaInset(edge: .bottom) {
-                Button {
-                    showConfirmation.toggle()
-                } label: {
-                    Label("Save now", systemImage: "opticaldisc")
-                }
-                .buttonStyle(.bordered)
-            }
+            .buttonStyle(.bordered)
         }
         .alert(isPresented: $showConfirmation) {
             Alert(
@@ -80,7 +83,7 @@ struct SessionView: View {
             )
         }
     }
-    
+
     func moveExercises(from source: IndexSet, to destination: Int) {
         session.training.exercises.move(fromOffsets: source, toOffset: destination)
     }
