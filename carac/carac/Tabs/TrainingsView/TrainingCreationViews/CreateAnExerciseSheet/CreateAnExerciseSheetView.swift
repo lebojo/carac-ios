@@ -30,7 +30,17 @@ struct CreateAnExerciseSheetView: View {
                 }
                 
                 Section {
-                    Stepper("Wheight step: **\(newExercise.weightSteps.formatted())**", value: $newExercise.weightSteps, step: 0.1)
+                    VStack {
+                        Stepper("Wheight step: **\(newExercise.weightSteps.formatted())**", value: $newExercise.weightSteps, step: 0.1)
+                        
+                        Picker("Picker template", selection: $newExercise.weightSteps) {
+                            ForEach([1, 2.5, 5, 10], id: \.self) { num in
+                                Text(num, format: .number.precision(.fractionLength(1)))
+                                    .tag(num)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
                 } footer: {
                     Text("Wheight step is used to precisely measure the weight of the exercise.")
                 }
