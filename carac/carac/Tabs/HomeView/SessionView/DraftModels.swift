@@ -45,7 +45,7 @@ public struct TrainingDraft: Identifiable, Hashable {
         self.title = training.title
         self.repeatDays = training.repeatDays
         self.exercises = training.exercises.map { ex in
-            ExerciseDraft(name: ex.name, weightSteps: ex.weightSteps)
+            ExerciseDraft(from: ex)
         }
     }
 }
