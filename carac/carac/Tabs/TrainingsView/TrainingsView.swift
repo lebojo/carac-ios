@@ -39,7 +39,7 @@ struct TrainingsView: View {
                     }
                 }
             }
-            .bottomButton(title: "Create an training", systemName: "plus") {
+            .bottomButton(title: "Create a training", systemName: "plus") {
                 mainViewState.selectedState = .createTraining
             }
             .navigationTitle("Carac Training\(trainings.count > 1 ? "s" : "")")
