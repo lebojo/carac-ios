@@ -20,7 +20,7 @@ class MainViewState: ObservableObject {
     @Published var selectedExercise: Exercise?
     @Published var selectedTraining: Training?
 
-    @Published var currentSession: Session?
+    @Published var currentSession: SessionDraft?
 
     func backHome() {
         selectedState = nil

@@ -12,8 +12,6 @@ struct TodayHomeView: View {
     @Environment(\.modelContext) private var modelContext
 
     @EnvironmentObject var mainViewState: MainViewState
-
-    @State private var session: Session?
     
     @Query private var sessions: [Session]
     
@@ -27,7 +25,8 @@ struct TodayHomeView: View {
         if !trainings.isEmpty {
             ForEach(todaySessions) { todaySession in
                 Button("Modify \(todaySession.training.title) at \(todaySession.date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)))") {
-                    mainViewState.currentSession = todaySession
+                    let draftSession = SessionDraft(from: todaySession)
+                    mainViewState.currentSession = draftSession
                 }
             }
 
@@ -52,11 +51,7 @@ struct TodayHomeView: View {
     }
     
     private func createSession(_ training: Training) {
-        session = Session(training: Training(from: training))
-        if let session {
-            mainViewState.currentSession = session
-        } else {
-            print("Error while creating Session")
-        }
+        let draft = SessionDraft(training: TrainingDraft(from: training))
+        mainViewState.currentSession = draft
     }
 }
