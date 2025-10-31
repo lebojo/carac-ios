@@ -5,7 +5,6 @@
 //  Created by Jordan on 02.03.2025.
 //
 
-import SwiftData
 import SwiftUI
 
 struct SessionView: View {
@@ -13,15 +12,15 @@ struct SessionView: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var showConfirmation = false
-    @State private var session: Session
+    @State private var session: SessionDraft
 
-    init(session: Session) {
+    init(session: SessionDraft) {
         self._session = State(initialValue: session)
     }
 
     var body: some View {
         TabView {
-            NavigationView {
+            NavigationStack {
                 List {
                     ForEach(session.training.exercises) { exercise in
                         Text(exercise.name)
@@ -35,13 +34,29 @@ struct SessionView: View {
                         EditButton()
                     }
                 }
+                .safeAreaInset(edge: .bottom) {
+                    Button {
+                        showConfirmation.toggle()
+                    } label: {
+                        Label("Save now", systemImage: "opticaldisc")
+                    }
+                    .buttonStyle(.bordered)
+                    .padding()
+                }
                 .navigationTitle("Session of \(session.date.formatted(.dateTime.day().month()))")
             }
+            .tabItem {
+                Label("List", systemImage: "list.bullet")
+            }
 
-            ForEach($session.training.exercises) { exercise in
-                NavigationView {
+            TabView {
+                ForEach($session.training.exercises) { exercise in
                     ExerciseListView(exercise: exercise)
                 }
+            }
+            .tabViewStyle(.page)
+            .tabItem {
+                Label("Exercises", systemImage: "figure.walk")
             }
 
 //                VStack {
@@ -51,16 +66,8 @@ struct SessionView: View {
 //                    .frame(height: 150)
 //                }
         }
-        .tabViewStyle(.page)
+//        .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
-        .safeAreaInset(edge: .bottom) {
-            Button {
-                showConfirmation.toggle()
-            } label: {
-                Label("Save now", systemImage: "opticaldisc")
-            }
-            .buttonStyle(.bordered)
-        }
         .alert(isPresented: $showConfirmation) {
             Alert(
                 title: Text("End session"),
@@ -71,7 +78,8 @@ struct SessionView: View {
                 secondaryButton: .default(
                     Text("Save"),
                     action: {
-                        modelContext.insert(session)
+                        let sessionSave = Session(from: session)
+                        modelContext.insert(sessionSave)
                         do {
                             try modelContext.save()
                             mainViewState.currentSession = nil
@@ -92,7 +100,7 @@ struct SessionView: View {
 #Preview {
     NavigationStack {
         SessionView(
-            session: Session(training: sampleTraining)
+            session: SessionDraft(training: sampleTrainingDraft)
         )
         .navigationTitle("Dimanche")
     }

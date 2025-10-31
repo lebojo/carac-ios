@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct SetView: View {
-    @Bindable var set: ExerciseSet
+    @Binding var set: ExerciseSetDraft
     
     let exerciseWeightStep: Double
 
@@ -33,8 +33,4 @@ struct SetView: View {
         }
         .cardStyle()
     }
-}
-
-#Preview {
-    SetView(set: ExerciseSet(id: 1), exerciseWeightStep: 0.5)
 }

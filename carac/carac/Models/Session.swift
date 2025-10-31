@@ -17,4 +17,9 @@ final class Session {
         self.date = date
         self.training = training
     }
+    
+    init(from draft: SessionDraft) {
+        date = draft.date
+        training = Training(from: draft.training)
+    }
 }

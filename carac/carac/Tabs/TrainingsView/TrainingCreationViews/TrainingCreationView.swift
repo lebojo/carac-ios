@@ -43,6 +43,7 @@ struct TrainingCreationView: View {
                 }
 
                 ExercisesGridSection(trainingExercises: $newTraining.exercises)
+
             }
             .closeButton()
             .navigationTitle("New training")

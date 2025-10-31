@@ -9,16 +9,16 @@ import Charts
 import SwiftUI
 
 struct ExerciseListView: View {
-    @Binding var exercise: Exercise
+    @Binding var exercise: ExerciseDraft
 
     var body: some View {
         List {
             Section {
-                ForEach(exercise.sets.sorted { $0.id < $1.id }) { set in
+                ForEach($exercise.sets.sorted { $0.id < $1.id }) { set in
                     SetView(set: set, exerciseWeightStep: exercise.weightSteps)
                         .contextMenu {
                             Button(role: .destructive) {
-                                if let setIndex = exercise.sets.firstIndex(of: set) {
+                                if let setIndex = exercise.sets.firstIndex(of: set.wrappedValue) {
                                     deleteSets(at: [setIndex])
                                 }
                             } label: {
@@ -31,16 +31,22 @@ struct ExerciseListView: View {
             } header: {
                     Text("Sets: \(exercise.sets.count)")
             } footer: {
-                AddSetsButton(exercise: exercise)
+                AddSetsButton(exercise: $exercise)
                     .listRowSeparator(.hidden)
             }
         }
         .listStyle(.plain)
         .background()
-        .navigationTitle(exercise.name)
+        .safeAreaInset(edge: .top, content: {
+            HStack {
+                Text(exercise.name)
+                    .font(.largeTitle)
+                    .bold()
+            }
+        })
         .onAppear {
             if exercise.sets.isEmpty {
-                exercise.sets.append(ExerciseSet(id: 0))
+                exercise.sets.append(ExerciseSetDraft(id: 0))
             }
         }
     }
@@ -53,6 +59,6 @@ struct ExerciseListView: View {
 }
 
 #Preview {
-    ExerciseListView(exercise: .constant(sampleExercise))
+    ExerciseListView(exercise: .constant(sampleExerciseDraft))
         .padding()
 }

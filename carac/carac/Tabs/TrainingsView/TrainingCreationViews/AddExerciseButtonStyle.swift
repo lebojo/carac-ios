@@ -16,6 +16,7 @@ struct ExerciseButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .buttonStyle(.plain)
             .frame(maxWidth: .infinity)
             .padding()
             .foregroundStyle(.white)

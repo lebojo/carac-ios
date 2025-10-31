@@ -27,8 +27,7 @@ struct HomeStateDestinationModifier: ViewModifier {
                     GlobalSettingsView()
                 }
             }
-            .fullScreenCover(item: $mainViewState.selectedExercise) {
-                exercise in
+            .fullScreenCover(item: $mainViewState.selectedExercise) { exercise in
                 ModifyAnExercise(exercise: exercise)
             }
             .fullScreenCover(item: $mainViewState.selectedTraining) { training in

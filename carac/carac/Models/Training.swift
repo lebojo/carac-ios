@@ -29,4 +29,10 @@ final class Training: Identifiable {
         
         self.exercises = copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }
     }
+    
+    init(from draft: TrainingDraft) {
+        title = draft.title
+        exercises = draft.exercises.map { Exercise(from: $0) }
+        repeatDays = draft.repeatDays
+    }
 }

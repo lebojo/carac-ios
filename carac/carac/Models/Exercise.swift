@@ -19,4 +19,10 @@ final class Exercise: Identifiable {
         self.weightSteps = weightSteps
         self.sets = sets
     }
+    
+    init(from draft: ExerciseDraft) {
+        name = draft.name
+        weightSteps = draft.weightSteps
+        sets = draft.sets.map { ExerciseSet(from: $0) }
+    }
 }
