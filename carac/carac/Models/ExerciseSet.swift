@@ -19,4 +19,10 @@ final class ExerciseSet: Identifiable {
         self.reps = reps
         self.weight = weight
     }
+
+    init(from draft: ExerciseSetDraft) {
+        id = draft.id
+        reps = draft.reps
+        weight = draft.weight
+    }
 }
