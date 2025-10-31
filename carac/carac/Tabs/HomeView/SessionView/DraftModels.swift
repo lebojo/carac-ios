@@ -65,17 +65,16 @@ public struct SessionDraft: Identifiable, Hashable {
 // MARK: - Materialization to SwiftData models
 
 extension ExerciseSetDraft {
-    func makeModel(idGenerator: inout Int) -> ExerciseSet {
-        let model = ExerciseSet(id: idGenerator, reps: reps, weight: weight)
-        idGenerator += 1
-        return model
+    func makeModel() -> ExerciseSet {
+        return ExerciseSet(id: id, reps: reps, weight: weight)
     }
+}
+
 }
 
 extension ExerciseDraft {
     func makeModel() -> Exercise {
-        var nextId = 1
-        let setsModels = sets.map { $0.makeModel(idGenerator: &nextId) }
+        let setsModels = sets.map { $0.makeModel() }
         return Exercise(name: name, weightSteps: weightSteps, sets: setsModels)
     }
 }
