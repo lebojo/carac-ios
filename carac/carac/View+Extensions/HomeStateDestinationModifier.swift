@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-public extension View {
-    func homeStateDestination() -> some View {
+extension View {
+    public func homeStateDestination() -> some View {
         modifier(HomeStateDestinationModifier())
     }
 }
@@ -21,16 +21,20 @@ struct HomeStateDestinationModifier: ViewModifier {
         content
             .fullScreenCover(item: $mainViewState.selectedState) { state in
                 switch state {
-                case .createExercise:
-                    CreateAnExerciseView()
+                case .createTraining:
+                    TrainingCreationView()
                 case .globalSettings:
                     GlobalSettingsView()
                 }
             }
-            .fullScreenCover(item: $mainViewState.selectedExercise) { exercise in
+            .fullScreenCover(item: $mainViewState.selectedExercise) {
+                exercise in
                 ModifyAnExercise(exercise: exercise)
             }
-            .fullScreenCover(item: $mainViewState.selectedSession) { session in
+            .fullScreenCover(item: $mainViewState.selectedTraining) { training in
+                TrainingModificationView(training: training)
+            }
+            .fullScreenCover(item: $mainViewState.currentSession) { session in
                 SessionView(session: session)
             }
     }

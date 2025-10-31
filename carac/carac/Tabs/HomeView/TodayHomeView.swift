@@ -14,52 +14,49 @@ struct TodayHomeView: View {
     @EnvironmentObject var mainViewState: MainViewState
 
     @State private var session: Session?
+    
+    @Query private var sessions: [Session]
+    
+    private var todaySessions: [Session] {
+        sessions.filter{ Calendar.current.isDateInToday($0.date) }
+    }
 
-    let exercises: [Exercise]
+    let trainings: [Training]
 
     var body: some View {
-        if exercises.isEmpty {
+        if !trainings.isEmpty {
+            ForEach(todaySessions) { todaySession in
+                Button("Modify \(todaySession.training.title) at \(todaySession.date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)))") {
+                    mainViewState.currentSession = todaySession
+                }
+            }
+
+            ForEach(trainings) { training in
+                Button {
+                    createSession(training)
+                } label: {
+                    if todaySessions.isEmpty {
+                        Label("Start your \(training.title)", systemImage: "plus.app")
+                    } else {
+                        Label("Start a new \(training.title) session", systemImage: "plus.diamond")
+                    }
+                }
+            }
+        } else {
             ContentUnavailableView(
-                "No exercises today",
+                "Free day!",
                 systemImage: "sun.dust",
                 description: Text("Chill, it's \(RepeatDay.today.title.lowercased()). You have nothing to do today.")
             )
+        }
+    }
+    
+    private func createSession(_ training: Training) {
+        session = Session(training: Training(from: training))
+        if let session {
+            mainViewState.currentSession = session
         } else {
-            Button {
-                createSession()
-            } label: {
-                Text("Today exercices: \(exercises.count)")
-            }
+            print("Error while creating Session")
         }
     }
-
-//    private func createSession() {
-//        session = Session(exercises: exercises)
-//
-//        if let session {
-//            modelContext.insert(session)
-//            mainViewState.selectedSession = session
-//        }
-//    }
-    private func createSession() {
-        let newSession = Session()
-        modelContext.insert(newSession)
-
-        // Si vous avez les IDs des exercices
-        let exerciseIDs = exercises.map { $0.persistentModelID }
-
-        for exerciseID in exerciseIDs {
-            if let contextExercise = modelContext.model(for: exerciseID) as? Exercise {
-                newSession.exercises.append(contextExercise)
-            }
-        }
-
-        session = newSession
-        mainViewState.selectedSession = newSession
-    }
-}
-
-#Preview {
-    TodayHomeView(exercises: [sampleExercise, sampleExercise])
-        .environmentObject(sampleMainViewState)
 }

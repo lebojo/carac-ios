@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SetView: View {
     @Bindable var set: ExerciseSet
+    
+    let exerciseWeightStep: Double
 
     var body: some View {
         VStack(spacing: 20) {
@@ -17,7 +19,7 @@ struct SetView: View {
                 set.weight
             }, set: { value in
                 set.weight = value
-            }), in: 0 ... 200, step: 0.5) {
+            }), in: 0 ... 200, step: exerciseWeightStep) {
                 Label("Weight: \(set.weight.formatted())kg", systemImage: "dumbbell.fill")
             }
 
@@ -34,5 +36,5 @@ struct SetView: View {
 }
 
 #Preview {
-    SetView(set: ExerciseSet(id: 1))
+    SetView(set: ExerciseSet(id: 1), exerciseWeightStep: 0.5)
 }

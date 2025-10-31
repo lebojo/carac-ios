@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct WeekHomeView: View {
-    let exercises: [Exercise]
+    let trainings: [Training]
 
     var body: some View {
         ForEach(RepeatDay.allCases, id: \.self) { day in
             HStack {
                 Text(day.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(exercises.filter { $0.days.contains(day.rawValue) }.map(\.name).joined(separator: ", "))
+                Text(trainings.filter { $0.repeatDays.contains(day.rawValue) }.map(\.title).joined(separator: ", "))
                     .lineLimit(1)
                     .italic()
                     .foregroundStyle(.secondary)
@@ -25,5 +25,5 @@ struct WeekHomeView: View {
 }
 
 #Preview {
-    WeekHomeView(exercises: [sampleExercise, sampleExercise])
+    WeekHomeView(trainings: [sampleTraining, sampleTraining])
 }

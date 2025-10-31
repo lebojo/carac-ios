@@ -12,9 +12,9 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            ExercisesView()
+            TrainingsView()
                 .tabItem {
-                    Label("Exercises", systemImage: "figure.strengthtraining.traditional")
+                    Label("Trainings", systemImage: "figure.strengthtraining.traditional")
                 }
                 .tag(0)
 

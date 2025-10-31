@@ -11,10 +11,10 @@ import SwiftData
 @Model
 final class Session {
     var date: Date
-    @Relationship(deleteRule: .cascade) var exercises: [Exercise]
+    @Relationship(deleteRule: .cascade) var training: Training
 
-    init(date: Date = .now, exercises: [Exercise] = []) {
+    init(date: Date = .now, training: Training) {
         self.date = date
-        self.exercises = exercises
+        self.training = training
     }
 }

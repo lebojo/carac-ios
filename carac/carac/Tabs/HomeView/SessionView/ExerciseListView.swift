@@ -9,13 +9,13 @@ import Charts
 import SwiftUI
 
 struct ExerciseListView: View {
-    @Bindable var exercise: Exercise
+    @Binding var exercise: Exercise
 
     var body: some View {
         List {
             Section {
                 ForEach(exercise.sets.sorted { $0.id < $1.id }) { set in
-                    SetView(set: set)
+                    SetView(set: set, exerciseWeightStep: exercise.weightSteps)
                         .contextMenu {
                             Button(role: .destructive) {
                                 if let setIndex = exercise.sets.firstIndex(of: set) {
@@ -29,11 +29,7 @@ struct ExerciseListView: View {
                 }
                 .onDelete(perform: deleteSets)
             } header: {
-                HStack {
-                    Text(exercise.name)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(exercise.sets.count)")
-                }
+                    Text("Sets: \(exercise.sets.count)")
             } footer: {
                 AddSetsButton(exercise: exercise)
                     .listRowSeparator(.hidden)
@@ -41,6 +37,12 @@ struct ExerciseListView: View {
         }
         .listStyle(.plain)
         .background()
+        .navigationTitle(exercise.name)
+        .onAppear {
+            if exercise.sets.isEmpty {
+                exercise.sets.append(ExerciseSet(id: 0))
+            }
+        }
     }
 
     private func deleteSets(at offsets: IndexSet) {
@@ -51,6 +53,6 @@ struct ExerciseListView: View {
 }
 
 #Preview {
-    ExerciseListView(exercise: sampleExercise)
+    ExerciseListView(exercise: .constant(sampleExercise))
         .padding()
 }
