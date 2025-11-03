@@ -42,6 +42,8 @@ struct ExerciseListView: View {
                 Text(exercise.name)
                     .font(.largeTitle)
                     .bold()
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2, reservesSpace: true)
             }
         })
         .onAppear {
