@@ -46,7 +46,7 @@ struct ExerciseListView: View {
         })
         .onAppear {
             if exercise.sets.isEmpty {
-                exercise.sets.append(ExerciseSetDraft(id: 0))
+                exercise.sets.append(ExerciseSetDraft(id: 0, weight: exercise.weightSteps))
             }
         }
     }
