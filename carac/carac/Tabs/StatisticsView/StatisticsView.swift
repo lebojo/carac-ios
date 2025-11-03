@@ -9,15 +9,17 @@ import SwiftData
 import SwiftUI
 
 struct StatisticsView: View {
-    @Query private var trainings: [Training]
     @Query private var sessions: [Session]
+    @Query private var trainings: [Training]
     
     private var todayTrainings: [Training] {
-        trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }.filter { $0.sessions.isEmpty }
+        trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }.done
     }
     
-    private var exceptEmptyExercices: [Training] {
-        trainings.filter(\.sessions.isEmpty)
+    private var totalWeightPulled: Double {
+        trainings.flatMap(\.exercises).flatMap(\.sets).reduce(0.0) { total, set in
+            total + set.weight * Double(set.reps)
+        }
     }
 
     var body: some View {
@@ -30,20 +32,20 @@ struct StatisticsView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 100)
-                            Text("Total weight pulled: \(trainings.flatMap(\.exercises).flatMap(\.sets).map(\.weight).reduce(0.0, +)) kg")
+                                .frame(maxWidth: .infinity, alignment: .center)
+
+                            Text("Total weight pulled: **\(totalWeightPulled.formatted()) kg**")
                         }
                     }
                     
                     Section("Today stats") {
-                        Label("Total sessions: \(todayTrainings.flatMap(\.sessions).count)", systemImage: "trophy")
-                        Label("Total trainings: \(todayTrainings.count)", systemImage: "figure.run")
-                        Label("Total exercices: \(todayTrainings.flatMap(\.exercises).count)", systemImage: "dumbbell")
+                        Label("Total sessions: **\(todayTrainings.flatMap(\.sessions).count)**", systemImage: "figure.run")
+                        Label("Total exercices: **\(todayTrainings.flatMap(\.exercises).count)**", systemImage: "dumbbell")
                     }
                     
                     Section("Global stats") {
-                        Label("Total sessions: \(sessions.count)", systemImage: "trophy")
-                        Label("Total trainings: \(trainings.count)", systemImage: "figure.run")
-                        Label("Total exercices: \(trainings.flatMap(\.exercises).count)", systemImage: "dumbbell")
+                        Label("Total sessions: **\(trainings.done.flatMap(\.sessions).count)**", systemImage: "figure.run")
+                        Label("Total exercices: **\(trainings.done.flatMap(\.exercises).count)**", systemImage: "dumbbell")
                     }
                 } else {
                     ContentUnavailableView("No stats for now", systemImage: "chart.line.downtrend.xyaxis")
@@ -52,5 +54,15 @@ struct StatisticsView: View {
             .navigationTitle("Carac teristics")
             .toolbar { HomeToolbarView() }
         }
+    }
+}
+
+extension [Training] {
+    var done: [Training] {
+        self.filter { !$0.sessions.isEmpty }
+    }
+    
+    var templates: [Training] {
+        self.filter { $0.sessions.isEmpty }
     }
 }
