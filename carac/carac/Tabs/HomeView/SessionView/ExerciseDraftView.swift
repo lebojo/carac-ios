@@ -1,18 +1,38 @@
 //
-//  ExerciseListView.swift
+//  ExerciseDraftView.swift
 //  carac
 //
 //  Created by Jordan on 07.03.2025.
 //
 
-import Charts
+import SwiftData
 import SwiftUI
 
-struct ExerciseListView: View {
+struct ExerciseDraftView: View {
     @Binding var exercise: ExerciseDraft
+    
+    let lastExerciseSet: ExerciseSet?
 
     var body: some View {
         List {
+            if let lastExerciseSet {
+                Section("Last time best") {
+                    VStack(spacing: 20) {
+                        Stepper(value: .constant(lastExerciseSet.weight), in: 0 ... 0) {
+                            Label("Weight: \(lastExerciseSet.weight.formatted())kg", systemImage: "dumbbell.fill")
+                        }
+                        .disabled(true)
+                        
+                        Stepper(value: .constant(lastExerciseSet.reps), in: 0 ... 0) {
+                            Label("Reps: \(lastExerciseSet.reps)", systemImage: "arrow.triangle.2.circlepath")
+                        }
+                        .disabled(true)
+                    }
+                    .cardStyle()
+                    .opacity(0.8)
+                }
+            }
+
             Section {
                 ForEach($exercise.sets.sorted { $0.id < $1.id }) { set in
                     SetView(set: set, exerciseWeightStep: exercise.weightSteps)
@@ -29,7 +49,7 @@ struct ExerciseListView: View {
                 }
                 .onDelete(perform: deleteSets)
             } header: {
-                    Text("Sets: \(exercise.sets.count)")
+                Text("Sets: \(exercise.sets.count)")
             } footer: {
                 AddSetsButton(exercise: $exercise)
                     .listRowSeparator(.hidden)
@@ -61,6 +81,6 @@ struct ExerciseListView: View {
 }
 
 #Preview {
-    ExerciseListView(exercise: .constant(sampleExerciseDraft))
+    ExerciseDraftView(exercise: .constant(sampleExerciseDraft), lastExerciseSet: nil)
         .padding()
 }
