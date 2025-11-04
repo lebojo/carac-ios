@@ -11,6 +11,12 @@ public struct ExerciseSetDraft: Identifiable, Hashable {
         self.reps = reps
         self.weight = weight
     }
+
+    init(from model: ExerciseSet) {
+        self.id = model.id
+        self.reps = model.reps
+        self.weight = model.weight
+    }
 }
 
 public struct ExerciseDraft: Identifiable, Hashable {
@@ -24,6 +30,13 @@ public struct ExerciseDraft: Identifiable, Hashable {
         self.name = name
         self.weightSteps = weightSteps
         self.sets = sets
+    }
+
+    init(from model: Exercise) {
+        self.id = UUID()
+        self.name = model.name
+        self.weightSteps = model.weightSteps
+        self.sets = model.sets.map { ExerciseSetDraft(from: $0) }
     }
 }
 
@@ -60,6 +73,12 @@ public struct SessionDraft: Identifiable, Hashable {
         self.date = date
         self.training = training
     }
+
+    init(from model: Session) {
+        self.id = UUID()
+        self.date = model.date
+        self.training = TrainingDraft(from: model.training)
+    }
 }
 
 // MARK: - Materialization to SwiftData models
@@ -89,30 +108,5 @@ extension SessionDraft {
     func makeModel() -> Session {
         let trainingModel = training.makeModel()
         return Session(date: date, training: trainingModel)
-    }
-}
-
-extension ExerciseSetDraft {
-    init(from model: ExerciseSet) {
-        self.id = model.id
-        self.reps = model.reps
-        self.weight = model.weight
-    }
-}
-
-extension ExerciseDraft {
-    init(from model: Exercise) {
-        self.id = UUID()
-        self.name = model.name
-        self.weightSteps = model.weightSteps
-        self.sets = model.sets.map { ExerciseSetDraft(from: $0) }
-    }
-}
-
-extension SessionDraft {
-    init(from model: Session) {
-        self.id = UUID()
-        self.date = model.date
-        self.training = TrainingDraft(from: model.training)
     }
 }
