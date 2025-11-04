@@ -29,7 +29,7 @@ struct SessionView: View {
 
             TabView {
                 ForEach($session.training.exercises) { exercise in
-                    ExerciseDraftView(exercise: exercise, lastExerciseSet: nil)
+                    ExerciseDraftView(exercise: exercise)
                 }
             }
             .tabViewStyle(.page)

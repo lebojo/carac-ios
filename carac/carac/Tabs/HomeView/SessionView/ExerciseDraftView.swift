@@ -9,9 +9,13 @@ import SwiftData
 import SwiftUI
 
 struct ExerciseDraftView: View {
+    @Query private var sessions: [Session]
+
+    @EnvironmentObject var mainViewState: MainViewState
+
+    @State private var lastExerciseSet: ExerciseSet?
+
     @Binding var exercise: ExerciseDraft
-    
-    let lastExerciseSet: ExerciseSet?
 
     var body: some View {
         List {
@@ -70,6 +74,15 @@ struct ExerciseDraftView: View {
             if exercise.sets.isEmpty {
                 exercise.sets.append(ExerciseSetDraft(id: 0, weight: exercise.weightSteps))
             }
+            let lastWeekSession = sessions.first { session in
+                if let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: session.date) {
+                    if let sessionDate = mainViewState.currentSession?.date, Calendar.current.isDate(sessionDate, inSameDayAs: lastWeekDate) {
+                        return true
+                    }
+                }
+                return false
+            }
+            lastExerciseSet = lastWeekSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted { $0.weight > $1.weight }.dropFirst().first
         }
     }
 
@@ -81,6 +94,6 @@ struct ExerciseDraftView: View {
 }
 
 #Preview {
-    ExerciseDraftView(exercise: .constant(sampleExerciseDraft), lastExerciseSet: nil)
+    ExerciseDraftView(exercise: .constant(sampleExerciseDraft))
         .padding()
 }
