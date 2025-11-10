@@ -11,7 +11,7 @@ struct WeekHomeView: View {
     let trainings: [Training]
 
     var body: some View {
-        ForEach(RepeatDay.allCases, id: \.self) { day in
+        ForEach(RepeatDay.allCases.filter { $0 != .noRepeat }, id: \.self) { day in
             HStack {
                 Text(day.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
