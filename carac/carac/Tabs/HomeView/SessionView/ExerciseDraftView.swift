@@ -21,20 +21,16 @@ struct ExerciseDraftView: View {
         List {
             if let lastExerciseSet {
                 Section("Last time best") {
-                    VStack(spacing: 20) {
-                        Stepper(value: .constant(lastExerciseSet.weight), in: 0 ... 0) {
-                            Label("Weight: \(lastExerciseSet.weight.formatted())kg", systemImage: "dumbbell.fill")
-                        }
-                        .disabled(true)
-                        
-                        Stepper(value: .constant(lastExerciseSet.reps), in: 0 ... 0) {
-                            Label("Reps: \(lastExerciseSet.reps)", systemImage: "arrow.triangle.2.circlepath")
-                        }
-                        .disabled(true)
+                    VStack(alignment: .leading, spacing: 20) {
+                        Label("Weight: \(lastExerciseSet.weight.formatted())kg", systemImage: "dumbbell.fill")
+
+                        Label("Reps: \(lastExerciseSet.reps)", systemImage: "arrow.triangle.2.circlepath")
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .cardStyle()
-                    .opacity(0.8)
+                    .listRowSeparator(.hidden)
                 }
+                .opacity(0.5)
             }
 
             Section {
@@ -70,19 +66,25 @@ struct ExerciseDraftView: View {
                     .lineLimit(2, reservesSpace: true)
             }
         })
-        .onAppear {
-            if exercise.sets.isEmpty {
-                exercise.sets.append(ExerciseSetDraft(id: 0, weight: exercise.weightSteps))
-            }
+        .task {
             let lastWeekSession = sessions.first { session in
-                if let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: session.date) {
-                    if let sessionDate = mainViewState.currentSession?.date, Calendar.current.isDate(sessionDate, inSameDayAs: lastWeekDate) {
+                if let sessionDate = mainViewState.currentSession?.date, let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: sessionDate) {
+                    if Calendar.current.isDate(session.date, inSameDayAs: lastWeekDate) {
                         return true
                     }
                 }
                 return false
             }
-            lastExerciseSet = lastWeekSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted { $0.weight > $1.weight }.dropFirst().first
+            // Skip the absolute max to get second-best; fallback to max if only one set
+            if let sets = lastWeekSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
+                lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
+            } else {
+                lastExerciseSet = nil
+            }
+
+            if exercise.sets.isEmpty {
+                exercise.sets.append(ExerciseSetDraft(id: 0, weight: lastExerciseSet?.weight ?? exercise.weightSteps))
+            }
         }
     }
 
