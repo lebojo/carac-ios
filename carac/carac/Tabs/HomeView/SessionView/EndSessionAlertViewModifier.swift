@@ -38,16 +38,16 @@ struct EndSessionAlertViewModifier: ViewModifier {
                         secondaryButton: .default(
                             Text("Save"),
                             action: {
-                                modelContext.delete(sessionModel)
-
                                 let sessionSave = Session(from: sessionDraft)
 
                                 modelContext.insert(sessionSave)
                                 do {
                                     try modelContext.save()
+                                    modelContext.delete(sessionModel)
+                                    try modelContext.save()
                                     mainViewState.currentSession = nil
                                 } catch {
-                                    print("Failed to modify session")
+                                    print("Failed to save new session; original session not deleted")
                                 }
                             }
                         )
