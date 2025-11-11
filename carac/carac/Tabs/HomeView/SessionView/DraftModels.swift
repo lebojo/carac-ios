@@ -67,19 +67,19 @@ struct SessionDraft: Identifiable, Hashable {
     var id: UUID
     var date: Date
     var training: TrainingDraft
-    let persistedSession: Session?
+    let persistedSessionID: PersistentIdentifier?
 
-    init(id: UUID = UUID(), date: Date = .now, training: TrainingDraft, persistedSession: Session? = nil) {
+    init(id: UUID = UUID(), date: Date = .now, training: TrainingDraft, persistedSessionID: PersistentIdentifier? = nil) {
         self.id = id
         self.date = date
         self.training = training
-        self.persistedSession = persistedSession
+        self.persistedSessionID = persistedSessionID
     }
 
     init(from model: Session) {
         self.id = UUID()
         self.date = model.date
         self.training = TrainingDraft(from: model.training)
-        self.persistedSession = model
+        self.persistedSessionID = model.persistentModelID
     }
 }

@@ -28,7 +28,8 @@ struct EndSessionAlertViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .alert(isPresented: $isPresented) {
-                if let sessionModel = sessionDraft.persistedSession {
+                if let sessionID = sessionDraft.persistedSessionID,
+                   let sessionModel = modelContext.model(for: sessionID) as? Session {
                     Alert(
                         title: Text("Modify session?"),
                         message: Text(
