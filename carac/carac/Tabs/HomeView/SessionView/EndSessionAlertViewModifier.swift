@@ -24,6 +24,21 @@ struct EndSessionAlertViewModifier: ViewModifier {
     @Binding var isPresented: Bool
 
     let sessionDraft: SessionDraft
+    
+    private func saveSession(deleteExisting: Session? = nil, errorMessage: String) {
+        if let session = deleteExisting {
+            modelContext.delete(session)
+        }
+        
+        let sessionSave = Session(from: sessionDraft)
+        modelContext.insert(sessionSave)
+        do {
+            try modelContext.save()
+            mainViewState.currentSession = nil
+        } catch {
+            print(errorMessage)
+        }
+    }
 
     func body(content: Content) -> some View {
         content
@@ -38,17 +53,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
                         secondaryButton: .default(
                             Text("Save"),
                             action: {
-                                modelContext.delete(sessionModel)
-
-                                let sessionSave = Session(from: sessionDraft)
-
-                                modelContext.insert(sessionSave)
-                                do {
-                                    try modelContext.save()
-                                    mainViewState.currentSession = nil
-                                } catch {
-                                    print("Failed to modify session")
-                                }
+                                saveSession(deleteExisting: sessionModel, errorMessage: "Failed to modify session")
                             }
                         )
                     )
@@ -62,14 +67,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
                         secondaryButton: .default(
                             Text("Save"),
                             action: {
-                                let sessionSave = Session(from: sessionDraft)
-                                modelContext.insert(sessionSave)
-                                do {
-                                    try modelContext.save()
-                                    mainViewState.currentSession = nil
-                                } catch {
-                                    print("Failed to save session")
-                                }
+                                saveSession(errorMessage: "Failed to save session")
                             }
                         )
                     )
