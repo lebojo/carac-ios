@@ -25,29 +25,42 @@ struct EndSessionAlertViewModifier: ViewModifier {
 
     let sessionDraft: SessionDraft
 
+    var isModifiying: Bool {
+        sessionDraft.persistedSession != nil
+    }
+
     func body(content: Content) -> some View {
         content
             .alert(isPresented: $isPresented) {
                 Alert(
-                    title: Text("End session"),
+                    title: Text(isModifiying ? "Modify session?" : "Save session?"),
                     message: Text(
-                        "Terminate the session now and save all your stats ?"
+                        isModifiying ? "All data will be modified. This cannot be undone." : "Terminate the session now and save all your stats ?"
                     ),
                     primaryButton: .cancel(),
                     secondaryButton: .default(
                         Text("Save"),
                         action: {
-                            let sessionSave = Session(from: sessionDraft)
-                            modelContext.insert(sessionSave)
-                            do {
-                                try modelContext.save()
-                                mainViewState.currentSession = nil
-                            } catch {
-                                print("Failed to save session")
-                            }
+                            saveSession(sessionModel: sessionDraft.persistedSession)
                         }
                     )
                 )
             }
+    }
+
+    private func saveSession(sessionModel: Session?) {
+        let sessionSave = Session(from: sessionDraft)
+        modelContext.insert(sessionSave)
+
+        if let sessionModel {
+            modelContext.delete(sessionModel)
+        }
+
+        do {
+            try modelContext.save()
+            mainViewState.currentSession = nil
+        } catch {
+            print("Failed to save session")
+        }
     }
 }
