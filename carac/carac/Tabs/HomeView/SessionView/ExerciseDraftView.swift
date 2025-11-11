@@ -75,7 +75,12 @@ struct ExerciseDraftView: View {
                 }
                 return false
             }
-            lastExerciseSet = lastWeekSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted { $0.weight > $1.weight }.dropFirst().first
+            // Skip the absolute max to get second-best; fallback to max if only one set
+            if let sets = lastWeekSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
+                lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
+            } else {
+                lastExerciseSet = nil
+            }
 
             if exercise.sets.isEmpty {
                 exercise.sets.append(ExerciseSetDraft(id: 0, weight: lastExerciseSet?.weight ?? exercise.weightSteps))
