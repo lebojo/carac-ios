@@ -28,26 +28,52 @@ struct EndSessionAlertViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .alert(isPresented: $isPresented) {
-                Alert(
-                    title: Text("End session"),
-                    message: Text(
-                        "Terminate the session now and save all your stats ?"
-                    ),
-                    primaryButton: .cancel(),
-                    secondaryButton: .default(
-                        Text("Save"),
-                        action: {
-                            let sessionSave = Session(from: sessionDraft)
-                            modelContext.insert(sessionSave)
-                            do {
-                                try modelContext.save()
-                                mainViewState.currentSession = nil
-                            } catch {
-                                print("Failed to save session")
+                if let sessionModel = sessionDraft.persistedSession {
+                    Alert(
+                        title: Text("Modify session?"),
+                        message: Text(
+                            "All data will be modified. This cannot be undone."
+                        ),
+                        primaryButton: .cancel(),
+                        secondaryButton: .default(
+                            Text("Save"),
+                            action: {
+                                modelContext.delete(sessionModel)
+
+                                let sessionSave = Session(from: sessionDraft)
+
+                                modelContext.insert(sessionSave)
+                                do {
+                                    try modelContext.save()
+                                    mainViewState.currentSession = nil
+                                } catch {
+                                    print("Failed to modify session")
+                                }
                             }
-                        }
+                        )
                     )
-                )
+                } else {
+                    Alert(
+                        title: Text("End session"),
+                        message: Text(
+                            "Terminate the session now and save all your stats ?"
+                        ),
+                        primaryButton: .cancel(),
+                        secondaryButton: .default(
+                            Text("Save"),
+                            action: {
+                                let sessionSave = Session(from: sessionDraft)
+                                modelContext.insert(sessionSave)
+                                do {
+                                    try modelContext.save()
+                                    mainViewState.currentSession = nil
+                                } catch {
+                                    print("Failed to save session")
+                                }
+                            }
+                        )
+                    )
+                }
             }
     }
 }

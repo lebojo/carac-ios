@@ -63,20 +63,23 @@ public struct TrainingDraft: Identifiable, Hashable {
     }
 }
 
-public struct SessionDraft: Identifiable, Hashable {
-    public var id: UUID
-    public var date: Date
-    public var training: TrainingDraft
+struct SessionDraft: Identifiable, Hashable {
+    var id: UUID
+    var date: Date
+    var training: TrainingDraft
+    let persistedSession: Session?
 
-    public init(id: UUID = UUID(), date: Date = .now, training: TrainingDraft) {
+    init(id: UUID = UUID(), date: Date = .now, training: TrainingDraft, persistedSession: Session? = nil) {
         self.id = id
         self.date = date
         self.training = training
+        self.persistedSession = persistedSession
     }
 
     init(from model: Session) {
         self.id = UUID()
         self.date = model.date
         self.training = TrainingDraft(from: model.training)
+        self.persistedSession = model
     }
 }
