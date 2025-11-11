@@ -80,33 +80,3 @@ public struct SessionDraft: Identifiable, Hashable {
         self.training = TrainingDraft(from: model.training)
     }
 }
-
-// MARK: - Materialization to SwiftData models
-
-extension ExerciseSetDraft {
-    func makeModel() -> ExerciseSet {
-        return ExerciseSet(id: id, reps: reps, weight: weight)
-    }
-}
-
-extension ExerciseDraft {
-    func makeModel() -> Exercise {
-        let setsModels = sets.map { $0.makeModel() }
-        return Exercise(name: name, weightSteps: weightSteps, sets: setsModels)
-    }
-}
-
-extension TrainingDraft {
-    func makeModel() -> Training {
-        let exercisesModels = exercises.map { $0.makeModel() }
-        let training = Training(title, exercises: exercisesModels, repeatDays: repeatDays.compactMap(RepeatDay.init(rawValue:)))
-        return training
-    }
-}
-
-extension SessionDraft {
-    func makeModel() -> Session {
-        let trainingModel = training.makeModel()
-        return Session(date: date, training: trainingModel)
-    }
-}
