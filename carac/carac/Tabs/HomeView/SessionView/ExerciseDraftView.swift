@@ -67,16 +67,10 @@ struct ExerciseDraftView: View {
             }
         })
         .task {
-            let lastWeekSession = sessions.first { session in
-                if let sessionDate = mainViewState.currentSession?.date, let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: sessionDate) {
-                    if Calendar.current.isDate(session.date, inSameDayAs: lastWeekDate) {
-                        return true
-                    }
-                }
-                return false
-            }
+            let lastSession = sessions.sorted(by: { $0.date > $1.date }).first
+
             // Skip the absolute max to get second-best; fallback to max if only one set
-            if let sets = lastWeekSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
+            if let sets = lastSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
                 lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
             } else {
                 lastExerciseSet = nil
