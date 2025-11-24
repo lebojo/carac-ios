@@ -22,4 +22,8 @@ final class Session {
         date = draft.date
         training = Training(from: draft.training)
     }
+
+    var totalWeightPulled: Double {
+        training.exercises.reduce(0) { $0 + $1.totalPulledWeight }
+    }
 }

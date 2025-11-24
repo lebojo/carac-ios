@@ -50,7 +50,7 @@ struct TrainingModificationView: View {
             .bottomButton(title: "Modify now", systemName: "calendar.badge.plus", disabled: training.exercises.isEmpty || training.title.isEmpty) {
                 try! modelContext.save()
 
-                mainViewState.selectedState = nil
+                mainViewState.backHome()
             }
         }
     }
