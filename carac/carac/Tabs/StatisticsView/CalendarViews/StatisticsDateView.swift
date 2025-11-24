@@ -16,7 +16,7 @@ struct StatisticsDateView: View {
 
     var body: some View {
         List {
-            if let firstSession = sessions.first {
+            if sessions.count == 1, let firstSession = sessions.first {
                 forEachExercises(firstSession.training.exercises)
             } else {
                 ForEach(sessions) { session in

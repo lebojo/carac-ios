@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct StatisticsCalendarView: View {
-    @EnvironmentObject private var statisticsViewState: StatisticsViewState
-
     @Binding var selectedDate: Date
 
     var body: some View {
-        DatePicker("Wich", selection: $selectedDate, displayedComponents: .date)
+        DatePicker("Statistics date selection", selection: $selectedDate, displayedComponents: .date)
             .datePickerStyle(.graphical)
     }
 }

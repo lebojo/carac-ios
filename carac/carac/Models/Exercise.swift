@@ -27,6 +27,6 @@ final class Exercise: Identifiable {
     }
 
     var totalPulledWeight: Double {
-        sets.reduce(0) { $0 + $1.weight }
+        sets.reduce(0) { $0 + ($1.weight * Double($1.reps)) }
     }
 }
