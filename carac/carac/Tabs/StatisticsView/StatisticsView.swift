@@ -34,18 +34,8 @@ struct StatisticsView: View {
         NavigationStack {
             List {
                 if !trainings.isEmpty {
-                    Section("Hall of glory") {
-                        VStack {
-                            Image(systemName: "trophy")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 100)
-                                .frame(maxWidth: .infinity, alignment: .center)
+                    HallOfGlorySectionView(totalWeightPulled: totalWeightPulled)
 
-                            Text("Total weight pulled: **\(totalWeightPulled.formatted()) kg**")
-                        }
-                    }
-                    
                     Section("Today stats") {
                         Label("Total sessions: **\(todayDoneSessionCount)**", systemImage: "figure.run")
                         Label("Total exercices: **\(exerciseDoneTodayCount)**", systemImage: "dumbbell")
