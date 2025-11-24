@@ -15,7 +15,15 @@ struct StatisticsView: View {
     private var todayTrainings: [Training] {
         trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }.done
     }
-    
+
+    private var todayDoneSessionCount: Int {
+        trainings.flatMap(\.sessions).filter { Calendar.current.isDateInToday($0.date) }.count
+    }
+
+    private var exerciseDoneTodayCount: Int {
+        trainings.flatMap(\.sessions).filter { Calendar.current.isDateInToday($0.date) }.flatMap(\.training.exercises).count
+    }
+
     private var totalWeightPulled: Double {
         trainings.flatMap(\.exercises).flatMap(\.sets).reduce(0.0) { total, set in
             total + set.weight * Double(set.reps)
@@ -39,8 +47,8 @@ struct StatisticsView: View {
                     }
                     
                     Section("Today stats") {
-                        Label("Total sessions: **\(todayTrainings.flatMap(\.sessions).count)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(todayTrainings.flatMap(\.exercises).count)**", systemImage: "dumbbell")
+                        Label("Total sessions: **\(todayDoneSessionCount)**", systemImage: "figure.run")
+                        Label("Total exercices: **\(exerciseDoneTodayCount)**", systemImage: "dumbbell")
                     }
                     
                     Section("Global stats") {
