@@ -46,13 +46,20 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Carac Accueil"
+            "value" : "Carac cueil"
           }
         }
       }
     },
     "Carac teristics" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carac teristiques"
+          }
+        }
+      }
     },
     "Carac Training%@" : {
       "comment" : "The title of the view that lists all the trainings.",
