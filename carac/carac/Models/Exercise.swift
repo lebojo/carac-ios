@@ -25,4 +25,8 @@ final class Exercise: Identifiable {
         weightSteps = draft.weightSteps
         sets = draft.sets.map { ExerciseSet(from: $0) }
     }
+
+    var totalPulledWeight: Double {
+        sets.reduce(0) { $0 + ($1.weight * Double($1.reps)) }
+    }
 }

@@ -9,19 +9,18 @@ import SwiftData
 import SwiftUI
 
 struct StatisticsView: View {
-    @Query private var sessions: [Session]
+    @StateObject private var statisticsViewState: StatisticsViewState = .init()
+
     @Query private var trainings: [Training]
-    
-    private var todayTrainings: [Training] {
-        trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }.done
+
+    @State private var currentDate: Date = .now
+
+    private var currentDateDoneSession: [Session] {
+        trainings.flatMap(\.sessions).filter { Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day) }
     }
 
-    private var todayDoneSessionCount: Int {
-        trainings.flatMap(\.sessions).filter { Calendar.current.isDateInToday($0.date) }.count
-    }
-
-    private var exerciseDoneTodayCount: Int {
-        trainings.flatMap(\.sessions).filter { Calendar.current.isDateInToday($0.date) }.flatMap(\.training.exercises).count
+    private var currentDateDoneExercises: [Exercise] {
+        trainings.flatMap(\.sessions).filter { Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day) }.flatMap(\.training.exercises)
     }
 
     private var totalWeightPulled: Double {
@@ -30,27 +29,57 @@ struct StatisticsView: View {
         }
     }
 
+    private var currentDateTotalWeightPulled: Double {
+        currentDateDoneSession.reduce(0) { $0 + $1.totalWeightPulled }
+    }
+
+    private var singleTrainings: [Training] {
+        trainings.filter { $0.sessions.isEmpty }
+    }
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $statisticsViewState.navPath) {
             List {
                 if !trainings.isEmpty {
-                    HallOfGlorySectionView(totalWeightPulled: totalWeightPulled)
+                    StatisticsCalendarView(selectedDate: $currentDate)
+                        .environmentObject(statisticsViewState)
 
                     Section("Today stats") {
-                        Label("Total sessions: **\(todayDoneSessionCount)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(exerciseDoneTodayCount)**", systemImage: "dumbbell")
+                        Label("Total pulled: **\(currentDateTotalWeightPulled.formatted(.number.precision(.fractionLength(1))))**", systemImage: "trophy")
+                        Label("Total sessions: **\(currentDateDoneSession.count)**", systemImage: "figure.run")
+                        Label("Total exercices: **\(currentDateDoneExercises.count)**", systemImage: "dumbbell")
                     }
-                    
+
                     Section("Global stats") {
+                        HallOfGloryView(totalWeightPulled: totalWeightPulled)
+                            .padding()
+                            .listRowSeparator(.hidden)
+
                         Label("Total sessions: **\(trainings.done.flatMap(\.sessions).count)**", systemImage: "figure.run")
                         Label("Total exercices: **\(trainings.done.flatMap(\.exercises).count)**", systemImage: "dumbbell")
+
+                        ForEach(singleTrainings, id: \.persistentModelID) { training in
+                            Button {
+                                statisticsViewState.navPath.append(training)
+                            } label: {
+                                HStack {
+                                    Text(training.title)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Image(systemName: "chevron.right")
+                                }
+                            }
+                        }
                     }
+
                 } else {
                     ContentUnavailableView("No stats for now", systemImage: "chart.line.downtrend.xyaxis")
                 }
             }
             .navigationTitle("Carac teristics")
             .toolbar { HomeToolbarView() }
+            .navigationDestination(for: Date.self) { date in
+                StatisticsDateView(date: date)
+            }
         }
     }
 }
@@ -59,7 +88,7 @@ extension [Training] {
     var done: [Training] {
         self.filter { !$0.sessions.isEmpty }
     }
-    
+
     var templates: [Training] {
         self.filter { $0.sessions.isEmpty }
     }
