@@ -27,6 +27,22 @@ struct ModifyAnExercise: View {
                         .multilineTextAlignment(.trailing)
                     }
                 }
+
+                Section {
+                    VStack {
+                        Stepper("Wheight step: **\(exercise.weightSteps.formatted())**", value: $exercise.weightSteps, step: 0.1)
+
+                        Picker("Picker template", selection: $exercise.weightSteps) {
+                            ForEach([1, 2.5, 5, 10], id: \.self) { num in
+                                Text(num, format: .number.precision(.fractionLength(1)))
+                                    .tag(num)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                } footer: {
+                    Text("Wheight step is used to precisely measure the weight of the exercise.")
+                }
             }
             .navigationTitle("Modify the exercise")
             .bottomButton(title: "Update now", systemName: "pencil.and.outline", disabled: exercise.name.isEmpty) {
