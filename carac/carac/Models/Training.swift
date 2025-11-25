@@ -14,7 +14,7 @@ final class Training: Identifiable {
     var exercises: [Exercise]
     var repeatDays: [String]
 
-    @Relationship(deleteRule: .cascade, inverse: \Session.training)
+    @Relationship(deleteRule: .nullify, inverse: \Session.training)
     var sessions: [Session] = []
     
     init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {

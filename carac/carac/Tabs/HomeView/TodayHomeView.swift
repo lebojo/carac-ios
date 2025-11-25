@@ -12,18 +12,26 @@ struct TodayHomeView: View {
     @Environment(\.modelContext) private var modelContext
 
     @EnvironmentObject var mainViewState: MainViewState
-    
-    @Query private var sessions: [Session]
-    
-    private var todaySessions: [Session] {
-        sessions.filter{ Calendar.current.isDateInToday($0.date) }
-    }
 
+    @Query private var todaySessions: [Session]
     let trainings: [Training]
+
+    init(trainings: [Training]) {
+        self.trainings = trainings
+
+        // 2. On calcule les dates bornes
+        let start = Calendar.current.startOfDay(for: .now)
+        let end = Calendar.current.date(byAdding: .day, value: 1, to: start)!
+
+        // 3. On initialise la Query avec un Predicate natif
+        _todaySessions = Query(filter: #Predicate<Session> { session in
+            session.date >= start && session.date < end
+        })
+    }
 
     var body: some View {
         if !trainings.isEmpty {
-            ForEach(todaySessions) { todaySession in
+            ForEach(todaySessions, id: \.persistentModelID) { todaySession in
                 Button("Modify \(todaySession.training.title) at \(todaySession.date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)))") {
                     let draftSession = SessionDraft(from: todaySession)
                     mainViewState.currentSession = draftSession
@@ -31,11 +39,7 @@ struct TodayHomeView: View {
             }
             .onDelete { indexSet in
                 for index in indexSet {
-                    let trainingToDelete = todaySessions[index]
-                    withAnimation {
-                        modelContext.delete(trainingToDelete)
-                        try? modelContext.save()
-                    }
+                    modelContext.delete(todaySessions[index])
                 }
             }
 
@@ -58,7 +62,7 @@ struct TodayHomeView: View {
             )
         }
     }
-    
+
     private func createSession(_ training: Training) {
         let draft = SessionDraft(training: TrainingDraft(from: training))
         mainViewState.currentSession = draft
