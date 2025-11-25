@@ -29,6 +29,15 @@ struct TodayHomeView: View {
                     mainViewState.currentSession = draftSession
                 }
             }
+            .onDelete { indexSet in
+                for index in indexSet {
+                    let trainingToDelete = todaySessions[index]
+                    withAnimation {
+                        modelContext.delete(trainingToDelete)
+                        try? modelContext.save()
+                    }
+                }
+            }
 
             ForEach(trainings) { training in
                 Button {
