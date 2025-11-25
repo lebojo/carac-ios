@@ -47,6 +47,12 @@ struct SessionView: View {
                 Label("Stats", systemImage: "chart.bar")
             }
         }
+        .onAppear {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+        .onDisappear {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
     }
 }
 
