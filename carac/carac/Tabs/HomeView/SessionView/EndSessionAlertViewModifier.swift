@@ -48,17 +48,18 @@ struct EndSessionAlertViewModifier: ViewModifier {
             }
     }
 
+    @MainActor
     private func saveSession(sessionModel: Session?) {
-        let sessionSave = Session(from: sessionDraft)
-        modelContext.insert(sessionSave)
-
         if let sessionModel {
-            modelContext.delete(sessionModel)
+            sessionModel.update(with: sessionDraft)
+        } else {
+            let sessionSave = Session(from: sessionDraft)
+            modelContext.insert(sessionSave)
         }
 
         do {
             try modelContext.save()
-            mainViewState.currentSession = nil
+            mainViewState.backHome()
         } catch {
             print("Failed to save session")
         }

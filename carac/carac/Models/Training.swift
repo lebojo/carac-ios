@@ -35,4 +35,10 @@ final class Training: Identifiable {
         exercises = draft.exercises.map { Exercise(from: $0) }
         repeatDays = draft.repeatDays
     }
+
+    func update(with draft: TrainingDraft) {
+        title = draft.title
+        exercises = draft.exercises.map { Exercise(from: $0) }
+        repeatDays = draft.repeatDays
+    }
 }

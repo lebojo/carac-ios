@@ -26,4 +26,9 @@ final class Session {
     var totalWeightPulled: Double {
         training.exercises.reduce(0) { $0 + $1.totalPulledWeight }
     }
+
+    func update(with draft: SessionDraft) {
+        date = draft.date
+        training.update(with: draft.training)
+    }
 }
