@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension View {
-    func onBoarding(isPresented: Bool) -> some View {
+    func onBoarding(isPresented: Binding<Bool>) -> some View {
         modifier(OnBoardingModifier(isPresented: isPresented))
     }
 }
@@ -16,16 +16,11 @@ public extension View {
 struct OnBoardingModifier: ViewModifier {
     @EnvironmentObject var mainViewState: MainViewState
 
-    @State private var isOnboardingShown = false
-
-    let isPresented: Bool
+    @Binding var isPresented: Bool
 
     func body(content: Content) -> some View {
         content
-            .onAppear {
-                isOnboardingShown = isPresented
-            }
-            .sheet(isPresented: $isOnboardingShown) {
+            .sheet(isPresented: $isPresented) {
                 VStack {
                     Image("carac")
                         .resizable()
@@ -35,14 +30,19 @@ struct OnBoardingModifier: ViewModifier {
                     Text("Hey, welcome to Carac!")
                         .font(.title)
                         .padding()
-
+                    Text("To start your journey, simply create a training.\n💪")
+                        .font(.subheadline)
+                }
+                .safeAreaInset(edge: .bottom) {
                     Button {
                         mainViewState.selectedState = .createTraining
-                        isOnboardingShown = false
+                        isPresented = false
                     } label: {
                         Label("Create a Training", systemImage: "plus")
                     }
+                    .buttonStyle(.borderedProminent)
                 }
+                .interactiveDismissDisabled()
             }
     }
 }

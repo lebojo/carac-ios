@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @AppStorage("isFirstTime") private var isFirstTime: Bool = true
     @State private var selectedTab = 1
 
     var body: some View {
@@ -32,7 +33,7 @@ struct MainTabView: View {
         }
         .sideBarAdaptableIfAvailable()
         .homeStateDestination()
-        //                .onBoarding(isPresented: exercises.isEmpty) // TODO: Change to UserDefaults
+        .onBoarding(isPresented: $isFirstTime)
     }
 }
 
