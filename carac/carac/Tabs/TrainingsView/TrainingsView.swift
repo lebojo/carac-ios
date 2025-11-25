@@ -36,6 +36,7 @@ struct TrainingsView: View {
                     for index in indexSet {
                         let trainingToDelete = singleTrainings[index]
                         modelContext.delete(trainingToDelete)
+                        try? modelContext.save()
                     }
                 }
             }
