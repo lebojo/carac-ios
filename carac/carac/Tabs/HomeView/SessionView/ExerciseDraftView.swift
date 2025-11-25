@@ -67,9 +67,13 @@ struct ExerciseDraftView: View {
             }
         })
         .task {
-            let lastSession = sessions.sorted(by: { $0.date > $1.date }).filter( { $0.persistentModelID != mainViewState.currentSession?.persistedSession?.persistentModelID }).first
+            let lastSession = sessions
+                .filter { $0.persistentModelID != mainViewState.currentSession?.persistedSession?.persistentModelID }
+                .filter { session in
+                    session.training.exercises.contains { $0.name == exercise.name }
+                }
+                .max(by: { $0.date < $1.date })
 
-            // Skip the absolute max to get second-best; fallback to max if only one set
             if let sets = lastSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
                 lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
             } else {
