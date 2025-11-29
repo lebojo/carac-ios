@@ -21,5 +21,6 @@ struct CardStyleModifier: ViewModifier {
             .background(Color("cardBackground"))
             .clipShape(RoundedRectangle(cornerRadius: 12.0))
             .shadow(color: Color("cardShadow"), radius: 3, x: 0, y: 3)
+            .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 12.0))
     }
 }
