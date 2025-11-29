@@ -19,11 +19,11 @@ struct HallOfGloryView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.bottom)
 
-            Text("Total weight pulled: **\(totalWeightPulled.formatted(.number.precision(.fractionLength(1)))) kg**")
+            Text("Total weight pulled: **\(totalWeightPulled.maxDigits()) kg**")
         }
     }
 }
 
 #Preview {
-    HallOfGloryView(totalWeightPulled: 123.45)
+    HallOfGloryView(totalWeightPulled: 123.13)
 }
