@@ -45,7 +45,7 @@ struct StatisticsView: View {
                         .environmentObject(statisticsViewState)
 
                     Section("Today stats") {
-                        Label("Total pulled: **\(currentDateTotalWeightPulled.formatted(.number.precision(.fractionLength(1))))**", systemImage: "trophy")
+                        Label("Total pulled: **\(currentDateTotalWeightPulled.maxDigits())**", systemImage: "trophy")
                         Label("Total sessions: **\(currentDateDoneSession.count)**", systemImage: "figure.run")
                         Label("Total exercices: **\(currentDateDoneExercises.count)**", systemImage: "dumbbell")
                     }
