@@ -18,19 +18,16 @@ struct ExercisesGridSection: View {
 
     @Binding var trainingExercises: [Exercise]
 
-    private let columns: [GridItem] = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-    ]
-
     var body: some View {
         Section("Selected exercises \(trainingExercises.count)") { // TODO: Find a better way to show it
+
+            NewExerciseButton()
+                .frame(maxWidth: .infinity)
+
             ForEach(exercises) { exercise in
                 ExerciseCell(exercise: exercise, trainingExercises: $trainingExercises, isSelected: trainingExercises.contains(where: { $0.id == exercise.id }))
                     .listRowSeparator(.hidden)
             }
-
-            NewExerciseButton()
         }
     }
 }
@@ -53,23 +50,23 @@ struct ExerciseCell: View {
             }
         } label: {
             Text("\(exercise.name)")
-                .contextMenu {
-                    Button("Modify", systemImage: "pencil") {
-                        mainViewState.selectedExercise = exercise
-                    }
-
-                    Button("Delete", systemImage: "trash", role: .destructive) {
-                        if let index = trainingExercises.firstIndex(
-                            of: exercise
-                        ) {
-                            trainingExercises.remove(at: index)
-                        }
-                        modelContext.delete(exercise)
-                    }
-                }
         }
         .padding()
         .buttonStyle(.exerciseButton(isSelected))
+        .contextMenu {
+            Button("Modify", systemImage: "pencil") {
+                mainViewState.selectedExercise = exercise
+            }
+
+            Button("Delete", systemImage: "trash", role: .destructive) {
+                if let index = trainingExercises.firstIndex(
+                    of: exercise
+                ) {
+                    trainingExercises.remove(at: index)
+                }
+                modelContext.delete(exercise)
+            }
+        }
     }
 }
 
