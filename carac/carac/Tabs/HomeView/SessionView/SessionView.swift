@@ -32,7 +32,7 @@ struct SessionView: View {
                     ExerciseDraftView(exercise: exercise)
                 }
             }
-            .tabViewStyle(.page)
+            .tabViewStyle(.page(indexDisplayMode: .always))
             .tabItem {
                 Label("Exercises", systemImage: "figure.walk")
             }
