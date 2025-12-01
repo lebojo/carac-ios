@@ -12,7 +12,13 @@ struct ModifyAnExercise: View {
     @EnvironmentObject var mainViewState: MainViewState
     @Environment(\.modelContext) private var modelContext
 
+    @Query private var allTrainings: [Training]
+
     @Bindable var exercise: Exercise
+
+    private var trainings: [Training] {
+        allTrainings.filter { $0.exercises.contains { $0.name == exercise.name } }
+    }
 
     var body: some View {
         NavigationStack {
@@ -43,8 +49,11 @@ struct ModifyAnExercise: View {
                 } footer: {
                     Text("Wheight step is used to precisely measure the weight of the exercise.")
                 }
+
+                Text("This exercise is used in:\n\(trainings.map(\.title).joined(separator: "\n"))")
             }
             .navigationTitle("Modify the exercise")
+            .closeButton()
             .bottomButton(title: "Update now", systemName: "pencil.and.outline", disabled: exercise.name.isEmpty) {
                 do {
                     try modelContext.save()
