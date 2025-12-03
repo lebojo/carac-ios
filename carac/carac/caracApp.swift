@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct caracApp: App {
     @AppStorage("tintColor") var tintColor = "#007AFF"
+    @AppStorage("preferedTheme") var theme: Theme = .systemDefault
 
     @StateObject var mainViewState = MainViewState()
 
@@ -58,6 +59,7 @@ struct caracApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .preferredColorScheme(theme.colorScheme)
                 .tint(
                     Color(
                         hex: tintColor
