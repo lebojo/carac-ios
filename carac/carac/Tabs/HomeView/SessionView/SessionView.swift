@@ -37,11 +37,8 @@ struct SessionView: View {
                 Label("Exercises", systemImage: "figure.walk")
             }
 
-            VStack {
-                SessionChart(weights: session.training.exercises.flatMap { $0.sets.map(\.weight) },
-                             reps: session.training.exercises.flatMap { $0.sets.map(\.reps) })
-                    .padding()
-                    .frame(height: 150)
+            NavigationStack {
+                StatisticsTrainingView(trainingTitle: session.training.title)
             }
             .tabItem {
                 Label("Stats", systemImage: "chart.bar")
