@@ -12,6 +12,8 @@ struct TrainingModificationView: View {
     @EnvironmentObject var mainViewState: MainViewState
     @Environment(\.modelContext) private var modelContext
 
+    @Query private var allTrainings: [Training]
+
     @Bindable var training: Training
 
     var body: some View {
@@ -24,6 +26,12 @@ struct TrainingModificationView: View {
                             Text("Top body training")
                         }
                         .multilineTextAlignment(.trailing)
+                        .onChange(of: training.title) { oldValue, newValue in
+                            allTrainings.forEach { training in
+                                guard training.title == oldValue else { return }
+                                training.title = newValue
+                            }
+                        }
                     }
 
                     NavigationLink(
