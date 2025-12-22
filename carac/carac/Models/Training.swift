@@ -16,7 +16,11 @@ final class Training: Identifiable {
 
     @Relationship(deleteRule: .nullify, inverse: \Session.training)
     var sessions: [Session] = []
-    
+
+    var totalWeightPulled: Double {
+        sessions.reduce(0) { $0 + $1.totalWeightPulled }
+    }
+
     init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {
         self.title = title
         self.exercises = exercises
