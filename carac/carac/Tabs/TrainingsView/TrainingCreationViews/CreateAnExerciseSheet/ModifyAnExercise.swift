@@ -31,6 +31,12 @@ struct ModifyAnExercise: View {
                             Text("Curl Series")
                         }
                         .multilineTextAlignment(.trailing)
+                        .onChange(of: exercise.name) { oldValue, newValue in
+                            trainings.flatMap(\.exercises).forEach { exercise in
+                                guard exercise.name == oldValue else { return }
+                                exercise.name = newValue
+                            }
+                        }
                     }
                 }
 
@@ -50,7 +56,7 @@ struct ModifyAnExercise: View {
                     Text("Wheight step is used to precisely measure the weight of the exercise.")
                 }
 
-                Text("This exercise is used in:\n\(trainings.map(\.title).joined(separator: "\n"))")
+                Text("This exercise is used in:\n\(Set(trainings.map(\.title)).joined(separator: "\n"))")
             }
             .navigationTitle("Modify the exercise")
             .closeButton()
