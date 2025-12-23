@@ -38,7 +38,7 @@ struct SessionView: View {
             }
 
             NavigationStack {
-                StatisticsTrainingView(trainingTitle: session.training.title)
+                StatisticsTrainingView(trainingTitle: session.training.title, currentSession: session)
             }
             .tabItem {
                 Label("Stats", systemImage: "chart.bar")

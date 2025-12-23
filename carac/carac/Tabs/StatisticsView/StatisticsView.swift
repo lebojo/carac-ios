@@ -78,7 +78,7 @@ struct StatisticsView: View {
             .navigationTitle("Carac teristics")
             .toolbar { HomeToolbarView() }
             .navigationDestination(for: Training.self) { training in
-                StatisticsTrainingView(trainingTitle: training.title)
+                StatisticsTrainingView(trainingTitle: training.title, currentSession: nil)
             }
         }
     }

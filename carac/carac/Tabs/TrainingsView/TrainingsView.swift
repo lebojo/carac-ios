@@ -59,6 +59,8 @@ struct TrainingsView: View {
                         }
                     }
                 }
+
+                OrphanExercisesSectionView(correctExercisesName: singleExercises.map(\.name))
             }
             .bottomButton(title: "Create a training", systemName: "plus") {
                 mainViewState.selectedState = .createTraining

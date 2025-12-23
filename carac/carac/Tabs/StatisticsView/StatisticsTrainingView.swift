@@ -18,12 +18,26 @@ struct StatisticsTrainingView: View {
 
     let trainingTitle: String
 
+    let currentSession: SessionDraft?
+
     private var sessions: [Session] {
         dataSessions.filter { $0.training.title == trainingTitle }
     }
 
+    private var sessionsCount: Int {
+        let sessionsCount = sessions.count
+        if let currentSession, currentSession.totalWeightPulled > 0 {
+            return sessionsCount + 1
+        }
+        return sessionsCount
+    }
+
     private var totalWeightPulled: Double {
-        sessions.reduce(0) { $0 + $1.totalWeightPulled }
+        let totalSessionWeightPulled = sessions.reduce(0) { $0 + $1.totalWeightPulled }
+        if let currentSession, currentSession.totalWeightPulled > 0 {
+            return currentSession.totalWeightPulled + totalSessionWeightPulled
+        }
+        return totalSessionWeightPulled
     }
 
     private var bestSession: (weightPulled: Double, date: Date)? {
@@ -42,13 +56,17 @@ struct StatisticsTrainingView: View {
         guard sorted.count > 1 else { return nil }
 
         // Crée des paires (Session N, Session N+1)
-        let changes = zip(sorted, sorted.dropFirst()).compactMap { prev, curr -> Double? in
+        var changes = zip(sorted, sorted.dropFirst()).compactMap { prev, curr -> Double? in
             guard prev.totalWeightPulled > 0 else { return nil }
 
             return (curr.totalWeightPulled - prev.totalWeightPulled) / prev.totalWeightPulled
         }
 
         guard !changes.isEmpty else { return nil }
+
+        if let currentSession {
+            changes.append((currentSession.totalWeightPulled - sorted.last!.totalWeightPulled) / sorted.last!.totalWeightPulled)
+        }
 
         let average = changes.reduce(0, +) / Double(changes.count)
 
@@ -60,17 +78,17 @@ struct StatisticsTrainingView: View {
             if sessions.count > 1 {
                 SessionChart(data: sessions.map {
                     ($0.totalWeightPulled, $0.date)
-                })
-                .padding()
+                }, currentSessionData: currentSession.map { ($0.totalWeightPulled, $0.date) })
+                    .padding()
             }
 
-            Section("Global training stats") {
+            Section("Global training stats" + (currentSession != nil ? " with today" : "")) {
                 HallOfGloryView(totalWeightPulled: totalWeightPulled)
                 Text("Total times done: **\(sessions.count)**")
                 if let bestSession {
                     Text("Best: **\(bestSession.weightPulled)** at **\(bestSession.date.formatted(date: .abbreviated, time: .omitted))**")
                 }
-                Text("Average: **\(sessions.isEmpty ? 0 : totalWeightPulled / Double(sessions.count))**")
+                Text("Average: **\(sessionsCount > 0  ? 0 : totalWeightPulled / Double(sessionsCount))**")
                 if let averageTrend {
                     Text("Average trend: \(coloredAverageTrend(averageTrend))")
                 }
@@ -87,13 +105,18 @@ struct StatisticsTrainingView: View {
                         isShowingConfirmation = true
                     }
                 }
+
+                if let currentSession {
+                    Text("\(currentSession.date.formatted()) (Today)")
+                        .italic()
+                }
             }
             .alert("Do you confirm ?", isPresented: $isShowingConfirmation, presenting: sessionToDelete) { item in
                 Button("Cancel", role: .cancel) { isShowingConfirmation = false }
                 Button("Delete", role: .destructive) {
                     modelContext.delete(item)
                 }
-            } message: { item in
+            } message: { _ in
                 Text("This action cannot be undone")
             }
         }
@@ -113,5 +136,5 @@ struct StatisticsTrainingView: View {
 }
 
 #Preview {
-    StatisticsTrainingView(trainingTitle: sampleTraining.title)
+    StatisticsTrainingView(trainingTitle: sampleTraining.title, currentSession: nil)
 }
