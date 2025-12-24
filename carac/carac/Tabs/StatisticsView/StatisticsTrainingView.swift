@@ -64,8 +64,8 @@ struct StatisticsTrainingView: View {
 
         guard !changes.isEmpty else { return nil }
 
-        if let currentSession {
-            changes.append((currentSession.totalWeightPulled - sorted.last!.totalWeightPulled) / sorted.last!.totalWeightPulled)
+        if let currentSession, let last = sorted.last {
+            changes.append((currentSession.totalWeightPulled - last.totalWeightPulled) / last.totalWeightPulled)
         }
 
         let average = changes.reduce(0, +) / Double(changes.count)
