@@ -84,7 +84,7 @@ struct StatisticsTrainingView: View {
 
             Section("Global training stats" + (currentSession != nil ? " with today" : "")) {
                 HallOfGloryView(totalWeightPulled: totalWeightPulled)
-                Text("Total times done: **\(sessions.count)**")
+                Text("Total times done: **\(sessionsCount)**")
                 if let bestSession {
                     Text("Best: **\(bestSession.weightPulled)** at **\(bestSession.date.formatted(date: .abbreviated, time: .omitted))**")
                 }
