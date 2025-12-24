@@ -82,4 +82,12 @@ struct SessionDraft: Identifiable, Hashable {
         self.training = TrainingDraft(from: model.training)
         self.persistedSession = model
     }
+
+    var totalWeightPulled: Double {
+        training.exercises.reduce(0) { total, exercise in
+            total + exercise.sets.reduce(0) { total, set in
+                total + (set.weight * Double(set.reps))
+            }
+        }
+    }
 }
