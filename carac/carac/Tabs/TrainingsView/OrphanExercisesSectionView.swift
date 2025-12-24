@@ -24,7 +24,7 @@ struct OrphanExercisesSectionView: View {
             Section("Orphan exercises") {
                 ForEach(orphanExercises, id: \.persistentModelID) { exercise in
                     Button {
-                        print("Babylone")
+                        // TODO: Implement handling of orphan exercise selection.
                     } label: {
                         HStack {
                             Text(exercise.name)
