@@ -88,7 +88,7 @@ struct StatisticsTrainingView: View {
                 if let bestSession {
                     Text("Best: **\(bestSession.weightPulled)** at **\(bestSession.date.formatted(date: .abbreviated, time: .omitted))**")
                 }
-                Text("Average: **\(sessionsCount > 0  ? 0 : totalWeightPulled / Double(sessionsCount))**")
+                Text("Average: **\(sessionsCount > 0 ? totalWeightPulled / Double(sessionsCount) : 0)**")
                 if let averageTrend {
                     Text("Average trend: \(coloredAverageTrend(averageTrend))")
                 }
