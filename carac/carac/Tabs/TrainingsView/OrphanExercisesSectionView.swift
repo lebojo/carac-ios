@@ -1,5 +1,5 @@
 //
-//  OrphanExercisesView.swift
+//  OrphanExercisesSectionView.swift
 //  carac
 //
 //  Created by Jordan Chap on 22.12.2025.
