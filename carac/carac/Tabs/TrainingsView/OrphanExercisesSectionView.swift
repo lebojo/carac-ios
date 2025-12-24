@@ -14,8 +14,9 @@ struct OrphanExercisesSectionView: View {
     let correctExercisesName: [String]
 
     private var orphanExercises: [Exercise] {
-        sessions.flatMap(\.training.exercises).filter { exercise in
-            !correctExercisesName.contains(exercise.name)
+        let correctExercisesNameSet = Set(correctExercisesName)
+        return sessions.flatMap(\.training.exercises).filter { exercise in
+            !correctExercisesNameSet.contains(exercise.name)
         }
     }
 
