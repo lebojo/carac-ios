@@ -24,6 +24,7 @@ struct SetView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .onStepperBackgroundTap(perform: handleTap)
+            .padding()
             .cardStyle()
 
             if isFinished {

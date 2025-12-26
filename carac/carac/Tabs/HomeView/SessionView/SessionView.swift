@@ -27,15 +27,10 @@ struct SessionView: View {
                 Label("List", systemImage: "list.bullet")
             }
 
-            TabView {
-                ForEach($session.training.exercises) { exercise in
-                    ExerciseDraftView(exercise: exercise)
+            SessionExercisesView(exercises: $session.training.exercises)
+                .tabItem {
+                    Label("Exercises", systemImage: "figure.walk")
                 }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .always))
-            .tabItem {
-                Label("Exercises", systemImage: "figure.walk")
-            }
 
             NavigationStack {
                 StatisticsTrainingView(trainingTitle: session.training.title, currentSession: session)

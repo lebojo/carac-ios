@@ -22,11 +22,12 @@ struct ExerciseDraftView: View {
             if let lastExerciseSet {
                 Section("Last time best") {
                     VStack(alignment: .leading, spacing: 20) {
-                        Label("Weight: \(lastExerciseSet.weight.formatted())kg", systemImage: "dumbbell.fill")
+                        Label("Weight: \(lastExerciseSet.weight.maxDigits(2))kg", systemImage: "dumbbell.fill")
 
                         Label("Reps: \(lastExerciseSet.reps)", systemImage: "arrow.triangle.2.circlepath")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
                     .cardStyle()
                     .listRowSeparator(.hidden)
                 }
@@ -55,30 +56,11 @@ struct ExerciseDraftView: View {
                     .listRowSeparator(.hidden)
             }
         }
+        .navigationTitle(exercise.name)
+        .scrollIndicators(.never)
         .listStyle(.plain)
-        .background()
-        .safeAreaInset(edge: .top, content: {
-            HStack {
-                Text(exercise.name)
-                    .font(.largeTitle)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2, reservesSpace: true)
-            }
-        })
         .task {
-            let lastSession = sessions
-                .filter { $0.persistentModelID != mainViewState.currentSession?.persistedSession?.persistentModelID }
-                .filter { session in
-                    session.training.exercises.contains { $0.name == exercise.name }
-                }
-                .max(by: { $0.date < $1.date })
-
-            if let sets = lastSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
-                lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
-            } else {
-                lastExerciseSet = nil
-            }
+            setLastBestSetIfAvailable()
 
             if exercise.sets.isEmpty {
                 exercise.sets.append(ExerciseSetDraft(id: 0, weight: lastExerciseSet?.weight ?? exercise.weightSteps))
@@ -89,6 +71,21 @@ struct ExerciseDraftView: View {
     private func deleteSets(at offsets: IndexSet) {
         withAnimation {
             exercise.sets.remove(atOffsets: offsets)
+        }
+    }
+
+    private func setLastBestSetIfAvailable() {
+        let lastSession = sessions
+            .filter { $0.persistentModelID != mainViewState.currentSession?.persistedSession?.persistentModelID }
+            .filter { session in
+                session.training.exercises.contains { $0.name == exercise.name }
+            }
+            .max(by: { $0.date < $1.date })
+
+        if let sets = lastSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
+            lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
+        } else {
+            lastExerciseSet = nil
         }
     }
 }

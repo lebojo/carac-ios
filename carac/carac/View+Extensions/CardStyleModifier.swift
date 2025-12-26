@@ -17,7 +17,6 @@ extension View {
 struct CardStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding()
             .background(Color("cardBackground"))
             .clipShape(RoundedRectangle(cornerRadius: 12.0))
             .shadow(color: Color("cardShadow"), radius: 3, x: 0, y: 3)
