@@ -9,14 +9,16 @@ import SwiftData
 import SwiftUI
 
 struct OrphanExercisesSectionView: View {
-    @Query var sessions: [Session]
+    @Query var exercises: [Exercise]
+
+    @State private var selectedOrphanExercise: Exercise? = nil
 
     let correctExercisesName: [String]
 
     private var orphanExercises: [Exercise] {
         let correctExercisesNameSet = Set(correctExercisesName)
-        return sessions.flatMap(\.training.exercises).filter { exercise in
-            !correctExercisesNameSet.contains(exercise.name)
+        return exercises.filter { exercise in
+            !correctExercisesNameSet.contains(exercise.name) && !exercise.sets.isEmpty
         }
     }
 
@@ -25,7 +27,7 @@ struct OrphanExercisesSectionView: View {
             Section("Orphan exercises") {
                 ForEach(orphanExercises, id: \.persistentModelID) { exercise in
                     Button {
-                        // TODO: Implement handling of orphan exercise selection.
+                        selectedOrphanExercise = exercise
                     } label: {
                         HStack {
                             Text(exercise.name)
@@ -35,12 +37,9 @@ struct OrphanExercisesSectionView: View {
                     }
                 }
             }
+            .sheet(item: $selectedOrphanExercise) { orphanExercise in
+                OrphanExercisesCorrectionSheetView(wrongExerciseName: orphanExercise.name, correctExercisesName: correctExercisesName)
+            }
         }
-    }
-}
-
-#Preview {
-    List {
-        OrphanExercisesSectionView(correctExercisesName: [])
     }
 }
