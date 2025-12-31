@@ -39,6 +39,8 @@ struct OrphanExercisesSectionView: View {
             }
             .sheet(item: $selectedOrphanExercise) { orphanExercise in
                 OrphanExercisesCorrectionSheetView(wrongExerciseName: orphanExercise.name, correctExercisesName: correctExercisesName)
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.medium])
             }
         }
     }
