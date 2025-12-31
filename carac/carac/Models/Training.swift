@@ -21,6 +21,10 @@ final class Training: Identifiable {
         sessions.reduce(0) { $0 + $1.totalWeightPulled }
     }
 
+    var repeatDaysStringified: String {
+        repeatDays.joined(separator: ", ")
+    }
+
     init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {
         self.title = title
         self.exercises = exercises

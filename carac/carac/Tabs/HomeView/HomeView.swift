@@ -9,14 +9,13 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    @Query private var trainings: [Training]
+    @EnvironmentObject private var mainViewState: MainViewState
+
+    @Query(filter: #Predicate<Training> { training in training.sessions.isEmpty })
+    private var trainings: [Training]
 
     private var todayTrainings: [Training] {
-        trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }.filter { $0.sessions.isEmpty }
-    }
-    
-    private var weekTrainings: [Training] {
-        trainings.filter { !$0.repeatDays.contains(RepeatDay.today.rawValue) }
+        trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }
     }
 
     var body: some View {
@@ -24,9 +23,20 @@ struct HomeView: View {
             List {
                 TodayHomeView(trainings: todayTrainings)
 
-                if !weekTrainings.isEmpty {
+                Section {
+                    Menu("Start another day training") {
+                        ForEach(trainings) { training in
+                            Button(training.title + " (\(training.repeatDaysStringified))") {
+                                let draft = SessionDraft(training: TrainingDraft(from: training))
+                                mainViewState.currentSession = draft
+                            }
+                        }
+                    }
+                }
+
+                if !trainings.isEmpty {
                     Section("This week") {
-                        WeekHomeView(trainings: weekTrainings)
+                        WeekHomeView(trainings: trainings)
                     }
                 }
             }
