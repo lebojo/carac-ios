@@ -25,10 +25,11 @@ struct HomeView: View {
 
                 Section {
                     Menu("Start another day training") {
-                        ForEach(trainings) { training in
+                        ForEach(trainings.filter { !$0.repeatDays.contains(RepeatDay.today.rawValue) }) { training in
                             Button(training.title + " (\(training.repeatDaysStringified))") {
                                 let draft = SessionDraft(training: TrainingDraft(from: training))
                                 mainViewState.currentSession = draft
+                                
                             }
                         }
                     }
