@@ -8,7 +8,7 @@ struct CustomCalendarView: View {
     private let calendar = Calendar.current
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
 
-    private var activatedDate: [Date]
+    private var activatedDates: Set<Date>
 
     private var monthHeader: String {
         let formatter = DateFormatter()
@@ -38,7 +38,8 @@ struct CustomCalendarView: View {
 
     init(selectedDate: Binding<Date>, activatedDate: [Date]) {
         self._selectedDate = selectedDate
-        self.activatedDate = activatedDate
+        let calendar = Calendar.current
+        self.activatedDates = Set(activatedDate.map { calendar.startOfDay(for: $0) })
         self._displayedMonth = State(initialValue: selectedDate.wrappedValue)
     }
 
@@ -106,7 +107,7 @@ struct CustomCalendarView: View {
     }
 
     private func isDateActive(_ date: Date) -> Bool {
-        activatedDate.contains { calendar.isDate($0, inSameDayAs: date) }
+        activatedDates.contains(calendar.startOfDay(for: date))
     }
 
     private func accessibilityLabel(for date: Date, isActive: Bool, isSelected: Bool, isToday: Bool) -> String {
