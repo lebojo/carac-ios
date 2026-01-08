@@ -119,14 +119,12 @@ struct CustomCalendarView: View {
         
         if isActive {
             label += ", has sessions"
+        } else {
+            label += ", no sessions available"
         }
         
         if isSelected {
             label += ", selected"
-        }
-        
-        if !isActive {
-            label += ", no sessions available"
         }
         
         return label
