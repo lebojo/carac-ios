@@ -48,6 +48,7 @@ struct CustomCalendarView: View {
                 Image(systemName: "chevron.left")
                     .contentShape(Rectangle())
                     .onTapGesture { changeMonth(by: -1) }
+                    .accessibilityLabel("Previous month")
 
                 Text(monthHeader.capitalized)
                     .font(.title3)
@@ -57,6 +58,7 @@ struct CustomCalendarView: View {
                 Image(systemName: "chevron.right")
                     .contentShape(Rectangle())
                     .onTapGesture { changeMonth(by: 1) }
+                    .accessibilityLabel("Next month")
             }
             .font(.body)
             .foregroundColor(.accentColor)
