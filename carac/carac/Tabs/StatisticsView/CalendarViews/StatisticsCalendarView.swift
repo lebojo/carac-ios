@@ -11,24 +11,24 @@ import SwiftUI
 struct StatisticsCalendarView: View {
     @Environment(\.modelContext) var modelContext
 
-    @State private var sessionDates: [Date] = []
+    @State private var activeDates: [Date] = []
 
     @Binding var selectedDate: Date
 
     var body: some View {
-        CustomCalendarView(selectedDate: $selectedDate, activatedDate: sessionDates)
+        CustomCalendarView(selectedDate: $selectedDate, activatedDate: activeDates)
             .task {
-                fetchSessionDates()
+                fetchActiveDates()
             }
     }
 
-    func fetchSessionDates() {
+    func fetchActiveDates() {
         do {
             var descriptor = FetchDescriptor<Session>()
             descriptor.propertiesToFetch = [\.date]
 
             let sessions = try modelContext.fetch(descriptor)
-            sessionDates = sessions.map(\.date)
+            activeDates = sessions.map(\.date)
         } catch {
             print("Oups : \(error)")
         }
