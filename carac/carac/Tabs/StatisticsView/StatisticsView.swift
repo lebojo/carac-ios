@@ -45,9 +45,9 @@ struct StatisticsView: View {
                         .environmentObject(statisticsViewState)
 
                     Section("Today stats") {
-                        Label("Total pulled: **\(currentDateTotalWeightPulled.maxDigits())**", systemImage: "trophy")
+                        Label("Total pulled: **\(currentDateTotalWeightPulled.maxDigits())**", systemImage: "trophy.fill")
                         Label("Total sessions: **\(currentDateDoneSession.count)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(currentDateDoneExercises.count)**", systemImage: "dumbbell")
+                        Label("Total exercices: **\(currentDateDoneExercises.count)**", systemImage: "dumbbell.fill")
                     }
 
                     Section("Global stats") {
@@ -56,16 +56,19 @@ struct StatisticsView: View {
                             .listRowSeparator(.hidden)
 
                         Label("Total sessions: **\(trainings.done.flatMap(\.sessions).count)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(trainings.done.flatMap(\.exercises).count)**", systemImage: "dumbbell")
+                        Label("Total exercices: **\(trainings.done.flatMap(\.exercises).count)**", systemImage: "dumbbell.fill")
 
                         ForEach(singleTrainings, id: \.persistentModelID) { training in
                             Button {
-                                statisticsViewState.navPath.append(training)
+                                withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                                    statisticsViewState.navPath.append(training)
+                                }
                             } label: {
                                 HStack {
                                     Text(training.title)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                     Image(systemName: "chevron.right")
+                                        .foregroundStyle(.tertiary)
                                 }
                             }
                         }
@@ -75,6 +78,8 @@ struct StatisticsView: View {
                     ContentUnavailableView("No stats for now", systemImage: "chart.line.downtrend.xyaxis")
                 }
             }
+            .scrollContentBackground(.hidden)
+            .subtleGradientBackground()
             .navigationTitle("Carac teristics")
             .toolbar { HomeToolbarView() }
             .navigationDestination(for: Training.self) { training in

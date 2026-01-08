@@ -20,12 +20,16 @@ struct ExerciseButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity)
             .padding()
             .foregroundStyle(.white)
-            .background(isActive ? .green : .accentColor.opacity(0.2))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(isActive ? .green : .accentColor.opacity(0.2))
+                    .shadow(color: isActive ? .green.opacity(0.3) : .accentColor.opacity(0.1), radius: configuration.isPressed ? 2 : 8, y: configuration.isPressed ? 1 : 4)
+            )
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 16))
-            .opacity(configuration.isPressed ? 0.8 : 1)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .opacity(configuration.isPressed ? 0.9 : 1)
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
             .lineLimit(2, reservesSpace: true)
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
     }
 }
 

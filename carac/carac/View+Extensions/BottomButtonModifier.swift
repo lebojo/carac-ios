@@ -26,16 +26,21 @@ struct BottomButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Button(title, systemImage: systemName) {
+                Button(title, systemImage: systemName) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
                         action()
                     }
-                    .buttonStyle(.bordered)
-                    .padding()
-                    .disabled(disabled)
                 }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+                .controlSize(.large)
+                .disabled(disabled)
+                .padding()
                 .frame(maxWidth: .infinity)
-                .background(.background)
+                .background(
+                    .ultraThinMaterial,
+                    in: RoundedRectangle(cornerRadius: 0)
+                )
             }
     }
 }

@@ -29,12 +29,15 @@ struct TrainingsView: View {
                 Section("Trainings") {
                     ForEach(singleTrainings, id: \.persistentModelID) { training in
                         Button {
-                            mainViewState.selectedTraining = training
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                                mainViewState.selectedTraining = training
+                            }
                         } label: {
                             HStack {
                                 Text(training.title)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Image(systemName: "chevron.right")
+                                    .foregroundStyle(.tertiary)
                             }
                         }
                     }
@@ -49,12 +52,15 @@ struct TrainingsView: View {
                 Section("Exercises") {
                     ForEach(singleExercises, id: \.persistentModelID) { exercise in
                         Button {
-                            mainViewState.selectedExercise = exercise
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                                mainViewState.selectedExercise = exercise
+                            }
                         } label: {
                             HStack {
                                 Text(exercise.name)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Image(systemName: "chevron.right")
+                                    .foregroundStyle(.tertiary)
                             }
                         }
                     }
@@ -62,6 +68,8 @@ struct TrainingsView: View {
 
                 OrphanExercisesSectionView(correctExercisesName: singleExercises.map(\.name))
             }
+            .scrollContentBackground(.hidden)
+            .subtleGradientBackground()
             .bottomButton(title: "Create a training", systemName: "plus") {
                 mainViewState.selectedState = .createTraining
             }

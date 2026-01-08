@@ -15,11 +15,17 @@ extension View {
 }
 
 struct CardStyleModifier: ViewModifier {
+    @State private var isPressed = false
+    
     func body(content: Content) -> some View {
         content
-            .background(Color("cardBackground"))
-            .clipShape(RoundedRectangle(cornerRadius: 12.0))
-            .shadow(color: Color("cardShadow"), radius: 3, x: 0, y: 3)
-            .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 12.0))
+            .background(
+                RoundedRectangle(cornerRadius: 16.0)
+                    .fill(Color("cardBackground"))
+                    .shadow(color: Color("cardShadow").opacity(0.3), radius: 8, x: 0, y: 4)
+                    .shadow(color: Color("cardShadow").opacity(0.15), radius: 2, x: 0, y: 1)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 16.0))
+            .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 16.0))
     }
 }

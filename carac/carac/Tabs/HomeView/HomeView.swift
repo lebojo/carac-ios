@@ -41,6 +41,8 @@ struct HomeView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .subtleGradientBackground()
             .navigationTitle("Carac Home")
             .toolbar { HomeToolbarView() }
         }

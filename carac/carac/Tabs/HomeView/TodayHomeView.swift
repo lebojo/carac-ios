@@ -32,10 +32,29 @@ struct TodayHomeView: View {
     var body: some View {
         if !trainings.isEmpty {
             ForEach(todaySessions, id: \.persistentModelID) { todaySession in
-                Button("Modify \(todaySession.training.title) at \(todaySession.date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)))") {
-                    let draftSession = SessionDraft(from: todaySession)
-                    mainViewState.currentSession = draftSession
+                Button {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        let draftSession = SessionDraft(from: todaySession)
+                        mainViewState.currentSession = draftSession
+                    }
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Modify \(todaySession.training.title)")
+                                .font(.headline)
+                            Text(todaySession.date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)))
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.tertiary)
+                    }
+                    .padding()
+                    .background(Color("cardBackground"))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .buttonStyle(.plain)
             }
             .onDelete { indexSet in
                 for index in indexSet {
@@ -45,19 +64,26 @@ struct TodayHomeView: View {
 
             ForEach(trainings) { training in
                 Button {
-                    createSession(training)
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        createSession(training)
+                    }
                 } label: {
                     if todaySessions.isEmpty {
-                        Label("Start your \(training.title)", systemImage: "plus.app")
+                        Label("Start your \(training.title)", systemImage: "play.circle.fill")
+                            .font(.headline)
                     } else {
-                        Label("Start a new \(training.title) session", systemImage: "plus.diamond")
+                        Label("Start a new \(training.title) session", systemImage: "plus.circle.fill")
+                            .font(.headline)
                     }
                 }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+                .controlSize(.large)
             }
         } else {
             ContentUnavailableView(
                 "Free day!",
-                systemImage: "sun.dust",
+                systemImage: "sun.dust.fill",
                 description: Text("Chill, it's \(RepeatDay.today.title.lowercased()). You have nothing to do today.")
             )
         }

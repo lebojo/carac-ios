@@ -26,21 +26,26 @@ struct SetView: View {
             .onStepperBackgroundTap(perform: handleTap)
             .padding()
             .cardStyle()
+            .scaleEffect(isFinished ? 0.98 : 1.0)
+            .opacity(isFinished ? 0.7 : 1.0)
 
             if isFinished {
-                Label("Set is finished checkmark", systemImage: "checkmark.circle")
+                Label("Set is finished checkmark", systemImage: "checkmark.circle.fill")
                     .labelStyle(.iconOnly)
                     .font(.largeTitle)
                     .foregroundStyle(.tint)
                     .padding()
+                    .transition(.scale.combined(with: .opacity))
+                    .symbolEffect(.bounce, value: isFinished)
             }
         }
         .sensoryFeedback(.success, trigger: isFinished)
         .onBackgroundTap(perform: handleTap)
+        .animation(.spring(response: 0.4, dampingFraction: 0.7), value: isFinished)
     }
 
     private func handleTap() {
-        withAnimation(.bouncy) {
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
             isFinished.toggle()
         }
     }

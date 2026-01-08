@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddSetsButton: View {
     @Binding var exercise: ExerciseDraft
+    @State private var isPressed = false
 
     var nextWeight: Double {
         guard let lastSet = exercise.sets.last, lastSet.weight > 1 else {
@@ -24,7 +25,7 @@ struct AddSetsButton: View {
     var body: some View {
         HStack {
             Button {
-                withAnimation {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
                     exercise.sets.append(
                         ExerciseSetDraft(
                             id: (exercise.sets.last?.id ?? 0) + 1,
@@ -34,9 +35,13 @@ struct AddSetsButton: View {
                     )
                 }
             } label: {
-                Text("Add Set")
+                Label("Add Set", systemImage: "plus.circle.fill")
+                    .font(.headline)
+                    .padding(.vertical, 4)
             }
             .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .controlSize(.large)
         }
         .frame(maxWidth: .infinity)
         .padding()
