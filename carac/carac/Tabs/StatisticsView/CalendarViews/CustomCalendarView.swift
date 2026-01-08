@@ -22,7 +22,7 @@ struct CustomCalendarView: View {
 
     private var startOffset: Int {
         let components = calendar.dateComponents([.year, .month], from: displayedMonth)
-        let firstOfMonth = calendar.date(from: components)!
+        guard let firstOfMonth = calendar.date(from: components) else { return 0 }
         let weekday = calendar.component(.weekday, from: firstOfMonth)
         return (weekday - calendar.firstWeekday + 7) % 7
     }
