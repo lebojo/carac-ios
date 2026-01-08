@@ -91,6 +91,8 @@ struct CustomCalendarView: View {
                                 (isActive ? .primary : .gray.opacity(0.3))
                         )
                         .clipShape(Circle())
+                        .accessibilityLabel(accessibilityLabel(for: date, isActive: isActive, isSelected: isSelected, isToday: isToday))
+                        .accessibilityHint(isActive ? "Double tap to select this date" : "")
                         .onTapGesture {
                             guard isActive else { return }
                             selectedDate = date
@@ -105,6 +107,29 @@ struct CustomCalendarView: View {
 
     private func isDateActive(_ date: Date) -> Bool {
         activatedDate.contains { calendar.isDate($0, inSameDayAs: date) }
+    }
+
+    private func accessibilityLabel(for date: Date, isActive: Bool, isSelected: Bool, isToday: Bool) -> String {
+        let dayNumber = calendar.component(.day, from: date)
+        var label = "Day \(dayNumber)"
+        
+        if isToday {
+            label += ", today"
+        }
+        
+        if isActive {
+            label += ", has sessions"
+        }
+        
+        if isSelected {
+            label += ", selected"
+        }
+        
+        if !isActive {
+            label += ", no sessions available"
+        }
+        
+        return label
     }
 
     private func changeMonth(by value: Int) {
