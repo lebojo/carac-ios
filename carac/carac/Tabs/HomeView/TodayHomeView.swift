@@ -51,8 +51,7 @@ struct TodayHomeView: View {
                             .foregroundStyle(.tertiary)
                     }
                     .padding()
-                    .background(Color("cardBackground"))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .cardStyle()
                 }
                 .buttonStyle(.plain)
             }

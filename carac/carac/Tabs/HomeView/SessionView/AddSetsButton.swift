@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AddSetsButton: View {
     @Binding var exercise: ExerciseDraft
-    @State private var isPressed = false
 
     var nextWeight: Double {
         guard let lastSet = exercise.sets.last, lastSet.weight > 1 else {

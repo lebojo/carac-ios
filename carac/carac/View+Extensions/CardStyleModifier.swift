@@ -15,8 +15,6 @@ extension View {
 }
 
 struct CardStyleModifier: ViewModifier {
-    @State private var isPressed = false
-    
     func body(content: Content) -> some View {
         content
             .background(
