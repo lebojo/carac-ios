@@ -36,10 +36,10 @@ struct CustomCalendarView: View {
         }
     }
 
-    init(selectedDate: Binding<Date>, activatedDate: [Date]) {
+    init(selectedDate: Binding<Date>, activatedDates: [Date]) {
         self._selectedDate = selectedDate
         let calendar = Calendar.current
-        self.activatedDates = Set(activatedDate.map { calendar.startOfDay(for: $0) })
+        self.activatedDates = Set(activatedDates.map { calendar.startOfDay(for: $0) })
         self._displayedMonth = State(initialValue: selectedDate.wrappedValue)
     }
 
