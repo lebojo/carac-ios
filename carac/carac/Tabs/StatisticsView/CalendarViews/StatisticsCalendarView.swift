@@ -16,7 +16,7 @@ struct StatisticsCalendarView: View {
     @Binding var selectedDate: Date
 
     var body: some View {
-        CustomCalendarView(selectedDate: $selectedDate, activatedDate: activeDates)
+        CustomCalendarView(selectedDate: $selectedDate, activatedDates: activeDates)
             .task {
                 fetchActiveDates()
             }
