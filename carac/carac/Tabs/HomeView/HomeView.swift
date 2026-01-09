@@ -29,16 +29,13 @@ struct HomeView: View {
                             Button(training.title + " (\(training.repeatDaysStringified))") {
                                 let draft = SessionDraft(training: TrainingDraft(from: training))
                                 mainViewState.currentSession = draft
-                                
                             }
                         }
                     }
                 }
 
                 if !trainings.isEmpty {
-                    Section("This week") {
-                        WeekHomeView(trainings: trainings)
-                    }
+                    WeekSectionHomeView(trainings: trainings)
                 }
             }
             .navigationTitle("Carac Home")
