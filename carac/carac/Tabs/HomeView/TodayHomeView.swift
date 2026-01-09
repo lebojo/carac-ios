@@ -19,11 +19,9 @@ struct TodayHomeView: View {
     init(trainings: [Training]) {
         self.trainings = trainings
 
-        // 2. On calcule les dates bornes
         let start = Calendar.current.startOfDay(for: .now)
         let end = Calendar.current.date(byAdding: .day, value: 1, to: start)!
 
-        // 3. On initialise la Query avec un Predicate natif
         _todaySessions = Query(filter: #Predicate<Session> { session in
             session.date >= start && session.date < end
         })
@@ -31,27 +29,31 @@ struct TodayHomeView: View {
 
     var body: some View {
         if !trainings.isEmpty {
-            ForEach(todaySessions, id: \.persistentModelID) { todaySession in
-                Button("Modify \(todaySession.training.title) at \(todaySession.date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)))") {
-                    let draftSession = SessionDraft(from: todaySession)
-                    mainViewState.currentSession = draftSession
-                }
-            }
-            .onDelete { indexSet in
-                for index in indexSet {
-                    modelContext.delete(todaySessions[index])
-                }
-            }
-
-            ForEach(trainings) { training in
-                Button {
-                    createSession(training)
-                } label: {
-                    if todaySessions.isEmpty {
-                        Label("Start your \(training.title)", systemImage: "plus.app")
-                    } else {
-                        Label("Start a new \(training.title) session", systemImage: "plus.diamond")
+            Section("Today") {
+                ForEach(todaySessions, id: \.persistentModelID) { todaySession in
+                    Button("Modify \(todaySession.training.title) at \(todaySession.date.twoDigitsHour)", systemImage: "pencil") {
+                        let draftSession = SessionDraft(from: todaySession)
+                        mainViewState.currentSession = draftSession
                     }
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        modelContext.delete(todaySessions[index])
+                    }
+                }
+
+                ForEach(trainings) { training in
+                    Button {
+                        createSession(training)
+                    } label: {
+                        Text("New **\(training.title)**")
+                            .frame(maxWidth: .infinity)
+                            .background(.clear)
+                            .foregroundStyle(.white)
+                    }
+                    .controlSize(.large)
+                    .buttonStyle(.borderedProminent)
+                    .glassEffectStyle(.regular)
                 }
             }
         } else {

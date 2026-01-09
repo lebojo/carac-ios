@@ -40,6 +40,10 @@ enum RepeatDay: String, CaseIterable {
         }
     }
 
+    var isToday: Bool {
+        self == .today
+    }
+
     var title: String {
         switch self {
         case .monday:
