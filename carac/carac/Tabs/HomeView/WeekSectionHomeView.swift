@@ -39,6 +39,9 @@ struct WeekSectionHomeView: View {
                     .bold(day.isToday)
                 }
             }
+
+            Text(emptyDays.map(\.title).joined(separator: ", "))
+                .italic()
         }
     }
 }
