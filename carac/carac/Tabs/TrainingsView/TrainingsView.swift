@@ -15,6 +15,9 @@ struct TrainingsView: View {
     @Query private var trainings: [Training]
     @Query private var exercises: [Exercise]
 
+    @State private var navigationPath = NavigationPath()
+    @State private var isTrainingCreationShow = false
+
     private var singleTrainings: [Training] {
         trainings.filter { $0.sessions.isEmpty }
     }
@@ -24,12 +27,12 @@ struct TrainingsView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             List {
-                Section("Trainings") {
+                Section {
                     ForEach(singleTrainings, id: \.persistentModelID) { training in
                         Button {
-                            mainViewState.selectedTraining = training
+                            navigationPath.append(training)
                         } label: {
                             HStack {
                                 Text(training.title)
@@ -44,6 +47,15 @@ struct TrainingsView: View {
                             modelContext.delete(trainingToDelete)
                         }
                     }
+                } header: {
+                    Text("Trainings")
+                } footer: {
+                    Button("Create a new training", systemImage: "plus") {
+                        isTrainingCreationShow = true
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .glassEffectStyle()
+                    .frame(maxWidth: .infinity)
                 }
 
                 Section("Exercises") {
@@ -62,11 +74,14 @@ struct TrainingsView: View {
 
                 OrphanExercisesSectionView(correctExercisesName: singleExercises.map(\.name))
             }
-            .bottomButton(title: "Create a training", systemName: "plus") {
-                mainViewState.selectedState = .createTraining
-            }
-            .navigationTitle("Carac Training\(trainings.count > 1 ? "s" : "")")
             .toolbar { HomeToolbarView() }
+            .navigationTitle("Carac Training\(trainings.count > 1 ? "s" : "")")
+            .navigationDestination(for: Training.self) { training in
+                TrainingModificationView(training: training)
+            }
+            .sheet(isPresented: $isTrainingCreationShow) {
+                TrainingCreationView()
+            }
         }
     }
 }

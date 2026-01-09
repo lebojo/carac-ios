@@ -9,13 +9,13 @@ import SwiftData
 import SwiftUI
 
 struct TrainingCreationView: View {
-    @EnvironmentObject var mainViewState: MainViewState
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
 
     @State private var newTraining = Training("", repeatDays: [RepeatDay.today])
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     HStack {
@@ -43,21 +43,27 @@ struct TrainingCreationView: View {
                 }
 
                 ExercisesGridSection(trainingExercises: $newTraining.exercises)
-
             }
-            .closeButton()
-            .navigationTitle("New training")
             .animation(.easeInOut, value: newTraining.exercises)
-            .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newTraining.exercises.isEmpty || newTraining.title.isEmpty) {
-                modelContext.insert(newTraining)
+            .navigationTitle("New training")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Close", systemImage: "xmark") {
+                        dismiss()
+                    }
+                }
 
-                mainViewState.selectedState = nil
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Create", systemImage: "checkmark") {
+                        modelContext.insert(newTraining)
+                        dismiss()
+                    }
+                }
             }
         }
     }
 }
-
-
 
 #Preview {
     TrainingCreationView()

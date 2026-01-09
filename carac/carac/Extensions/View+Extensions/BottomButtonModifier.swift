@@ -33,6 +33,7 @@ struct BottomButtonModifier: ViewModifier {
                     .buttonStyle(.bordered)
                     .padding()
                     .disabled(disabled)
+                    .glassEffectStyle()
                 }
                 .frame(maxWidth: .infinity)
                 .background(.background)

@@ -17,49 +17,42 @@ struct TrainingModificationView: View {
     @Bindable var training: Training
 
     var body: some View {
-        NavigationView {
-            List {
-                Section {
-                    HStack {
-                        Text("Name")
-                        TextField(text: $training.title) {
-                            Text("Top body training")
-                        }
-                        .multilineTextAlignment(.trailing)
-                        .onChange(of: training.title) { oldValue, newValue in
-                            allTrainings.forEach { training in
-                                guard training.title == oldValue else { return }
-                                training.title = newValue
-                            }
-                        }
+        List {
+            Section {
+                HStack {
+                    Text("Name")
+                    TextField(text: $training.title) {
+                        Text("Top body training")
                     }
+                    .multilineTextAlignment(.trailing)
+                    .onChange(of: training.title) { oldValue, newValue in
+                        for training in allTrainings {
+                            guard training.title == oldValue else { continue }
 
-                    NavigationLink(
-                        "Training days",
-                        destination: RepeatDayPicker(newTraining: training)
-                    )
-                } header: {
-                    Text("Main info")
-                } footer: {
-                    if !training.title.isEmpty
-                        && !training.repeatDays.isEmpty
-                    {
-                        Text(
-                            "\(training.title) should be done every \(training.repeatDays.joined(separator: ", "))"
-                        )
+                            training.title = newValue
+                        }
                     }
                 }
 
-                ExercisesGridSection(trainingExercises: $training.exercises)
+                NavigationLink(
+                    "Training days",
+                    destination: RepeatDayPicker(newTraining: training)
+                )
+            } header: {
+                Text("Main info")
+            } footer: {
+                if !training.title.isEmpty
+                    && !training.repeatDays.isEmpty
+                {
+                    Text(
+                        "\(training.title) should be done every \(training.repeatDays.joined(separator: ", "))"
+                    )
+                }
             }
-            .closeButton()
-            .navigationTitle(training.title)
-            .animation(.easeInOut, value: training.exercises)
-            .bottomButton(title: "Modify now", systemName: "calendar.badge.plus", disabled: training.exercises.isEmpty || training.title.isEmpty) {
-                try! modelContext.save()
 
-                mainViewState.backHome()
-            }
+            ExercisesGridSection(trainingExercises: $training.exercises)
         }
+        .navigationTitle(training.title)
+        .animation(.easeInOut, value: training.exercises)
     }
 }

@@ -25,7 +25,7 @@ struct GlassEffect: ViewModifier {
             content
                 .background(.thinMaterial)
                 .cornerRadius(cornerRadius)
-                .shadow(radius: 3)
+                .shadow(color: .cardShadow, radius: 3, y: 3)
         }
     }
 
