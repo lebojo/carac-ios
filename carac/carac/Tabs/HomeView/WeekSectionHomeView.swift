@@ -26,7 +26,7 @@ struct WeekSectionHomeView: View {
 
     var body: some View {
         Section("This week") {
-            ForEach(RepeatDay.allCases, id: \.self) { day in
+            ForEach(RepeatDay.allCases.filter { $0 != .noRepeat }, id: \.self) { day in
                 if let titles = trainingDays[day] {
                     HStack {
                         Text(day.title)
