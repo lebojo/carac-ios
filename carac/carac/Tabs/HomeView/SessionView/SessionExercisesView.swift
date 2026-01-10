@@ -22,7 +22,8 @@ struct SessionExercisesView: View {
             }
             .scrollTargetLayout()
         }
-        .scrollTargetBehavior(.paging)
+        .scrollTargetBehavior(.viewAligned)
+        .modifier(NextPageDiscoveryViewModifier())
     }
 }
 
