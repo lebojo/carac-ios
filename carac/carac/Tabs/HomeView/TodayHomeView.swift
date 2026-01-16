@@ -52,8 +52,7 @@ struct TodayHomeView: View {
                             .foregroundStyle(.white)
                     }
                     .controlSize(.large)
-                    .buttonStyle(.borderedProminent)
-                    .glassEffectStyle(.regular)
+                    .glassButton()
                 }
             }
         } else {

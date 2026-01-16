@@ -11,6 +11,10 @@ extension View {
     func glassEffectStyle(_ glassEffect: GlassEffect.GlassType = .regular, cornerRadius: CGFloat = 20) -> some View {
         modifier(GlassEffect(glassEffect: glassEffect, cornerRadius: cornerRadius))
     }
+
+    func glassButton() -> some View {
+        modifier(GlassEffectButton())
+    }
 }
 
 struct GlassEffect: ViewModifier {
@@ -20,7 +24,7 @@ struct GlassEffect: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
             content
-                .glassEffect(glassEffect.nativeGlass, in: .rect(cornerRadius: cornerRadius))
+                .glassEffect(glassEffect.nativeGlass)
         } else {
             content
                 .background(.thinMaterial)
@@ -41,6 +45,19 @@ struct GlassEffect: ViewModifier {
             case .regular:
                 .regular
             }
+        }
+    }
+}
+
+
+struct GlassEffectButton: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .buttonStyle(.glassProminent)
+        } else {
+            content
+                .buttonStyle(.borderedProminent)
         }
     }
 }

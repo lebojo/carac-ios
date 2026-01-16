@@ -53,8 +53,7 @@ struct TrainingsView: View {
                     Button("Create a new training", systemImage: "plus") {
                         isTrainingCreationShow = true
                     }
-                    .buttonStyle(.borderedProminent)
-                    .glassEffectStyle()
+                    .glassButton()
                     .frame(maxWidth: .infinity)
                 }
 
