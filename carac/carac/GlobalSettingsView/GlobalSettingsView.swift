@@ -58,6 +58,7 @@ struct GlobalSettingsView: View {
                         }
                     }
                 }
+                
                 HelpUsSection()
             }
             .navigationTitle("Settings")

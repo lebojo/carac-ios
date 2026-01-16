@@ -38,7 +38,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
                     title: Text(type.title),
                     message: Text(type.message),
                     primaryButton: .cancel(),
-                    secondaryButton: .default(
+                    secondaryButton: .destructive(
                         Text(type.actionTitle),
                         action: {
                             guard type != .cancel else {

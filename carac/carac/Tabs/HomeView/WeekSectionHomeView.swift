@@ -19,7 +19,7 @@ struct WeekSectionHomeView: View {
             return dayTraining.isEmpty ? nil : (day, dayTraining)
         })
 
-        emptyDays = Set(RepeatDay.allCases).subtracting(trainingDays.keys)
+        emptyDays = Set(RepeatDay.allCases).subtracting(trainingDays.keys).filter { $0 != .noRepeat }
     }
 
     var body: some View {
@@ -36,8 +36,10 @@ struct WeekSectionHomeView: View {
                 }
             }
 
-            Text(emptyDays.map(\.title).joined(separator: ", "))
-                .italic()
+            if !emptyDays.isEmpty {
+                Text(emptyDays.map(\.title).joined(separator: ", "))
+                    .italic()
+            }
         }
     }
 }
