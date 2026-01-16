@@ -10,9 +10,10 @@ import SwiftUI
 extension View {
     func endSessionAlert(
         isPresented: Binding<Bool>,
-        sessionDraft: SessionDraft
+        sessionDraft: SessionDraft,
+        type: EndSessionAlertViewModifier.EndSessionType
     ) -> some View {
-        modifier(EndSessionAlertViewModifier(isPresented: isPresented, sessionDraft: sessionDraft))
+        modifier(EndSessionAlertViewModifier(isPresented: isPresented, sessionDraft: sessionDraft, type: type))
     }
 }
 
@@ -24,6 +25,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
     @Binding var isPresented: Bool
 
     let sessionDraft: SessionDraft
+    let type: EndSessionType
 
     var isModifiying: Bool {
         sessionDraft.persistedSession != nil
@@ -33,14 +35,17 @@ struct EndSessionAlertViewModifier: ViewModifier {
         content
             .alert(isPresented: $isPresented) {
                 Alert(
-                    title: Text(isModifiying ? "Modify session?" : "Save session?"),
-                    message: Text(
-                        isModifiying ? "All data will be modified. This cannot be undone." : "Terminate the session now and save all your stats ?"
-                    ),
+                    title: Text(type.title),
+                    message: Text(type.message),
                     primaryButton: .cancel(),
                     secondaryButton: .default(
-                        Text("Save"),
+                        Text(type.actionTitle),
                         action: {
+                            guard type != .cancel else {
+                                mainViewState.backHome()
+                                return
+                            }
+
                             saveSession(sessionModel: sessionDraft.persistedSession)
                         }
                     )
@@ -62,6 +67,43 @@ struct EndSessionAlertViewModifier: ViewModifier {
             mainViewState.backHome()
         } catch {
             print("Failed to save session")
+        }
+    }
+
+    enum EndSessionType {
+        case save
+        case modify
+        case cancel
+
+        var title: String {
+            switch self {
+                case .save:
+                    "Save session?"
+                case .modify:
+                    "Modify session?"
+                case .cancel:
+                    "Cancel session?"
+            }
+        }
+
+        var message: String {
+            switch self {
+                case .save:
+                    "Terminate the session now and save all your stats ?"
+                case .modify:
+                    "All data will be modified.\nThis cannot be undone."
+                case .cancel:
+                    "All data will be lost.\nThis cannot be undone."
+            }
+        }
+
+        var actionTitle: String {
+            switch self {
+                case .save, .modify:
+                    "Save"
+                case .cancel:
+                    "Confirm"
+            }
         }
     }
 }

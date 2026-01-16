@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct TrainingExerciseListView: View {
+    @EnvironmentObject private var mainViewState: MainViewState
+
     @State private var showConfirmation: Bool = false
+    @State private var alertType: EndSessionAlertViewModifier.EndSessionType = .save
 
     @Binding var session: SessionDraft
 
@@ -20,22 +23,28 @@ struct TrainingExerciseListView: View {
             }
             .onMove(perform: moveExercises)
         }
-        .closeButton()
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Close", systemImage: "xmark") {
+                    alertType = .cancel
+                    showConfirmation = true
+                }
+            }
+
             ToolbarItem(placement: .topBarLeading) {
                 EditButton()
             }
-        }
-        .safeAreaInset(edge: .bottom) {
-            Button {
-                showConfirmation.toggle()
-            } label: {
-                Label("Save now", systemImage: "opticaldisc")
+
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    alertType = session.persistedSession != nil ? .modify : .save
+                    showConfirmation = true
+                } label: {
+                    Label("Save now", systemImage: "checkmark")
+                }
             }
-            .buttonStyle(.bordered)
-            .padding()
         }
-        .endSessionAlert(isPresented: $showConfirmation, sessionDraft: session)
+        .endSessionAlert(isPresented: $showConfirmation, sessionDraft: session, type: alertType)
         .navigationTitle("Session of \(session.date.formatted(.dateTime.day().month()))")
     }
 
