@@ -9,16 +9,14 @@ import SwiftUI
 
 struct WeekSectionHomeView: View {
     let emptyDays: Set<RepeatDay>
-    let trainingDays: [RepeatDay: String]
+    let trainingDays: [RepeatDay: [Training]]
 
     init(trainings: [Training]) {
         trainingDays = Dictionary(uniqueKeysWithValues: RepeatDay.allCases.compactMap { day in
-            let titles = trainings
+            let dayTraining = trainings
                 .filter { $0.repeatDays.contains(day.rawValue) }
-                .map(\.title)
-                .joined(separator: ", ")
 
-            return titles.isEmpty ? nil : (day, titles)
+            return dayTraining.isEmpty ? nil : (day, dayTraining)
         })
 
         emptyDays = Set(RepeatDay.allCases).subtracting(trainingDays.keys)
@@ -27,14 +25,12 @@ struct WeekSectionHomeView: View {
     var body: some View {
         Section("This week") {
             ForEach(RepeatDay.allCases.filter { $0 != .noRepeat }, id: \.self) { day in
-                if let titles = trainingDays[day] {
+                if let trainings = trainingDays[day] {
                     HStack {
                         Text(day.title)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        Text(titles)
-                            .lineLimit(1)
-                            .italic()
-                            .foregroundStyle(.secondary)
+
+                        MenuButtonView(trainings: trainings)
                     }
                     .bold(day.isToday)
                 }
@@ -42,6 +38,31 @@ struct WeekSectionHomeView: View {
 
             Text(emptyDays.map(\.title).joined(separator: ", "))
                 .italic()
+        }
+    }
+}
+
+struct MenuButtonView: View {
+    @EnvironmentObject private var mainViewState: MainViewState
+
+    let trainings: [Training]
+
+    var body: some View {
+        if trainings.count > 1 {
+            Menu("Start here") {
+                ForEach(trainings, id: \.title) { training in
+                    trainingButton(training)
+                }
+            }
+        } else if let first = trainings.first {
+            trainingButton(first)
+        }
+    }
+
+    func trainingButton(_ training: Training) -> some View {
+        Button(training.title) {
+            let draft = SessionDraft(training: TrainingDraft(from: training))
+            mainViewState.currentSession = draft
         }
     }
 }

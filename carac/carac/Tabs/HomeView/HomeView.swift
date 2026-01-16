@@ -23,17 +23,6 @@ struct HomeView: View {
             List {
                 TodayHomeView(trainings: todayTrainings)
 
-                Section {
-                    Menu("Start another day training") {
-                        ForEach(trainings.filter { !$0.repeatDays.contains(RepeatDay.today.rawValue) }) { training in
-                            Button(training.title + " (\(training.repeatDaysStringified))") {
-                                let draft = SessionDraft(training: TrainingDraft(from: training))
-                                mainViewState.currentSession = draft
-                            }
-                        }
-                    }
-                }
-
                 if !trainings.isEmpty {
                     WeekSectionHomeView(trainings: trainings)
                 }
