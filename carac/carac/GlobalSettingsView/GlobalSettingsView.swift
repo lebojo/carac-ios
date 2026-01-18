@@ -58,8 +58,13 @@ struct GlobalSettingsView: View {
                         }
                     }
                 }
-                
+
                 HelpUsSection()
+
+                Section("misc") {
+                    ExportDataToJsonButtonView()
+                    ImportJsonToDataButton()
+                }
             }
             .navigationTitle("Settings")
             .closeButton()
