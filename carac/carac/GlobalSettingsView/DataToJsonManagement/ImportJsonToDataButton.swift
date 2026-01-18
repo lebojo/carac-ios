@@ -41,7 +41,7 @@ struct ImportJsonToDataButton: View {
 
             try context.save()
         } catch {
-            print("Erreur : \(error)")
+            print("Error : \(error)")
         }
     }
 
@@ -85,8 +85,6 @@ struct ImportJsonToDataButton: View {
             context.insert(newTrainingTemplate)
 
             existingTitles.insert(titreTraining)
-
-            print("Nouveau template créé : \(titreTraining) ✨")
         }
     }
 }
