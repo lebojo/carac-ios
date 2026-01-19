@@ -21,10 +21,8 @@ struct HomeStateDestinationModifier: ViewModifier {
         content
             .fullScreenCover(item: $mainViewState.selectedState) { state in
                 switch state {
-                case .createTraining:
-                    TrainingCreationView()
-                case .globalSettings:
-                    GlobalSettingsView()
+                    case .createTraining:
+                        TrainingCreationView()
                 }
             }
             .fullScreenCover(item: $mainViewState.selectedExercise) { exercise in
