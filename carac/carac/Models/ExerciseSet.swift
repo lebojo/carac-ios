@@ -28,7 +28,7 @@ final class ExerciseSet: Identifiable, Codable {
 
     // MARK: - Codable
 
-    enum CodingKeys: CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id, reps, weight
     }
 
