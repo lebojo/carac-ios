@@ -61,9 +61,9 @@ struct ImportJsonToDataButton: View {
             predicate: #Predicate { $0.date == dateResearch }
         )
 
-        let candidats = try context.fetch(descriptor)
+        let candidates = try context.fetch(descriptor)
 
-        if candidats.first(where: { $0.training.title == newSession.training.title && $0.totalWeightPulled == newSession.totalWeightPulled }) != nil {
+        if candidates.first(where: { $0.training.title == newSession.training.title && $0.totalWeightPulled == newSession.totalWeightPulled }) != nil {
             return false
         } else {
             context.insert(newSession)
@@ -73,18 +73,18 @@ struct ImportJsonToDataButton: View {
     }
 
     private func createNewTrainingTemplateIfNeeded(_ newSession: Session, existingTitles: inout Set<String>) throws {
-        let titreTraining = newSession.training.title
+        let titleTraining = newSession.training.title
 
-        if !existingTitles.contains(titreTraining) {
+        if !existingTitles.contains(titleTraining) {
             let newTrainingTemplate = Training(
-                titreTraining,
+                titleTraining,
                 exercises: newSession.training.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) },
                 repeatDays: newSession.training.repeatDays.compactMap { RepeatDay(rawValue: $0) }
             )
 
             context.insert(newTrainingTemplate)
 
-            existingTitles.insert(titreTraining)
+            existingTitles.insert(titleTraining)
         }
     }
 }
