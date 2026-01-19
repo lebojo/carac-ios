@@ -90,5 +90,5 @@ struct ImportJsonToDataButton: View {
 }
 
 #Preview {
-    ExportDataToJsonButtonView()
+    ImportJsonToDataButton()
 }
