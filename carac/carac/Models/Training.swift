@@ -43,7 +43,7 @@ final class Training: Identifiable, Codable {
         repeatDays = draft.repeatDays
     }
 
-    // MARK: - Codable pour Training
+    // MARK: - Codable for Training
 
     enum CodingKeys: String, CodingKey {
         case title, exercises, repeatDays
