@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Exercise: Identifiable {
+final class Exercise: Identifiable, Codable {
     var name: String
     var weightSteps: Double
     @Relationship(deleteRule: .cascade) var sets: [ExerciseSet]
@@ -28,5 +28,25 @@ final class Exercise: Identifiable {
 
     var totalPulledWeight: Double {
         sets.reduce(0) { $0 + ($1.weight * Double($1.reps)) }
+    }
+
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case name, weightSteps, sets
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.weightSteps = try container.decode(Double.self, forKey: .weightSteps)
+        self.sets = try container.decode([ExerciseSet].self, forKey: .sets)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(weightSteps, forKey: .weightSteps)
+        try container.encode(sets, forKey: .sets)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Session.swift
+//  Training.swift
 //  carac
 //
 //  Created by Jordan on 07.03.2025.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Training: Identifiable {
+final class Training: Identifiable, Codable {
     var title: String
     var exercises: [Exercise]
     var repeatDays: [String]
@@ -31,13 +31,6 @@ final class Training: Identifiable {
         self.repeatDays = repeatDays.map(\.rawValue)
     }
     
-    init(from copy: Training) {
-        self.title = copy.title
-        self.repeatDays = copy.repeatDays
-        
-        self.exercises = copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }
-    }
-    
     init(from draft: TrainingDraft) {
         title = draft.title
         exercises = draft.exercises.map { Exercise(from: $0) }
@@ -48,5 +41,25 @@ final class Training: Identifiable {
         title = draft.title
         exercises = draft.exercises.map { Exercise(from: $0) }
         repeatDays = draft.repeatDays
+    }
+
+    // MARK: - Codable for Training
+
+    enum CodingKeys: String, CodingKey {
+        case title, exercises, repeatDays
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.exercises = try container.decode([Exercise].self, forKey: .exercises)
+        self.repeatDays = try container.decode([String].self, forKey: .repeatDays)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(title, forKey: .title)
+        try container.encode(exercises, forKey: .exercises)
+        try container.encode(repeatDays, forKey: .repeatDays)
     }
 }
