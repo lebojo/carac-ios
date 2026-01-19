@@ -27,10 +27,6 @@ struct ExportDataToJsonButtonView: View {
         .task {
             do {
 
-                for session in allSessions {
-                    print("Training: \(session.training.title) - Jours: \(session.training.repeatDays)")
-                }
-
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
                 let jsonData = try encoder.encode(allSessions)
