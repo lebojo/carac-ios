@@ -19,7 +19,7 @@ struct ImportJsonToDataButton: View {
         }
         .fileImporter(isPresented: $isImporting, allowedContentTypes: [.json]) { result in
             do {
-                try importData(jsonURL: result.get(), context: context)
+                importData(jsonURL: try result.get(), context: context)
             } catch {
                 print("Failed to import json: \(error)")
             }
