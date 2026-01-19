@@ -10,11 +10,17 @@ import SwiftUI
 struct HomeToolbarView: View {
     @EnvironmentObject var mainViewState: MainViewState
 
+    @State private var isSettingsVisible: Bool = false
+
     var body: some View {
         Button {
-            mainViewState.selectedState = .globalSettings
+            isSettingsVisible = true
         } label: {
             Label("Global settings", systemImage: "gear")
+        }
+        .sheet(isPresented: $isSettingsVisible) {
+            GlobalSettingsView()
+                .presentationDragIndicator(.visible)
         }
     }
 }

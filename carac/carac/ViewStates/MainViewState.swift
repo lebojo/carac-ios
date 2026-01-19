@@ -12,7 +12,6 @@ enum HomeState: String, Identifiable {
     var id: String { rawValue }
 
     case createTraining
-    case globalSettings
 }
 
 class MainViewState: ObservableObject {
