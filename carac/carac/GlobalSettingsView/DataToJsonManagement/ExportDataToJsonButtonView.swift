@@ -26,11 +26,10 @@ struct ExportDataToJsonButtonView: View {
         .disabled(isLoading)
         .task {
             do {
-
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
                 let jsonData = try encoder.encode(allSessions)
-                try? jsonData.write(to: tempURL)
+                try jsonData.write(to: tempURL)
 
                 isLoading = false
             } catch {
