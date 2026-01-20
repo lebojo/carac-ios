@@ -39,7 +39,8 @@ final class Training: Identifiable, Codable {
 
     func update(with draft: TrainingDraft) {
         title = draft.title
-        exercises = draft.exercises.map { Exercise(from: $0) }
+        exercises.removeAll()
+        exercises.append(contentsOf: draft.exercises.map { Exercise(from: $0) })
         repeatDays = draft.repeatDays
     }
 
