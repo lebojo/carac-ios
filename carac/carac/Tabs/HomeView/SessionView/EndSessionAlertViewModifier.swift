@@ -27,10 +27,6 @@ struct EndSessionAlertViewModifier: ViewModifier {
     let sessionDraft: SessionDraft
     let type: EndSessionType
 
-    var isModifiying: Bool {
-        sessionDraft.persistedSession != nil
-    }
-
     func body(content: Content) -> some View {
         content
             .alert(isPresented: $isPresented) {
