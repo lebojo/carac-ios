@@ -21,7 +21,7 @@ struct SessionJTO: Codable {
     init(from session: Session) {
         self.init(
             date: session.date,
-            training: TrainingJTO(from: session.training)
+            training: TrainingJTO(from: session.training).noRepeatDays
         )
     }
 }

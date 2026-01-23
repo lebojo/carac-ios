@@ -20,7 +20,7 @@ struct GlobalJTO: Codable {
 
     init(date: Date = .now, sessions: [Session]) {
         let sessionJTOs: [SessionJTO] = sessions.map { SessionJTO(from: $0) }
-        let templates = Array(Set(sessionJTOs.map(\.training).map(\.template)))
+        let templates = Array(Set(sessions.map { TrainingJTO(from: $0.training).template }))
 
         self.init(savingDate: date, templates: templates, sessions: sessionJTOs)
     }
