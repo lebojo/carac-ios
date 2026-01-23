@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct GlobalSettingsView: View {
     @EnvironmentObject var mainViewState: MainViewState
 
@@ -32,7 +30,7 @@ struct GlobalSettingsView: View {
                         }
                     }
                 }
-                
+
                 HelpUsSection()
 
                 Section("Your data") {
