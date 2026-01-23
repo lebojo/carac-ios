@@ -36,13 +36,13 @@ class Faker {
         }
 
         templatesTrainings = [
-            (RepeatDay.monday,    "Upper Body"),
-            (RepeatDay.tuesday,   "Lower Body"),
+            (RepeatDay.monday, "Upper Body"),
+            (RepeatDay.tuesday, "Lower Body"),
             (RepeatDay.wednesday, "Full Body"),
-            (RepeatDay.thursday,  "Push Day"),
-            (RepeatDay.friday,    "Pull Day"),
-            (RepeatDay.saturday,  "Core & Mobility"),
-            (RepeatDay.sunday,    "Active Recovery")
+            (RepeatDay.thursday, "Push Day"),
+            (RepeatDay.friday, "Pull Day"),
+            (RepeatDay.saturday, "Core & Mobility"),
+            (RepeatDay.sunday, "Active Recovery")
         ].map { title in
             let exercisesCount = Int.random(in: 1...tmpTemplatesExercises.count)
             let emptyTraining = Training(title.1, exercises: [], repeatDays: [title.0])
@@ -78,7 +78,8 @@ class Faker {
                         ExerciseSet(id: 1, reps: 12, weight: exercise.weightSteps * 2),
                         ExerciseSet(id: 2, reps: 10, weight: exercise.weightSteps * 3)
                     ])
-                })
+                },
+                repeatDays: training.repeatDays.compactMap { RepeatDay(rawValue: $0) })
             }
 
             for training in fakeTrainings {

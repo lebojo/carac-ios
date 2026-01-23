@@ -34,6 +34,10 @@ struct GlobalSettingsView: View {
                 }
                 
                 HelpUsSection()
+
+                Section("Your data") {
+                    ExportDataToJsonButtonView()
+                }
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
