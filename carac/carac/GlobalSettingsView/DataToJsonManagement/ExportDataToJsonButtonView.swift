@@ -42,6 +42,7 @@ struct ExportDataToJsonButtonView: View {
     private func saveData(data: GlobalJTO) throws {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
+        encoder.dateEncodingStrategy = .iso8601
         let jsonData = try encoder.encode(data)
         try jsonData.write(to: tempURL)
     }
