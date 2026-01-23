@@ -7,20 +7,30 @@
 
 import SwiftUI
 
-extension View {
-    public func closeButton() -> some View {
+public extension View {
+    func closeButton() -> some View {
         modifier(CloseButton())
     }
 }
 
 struct CloseButton: ViewModifier {
+    @Environment(\.dismiss) var dismiss
+
     @EnvironmentObject var mainViewState: MainViewState
 
     func body(content: Content) -> some View {
         content
             .toolbar {
-                Button("Close", systemImage: "xmark") {
-                    mainViewState.backHome()
+                ToolbarItem(placement: .automatic) {
+                    if #available(iOS 26.0, *) {
+                        Button(role: .close) {
+                            dismiss()
+                        }
+                    } else {
+                        Button("Close", systemImage: "xmark") {
+                            dismiss()
+                        }
+                    }
                 }
             }
     }

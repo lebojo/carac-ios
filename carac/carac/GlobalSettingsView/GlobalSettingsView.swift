@@ -41,6 +41,7 @@ struct GlobalSettingsView: View {
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .closeButton()
         }
         .preferredColorScheme(theme.colorScheme)
     }
