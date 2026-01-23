@@ -24,18 +24,18 @@ struct TrainingExerciseListView: View {
             .onMove(perform: moveExercises)
         }
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .cancellationAction) {
                 Button("Close", systemImage: "xmark") {
                     alertType = .cancel
                     showConfirmation = true
                 }
             }
 
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .automatic) {
                 EditButton()
             }
 
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .confirmationAction) {
                 Button {
                     alertType = session.persistedSession != nil ? .modify : .save
                     showConfirmation = true
@@ -54,5 +54,7 @@ struct TrainingExerciseListView: View {
 }
 
 #Preview {
-    TrainingExerciseListView(session: .constant(SessionDraft(training: sampleTrainingDraft)))
+    NavigationStack {
+        TrainingExerciseListView(session: .constant(SessionDraft(training: sampleTrainingDraft)))
+    }
 }
