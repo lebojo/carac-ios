@@ -41,13 +41,14 @@ struct caracApp: App {
                 configurations: [modelConfiguration]
             )
 
-//            #if DEBUG
-//                let context = container.mainContext
-//                let faker = Faker(modelContext: context)
-//
-//                faker.fakeAppActivity()
-//            #endif
+            #if DEBUG
+                if UserDefaults.standard.bool(forKey: "enableDebugSeeding") {
+                    let context = container.mainContext
+                    let faker = Faker(modelContext: context)
 
+                    faker.fakeAppActivity()
+                }
+            #endif
             return container
         } catch {
             fatalError(
