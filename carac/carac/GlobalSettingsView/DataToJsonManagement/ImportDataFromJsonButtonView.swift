@@ -87,7 +87,8 @@ struct ImportDataFromJsonButtonView: View {
 
     private func importTemplates(source: [TrainingJTO]) throws {
         let existingTrainings = try modelContext.fetch(FetchDescriptor<Training>())
-        let trainingsByTitle = Dictionary(existingTrainings.map { ($0.title, $0) }, uniquingKeysWith: { first, _ in first })
+        let templateTrainings = existingTrainings.filter { $0.sessions.isEmpty }
+        let trainingsByTitle = Dictionary(templateTrainings.map { ($0.title, $0) }, uniquingKeysWith: { first, _ in first })
 
         let existingExercises = try modelContext.fetch(FetchDescriptor<Exercise>())
         var exercisesByName = Dictionary(existingExercises.map { ($0.name, $0) }, uniquingKeysWith: { first, _ in first })
