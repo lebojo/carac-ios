@@ -12,22 +12,35 @@ struct ImportDataFromJsonButtonView: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var importedJto: GlobalJTO? = nil
-    @State private var isImporting = false
+    @State private var isFileImporterPresented = false
+    @State private var isImporting: Bool = false
+    @State private var isDecoding: Bool = false
 
     @State private var errorMessage: String?
 
     var body: some View {
         Button {
-            isImporting = true
+            isFileImporterPresented = true
         } label: {
-            Label("Import from JSON", systemImage: "square.and.arrow.down")
+            HStack {
+                Label("Import from JSON", systemImage: "square.and.arrow.down")
+
+                if isDecoding || isImporting {
+                    ProgressView()
+                }
+            }
         }
+        .disabled(isDecoding || isImporting)
         .fileImporter(
-            isPresented: $isImporting,
+            isPresented: $isFileImporterPresented,
             allowedContentTypes: [.json],
             allowsMultipleSelection: false
         ) { result in
-            handleImport(result: result)
+            isDecoding = true
+            Task {
+                await handleImport(result: result)
+                isDecoding = false
+            }
         }
         .alert("Error", isPresented: .constant(errorMessage != nil)) {
             Button("OK") { errorMessage = nil }
@@ -41,10 +54,14 @@ struct ImportDataFromJsonButtonView: View {
 
             if let importedJto {
                 Button("Import", role: .destructive) {
-                    do {
-                        try importData(backup: importedJto)
-                    } catch {
-                        errorMessage = "Error importing: \(error.localizedDescription)"
+                    isImporting = true
+                    Task {
+                        do {
+                            try await importData(backup: importedJto)
+                        } catch {
+                            errorMessage = "Error importing: \(error.localizedDescription)"
+                        }
+                        isImporting = false
                     }
                 }
             }
@@ -57,7 +74,7 @@ struct ImportDataFromJsonButtonView: View {
         }
     }
 
-    private func handleImport(result: Result<[URL], Error>) {
+    private func handleImport(result: Result<[URL], Error>) async {
         do {
             guard let fileUrl = try result.get().first else {
                 errorMessage = "No file found, please retry."
@@ -79,13 +96,17 @@ struct ImportDataFromJsonButtonView: View {
         }
     }
 
-    private func importData(backup: GlobalJTO) throws {
+    @MainActor
+    private func importData(backup: GlobalJTO) async throws {
         try importTemplates(source: backup.trainingTemplates)
         try importSessions(source: backup.sessions)
         try modelContext.save()
     }
 
+    @MainActor
     private func importTemplates(source: [TrainingJTO]) throws {
+        guard !source.isEmpty else { return }
+
         let existingTrainings = try modelContext.fetch(FetchDescriptor<Training>())
         let templateTrainings = existingTrainings.filter { $0.sessions.isEmpty }
         let trainingsByTitle = Dictionary(templateTrainings.map { ($0.title, $0) }, uniquingKeysWith: { first, _ in first })
@@ -119,13 +140,17 @@ struct ImportDataFromJsonButtonView: View {
         }
     }
 
+    @MainActor
     private func importSessions(source: [SessionJTO]) throws {
+        guard !source.isEmpty else { return }
+
         let existingSessions = try modelContext.fetch(FetchDescriptor<Session>())
         var sessionKeys = existingSessions.map { "\($0.date)_\($0.training.title)_\(String(format: "%.2f", $0.totalWeightPulled))" }
 
         for session in source {
             let sessionKey = "\(session.date)_\(session.training.name)_\(String(format: "%.2f", session.totalWeightPulled))"
             guard !sessionKeys.contains(sessionKey) else { continue }
+
             sessionKeys.append(sessionKey)
 
             let sessionToSave = Session(
