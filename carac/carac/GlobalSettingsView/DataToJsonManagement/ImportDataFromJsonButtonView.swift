@@ -152,7 +152,7 @@ struct ImportDataFromJsonButtonView: View {
             let sessionKey = "\(session.date)_\(session.training.name)_\(String(format: "%.2f", session.totalWeightPulled))"
             guard !sessionKeys.contains(sessionKey) else { continue }
 
-            sessionKeys.append(sessionKey)
+            sessionKeys.insert(sessionKey)
 
             let sessionToSave = Session(
                 date: session.date,
