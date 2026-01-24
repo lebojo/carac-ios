@@ -47,7 +47,3 @@ struct ExportDataToJsonButtonView: View {
         try jsonData.write(to: tempURL)
     }
 }
-
-#Preview {
-    ExportDataToJsonButtonView()
-}

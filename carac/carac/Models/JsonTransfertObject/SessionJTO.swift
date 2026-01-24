@@ -24,4 +24,14 @@ struct SessionJTO: Codable {
             training: TrainingJTO(from: session.training).noRepeatDays
         )
     }
+
+    var persistedModel: Session {
+        Session(date: date, training: training.persistedModel)
+    }
+
+    var totalWeightPulled: Double {
+        training.exercises.reduce(0) { result, exercise in
+            result + (exercise.sets?.reduce(0) { $0 + ($1.weight * Double($1.repetition)) } ?? 0)
+        }
+    }
 }

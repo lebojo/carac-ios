@@ -24,4 +24,12 @@ struct GlobalJTO: Codable {
 
         self.init(savingDate: date, templates: templates, sessions: sessionJTOs)
     }
+
+    var persistedSessions: [Session] {
+        sessions.map(\.persistedModel)
+    }
+
+    var persistedTemplates: [Training] {
+        trainingTemplates.map(\.persistedModel)
+    }
 }

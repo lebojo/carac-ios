@@ -35,6 +35,7 @@ struct GlobalSettingsView: View {
 
                 Section("Your data") {
                     ExportDataToJsonButtonView()
+                    ImportDataFromJsonButtonView()
                 }
             }
             .navigationTitle("Settings")
