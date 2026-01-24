@@ -62,6 +62,7 @@ struct ImportDataFromJsonButtonView: View {
                             errorMessage = "Error importing: \(error.localizedDescription)"
                         }
                         isImporting = false
+                        self.importedJto = nil
                     }
                 }
             }
@@ -151,7 +152,7 @@ struct ImportDataFromJsonButtonView: View {
             let sessionKey = "\(session.date)_\(session.training.name)_\(String(format: "%.2f", session.totalWeightPulled))"
             guard !sessionKeys.contains(sessionKey) else { continue }
 
-            sessionKeys.insert(sessionKey)
+            sessionKeys.append(sessionKey)
 
             let sessionToSave = Session(
                 date: session.date,
