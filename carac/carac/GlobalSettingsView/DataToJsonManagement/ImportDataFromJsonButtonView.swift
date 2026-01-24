@@ -11,7 +11,9 @@ import SwiftUI
 struct ImportDataFromJsonButtonView: View {
     @Environment(\.modelContext) private var modelContext
 
+    @State private var importedJto: GlobalJTO? = nil
     @State private var isImporting = false
+
     @State private var errorMessage: String?
 
     var body: some View {
@@ -27,28 +29,53 @@ struct ImportDataFromJsonButtonView: View {
         ) { result in
             handleImport(result: result)
         }
-        .alert("Erreur d'import", isPresented: .constant(errorMessage != nil)) {
+        .alert("Error", isPresented: .constant(errorMessage != nil)) {
             Button("OK") { errorMessage = nil }
         } message: {
             Text(errorMessage ?? "")
+        }
+        .alert("Backup found!", isPresented: .constant(importedJto != nil)) {
+            Button("Cancel", role: .cancel) {
+                importedJto = nil
+            }
+
+            if let importedJto {
+                Button("Import", role: .destructive) {
+                    do {
+                        try importData(backup: importedJto)
+                    } catch {
+                        errorMessage = "Error importing: \(error.localizedDescription)"
+                    }
+                }
+            }
+        } message: {
+            if let importedJto {
+                Text("Found a valid backup file from: \(importedJto.savingDate.formatted())\nWith: \(importedJto.sessions.count) sessions and \(importedJto.trainingTemplates.count) templates")
+            } else {
+                Text("Error, please retry or contact me.")
+            }
         }
     }
 
     private func handleImport(result: Result<[URL], Error>) {
         do {
-            guard let fileUrl = try result.get().first else { return }
-            guard fileUrl.startAccessingSecurityScopedResource() else { return }
+            guard let fileUrl = try result.get().first else {
+                errorMessage = "No file found, please retry."
+                return
+            }
+            guard fileUrl.startAccessingSecurityScopedResource() else {
+                errorMessage = "Can't access file, please retry."
+                return
+            }
+
             defer { fileUrl.stopAccessingSecurityScopedResource() }
 
             let data = try Data(contentsOf: fileUrl)
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            let backup = try decoder.decode(GlobalJTO.self, from: data)
-
-            try importData(backup: backup)
-
+            importedJto = try decoder.decode(GlobalJTO.self, from: data)
         } catch {
-            errorMessage = "Impossible d'importer: \(error.localizedDescription)"
+            errorMessage = "File access error: \(error.localizedDescription)"
         }
     }
 
@@ -93,14 +120,11 @@ struct ImportDataFromJsonButtonView: View {
 
     private func importSessions(source: [SessionJTO]) throws {
         let existingSessions = try modelContext.fetch(FetchDescriptor<Session>())
-        let sessionKeys = Set(existingSessions.map { "\($0.date)_\($0.training.title)_\($0.totalWeightPulled)" })
-        print("\(sessionKeys)")
-        print("-----")
+        let sessionKeys = existingSessions.map { "\($0.date)_\($0.training.title)_\(String(format: "%.2f", $0.totalWeightPulled))" }
 
         for session in source {
-            let sessionKey = "\(session.date)_\(session.training.name)_\(session.totalWeightPulled)"
+            let sessionKey = "\(session.date)_\(session.training.name)_\(String(format: "%.2f", session.totalWeightPulled))"
             guard !sessionKeys.contains(sessionKey) else { continue }
-            print("+ \(sessionKey)")
 
             let sessionToSave = Session(
                 date: session.date,
