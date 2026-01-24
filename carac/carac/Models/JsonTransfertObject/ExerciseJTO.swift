@@ -29,4 +29,12 @@ struct ExerciseJTO: Codable {
     var template: ExerciseJTO {
         .init(name: name, weightSteps: weightSteps, sets: nil)
     }
+
+    var persistedModel: Exercise {
+        Exercise(
+            name: name,
+            weightSteps: weightSteps ?? 0.5,
+            sets: sets?.enumerated().map { ExerciseSet(id: $0.offset, reps: $0.element.repetition, weight: $0.element.weight) } ?? []
+        )
+    }
 }

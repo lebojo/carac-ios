@@ -34,6 +34,10 @@ struct TrainingJTO: Codable, Hashable {
         .init(name: name, repeatDays: nil, exercises: exercises)
     }
 
+    var persistedModel: Training {
+        Training(name, exercises: exercises.map(\.persistedModel), repeatDays: repeatDays?.compactMap { RepeatDay(rawValue: $0) } ?? [])
+    }
+
     static func == (lhs: TrainingJTO, rhs: TrainingJTO) -> Bool {
         lhs.name == rhs.name
     }
