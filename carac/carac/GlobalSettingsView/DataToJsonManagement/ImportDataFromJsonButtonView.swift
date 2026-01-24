@@ -121,11 +121,12 @@ struct ImportDataFromJsonButtonView: View {
 
     private func importSessions(source: [SessionJTO]) throws {
         let existingSessions = try modelContext.fetch(FetchDescriptor<Session>())
-        let sessionKeys = existingSessions.map { "\($0.date)_\($0.training.title)_\(String(format: "%.2f", $0.totalWeightPulled))" }
+        var sessionKeys = existingSessions.map { "\($0.date)_\($0.training.title)_\(String(format: "%.2f", $0.totalWeightPulled))" }
 
         for session in source {
             let sessionKey = "\(session.date)_\(session.training.name)_\(String(format: "%.2f", session.totalWeightPulled))"
             guard !sessionKeys.contains(sessionKey) else { continue }
+            sessionKeys.append(sessionKey)
 
             let sessionToSave = Session(
                 date: session.date,
