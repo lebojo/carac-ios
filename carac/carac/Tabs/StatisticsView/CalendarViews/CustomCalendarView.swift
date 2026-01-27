@@ -103,7 +103,7 @@ struct CustomCalendarView: View {
                 }
             }
         }
-        .background(Color(uiColor: .systemBackground))
+        .background(Color.clear)
         .cornerRadius(16)
         .animation(.easeOut(duration: 0.25), value: selectedDate)
     }
