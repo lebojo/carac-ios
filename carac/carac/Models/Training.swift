@@ -8,40 +8,23 @@
 import Foundation
 import SwiftData
 
-@Model
-final class Training: Identifiable {
-    var title: String
-    var exercises: [Exercise]
-    var repeatDays: [String]
+typealias Training = SchemaV1.Training
 
-    @Relationship(deleteRule: .nullify, inverse: \Session.training)
-    var sessions: [Session] = []
-
-    var totalWeightPulled: Double {
-        sessions.reduce(0) { $0 + $1.totalWeightPulled }
-    }
-
-    var repeatDaysStringified: String {
-        repeatDays.joined(separator: ", ")
-    }
-
-    init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {
-        self.title = title
-        self.exercises = exercises
-        self.repeatDays = repeatDays.map(\.rawValue)
+extension Training {
+    convenience init(from copy: Training) {
+        self.init(copy.title, exercises: copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }, repeatDays: copy.repeatDays)
     }
     
-    init(from copy: Training) {
-        self.title = copy.title
-        self.repeatDays = copy.repeatDays
-        
-        self.exercises = copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }
+    convenience init(from draft: TrainingDraft) {
+        self.init(
+            draft.title,
+            exercises: draft.exercises.map { Exercise(from: $0) },
+            repeatDays: draft.repeatDays
+        )
     }
     
-    init(from draft: TrainingDraft) {
-        title = draft.title
-        exercises = draft.exercises.map { Exercise(from: $0) }
-        repeatDays = draft.repeatDays
+    convenience init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {
+        self.init(title, exercises: exercises, repeatDaysEnum: repeatDays)
     }
 
     func update(with draft: TrainingDraft) {
