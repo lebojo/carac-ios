@@ -8,23 +8,14 @@
 import Foundation
 import SwiftData
 
-@Model
-final class Session {
-    var date: Date
-    @Relationship(deleteRule: .cascade) var training: Training
+typealias Session = SchemaV1.Session
 
-    init(date: Date = .now, training: Training) {
-        self.date = date
-        self.training = training
-    }
-    
-    init(from draft: SessionDraft) {
-        date = draft.date
-        training = Training(from: draft.training)
-    }
-
-    var totalWeightPulled: Double {
-        training.exercises.reduce(0) { $0 + $1.totalPulledWeight }
+extension Session {
+    convenience init(from draft: SessionDraft) {
+        self.init(
+            date: draft.date,
+            training: Training(from: draft.training)
+        )
     }
 
     func update(with draft: SessionDraft) {

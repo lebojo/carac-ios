@@ -8,21 +8,10 @@
 import Foundation
 import SwiftData
 
-@Model
-final class ExerciseSet: Identifiable {
-    var id: Int
-    var reps: Int
-    var weight: Double // In KG
+typealias ExerciseSet = SchemaV1.ExerciseSet
 
-    init(id: Int, reps: Int = 1, weight: Double = 1) {
-        self.id = id
-        self.reps = reps
-        self.weight = weight
-    }
-
-    init(from draft: ExerciseSetDraft) {
-        id = draft.id
-        reps = draft.reps
-        weight = draft.weight
+extension ExerciseSet {
+    convenience init(from draft: ExerciseSetDraft) {
+        self.init(id: draft.id, reps: draft.reps, weight: draft.weight)
     }
 }
