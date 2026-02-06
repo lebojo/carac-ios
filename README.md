@@ -5,48 +5,48 @@ C'est une app de suivi de sport
 
 You can test it here: [TestFlight](https://testflight.apple.com/join/cnudJaMH)
 
-# Utilisation pour les développeurs
+# Developer Usage
 
-## Prérequis
-- macOS avec Xcode installé
+## Prerequisites
+- macOS with Xcode installed
 - Git
 
-## Cloner le dépôt
+## Clone the Repository
 ```bash
 git clone https://github.com/lebojo/carac-ios.git
 cd carac-ios
 ```
 
-## Ouvrir le projet avec Xcode
+## Open the Project with Xcode
 ```bash
 open carac/carac.xcodeproj
 ```
-Ou bien, vous pouvez ouvrir Xcode et sélectionner "File > Open", puis naviguer vers le fichier `carac/carac.xcodeproj`.
+Alternatively, you can open Xcode and select "File > Open", then navigate to the `carac/carac.xcodeproj` file.
 
-## Créer une branche pour vos modifications
-Avant de commencer à travailler sur une nouvelle fonctionnalité ou correction :
+## Create a Branch for Your Changes
+Before starting work on a new feature or fix:
 ```bash
-git checkout -b ma-nouvelle-fonctionnalite
+git checkout -b my-new-feature
 ```
 
-## Tester vos modifications
-1. Sélectionnez un simulateur ou un appareil cible dans Xcode
-2. Appuyez sur `Cmd + R` pour compiler et exécuter l'application
-3. Testez vos modifications de manière approfondie
+## Test Your Changes
+1. Select a simulator or target device in Xcode
+2. Press `Cmd + R` to build and run the application
+3. Test your changes thoroughly
 
-## Faire une Pull Request
-Une fois vos modifications testées et prêtes :
-1. Committez vos changements :
+## Make a Pull Request
+Once your changes are tested and ready:
+1. Commit your changes:
    ```bash
    git add .
-   git commit -m "Description de vos modifications"
+   git commit -m "Description of your changes"
    ```
-2. Poussez votre branche vers GitHub :
+2. Push your branch to GitHub:
    ```bash
-   git push origin ma-nouvelle-fonctionnalite
+   git push origin my-new-feature
    ```
-3. Allez sur [GitHub](https://github.com/lebojo/carac-ios) et créez une Pull Request depuis votre branche
-4. Décrivez vos modifications dans la Pull Request et attendez la revue
+3. Go to [GitHub](https://github.com/lebojo/carac-ios) and create a Pull Request from your branch
+4. Describe your changes in the Pull Request and wait for review
 
 # Made with love
 Made with ❤️ by Jordan Chap
