@@ -1,7 +1,24 @@
 # Carac
-C'est une app de suivi de sport
 
 <img src="https://github.com/user-attachments/assets/a6835cb1-0f24-4093-a30d-043f462da4ed" width="128">
+
+## About Carac
+
+Carac is a sports tracking application designed to help you monitor and improve your athletic performance. Whether you're a casual jogger, a dedicated gym enthusiast, or training for your next competition, Carac provides the tools you need to track your progress and stay motivated.
+
+### Why Carac?
+
+Carac exists to make sports tracking simple, intuitive, and accessible. Built with a focus on user experience, it helps athletes of all levels:
+
+- **Track Your Activities**: Log your workouts, runs, and training sessions with ease
+- **Monitor Progress**: Visualize your improvements over time and stay on top of your fitness goals
+- **Stay Motivated**: Keep yourself accountable and motivated with clear insights into your performance
+
+### Perfect For:
+
+- Athletes who want a straightforward way to track their training
+- Fitness enthusiasts looking to monitor their progress
+- Anyone who wants to build and maintain a consistent exercise routine
 
 You can test it here: [TestFlight](https://testflight.apple.com/join/cnudJaMH)
 
