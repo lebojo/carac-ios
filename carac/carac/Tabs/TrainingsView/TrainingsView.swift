@@ -17,6 +17,7 @@ struct TrainingsView: View {
 
     @State private var navigationPath = NavigationPath()
     @State private var isTrainingCreationShow = false
+    @State private var searchText: String = ""
 
     private var singleTrainings: [Training] {
         trainings.filter { $0.sessions.isEmpty }
@@ -26,11 +27,21 @@ struct TrainingsView: View {
         exercises.filter(\.sets.isEmpty)
     }
 
+    private var filteredTrainings: [Training] {
+        guard !searchText.isEmpty else { return singleTrainings }
+        return singleTrainings.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+    }
+
+    private var filteredExercises: [Exercise] {
+        guard !searchText.isEmpty else { return singleExercises }
+        return singleExercises.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+
     var body: some View {
         NavigationStack(path: $navigationPath) {
             List {
                 Section {
-                    ForEach(singleTrainings, id: \.persistentModelID) { training in
+                    ForEach(filteredTrainings, id: \.persistentModelID) { training in
                         Button {
                             navigationPath.append(training)
                         } label: {
@@ -43,7 +54,7 @@ struct TrainingsView: View {
                     }
                     .onDelete { indexSet in
                         for index in indexSet {
-                            let trainingToDelete = singleTrainings[index]
+                            let trainingToDelete = filteredTrainings[index]
                             modelContext.delete(trainingToDelete)
                         }
                     }
@@ -58,7 +69,7 @@ struct TrainingsView: View {
                 }
 
                 Section("Exercises") {
-                    ForEach(singleExercises, id: \.persistentModelID) { exercise in
+                    ForEach(filteredExercises, id: \.persistentModelID) { exercise in
                         Button {
                             mainViewState.selectedExercise = exercise
                         } label: {
@@ -74,6 +85,7 @@ struct TrainingsView: View {
                 OrphanExercisesSectionView(correctExercisesName: singleExercises.map(\.name))
             }
             .toolbar { HomeToolbarView() }
+            .searchable(text: $searchText)
             .navigationTitle("Carac Training\(trainings.count > 1 ? "s" : "")")
             .navigationDestination(for: Training.self) { training in
                 TrainingModificationView(training: training)
