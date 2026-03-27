@@ -29,43 +29,46 @@ struct TrainingsView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             List {
-                Section {
-                    ForEach(singleTrainings, id: \.persistentModelID) { training in
-                        Button {
-                            navigationPath.append(training)
-                        } label: {
-                            HStack {
-                                Text(training.title)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                Image(systemName: "chevron.right")
+                if !singleTrainings.isEmpty {
+                    Section {
+                        ForEach(singleTrainings, id: \.persistentModelID) { training in
+                            Button {
+                                navigationPath.append(training)
+                            } label: {
+                                HStack {
+                                    Text(training.title)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Image(systemName: "chevron.right")
+                                }
                             }
                         }
-                    }
-                    .onDelete { indexSet in
-                        for index in indexSet {
-                            let trainingToDelete = singleTrainings[index]
-                            modelContext.delete(trainingToDelete)
+                        .onDelete { indexSet in
+                            for index in indexSet {
+                                let trainingToDelete = singleTrainings[index]
+                                modelContext.delete(trainingToDelete)
+                            }
                         }
+                    } header: {
+                        Text("Trainings")
+                    } footer: {
+                        CreateTrainingButton
                     }
-                } header: {
-                    Text("Trainings")
-                } footer: {
-                    Button("Create a new training", systemImage: "plus") {
-                        isTrainingCreationShow = true
-                    }
-                    .glassButton()
-                    .frame(maxWidth: .infinity)
+                } else {
+                    CreateTrainingButton
+                        .controlSize(.extraLarge)
                 }
 
-                Section("Exercises") {
-                    ForEach(singleExercises, id: \.persistentModelID) { exercise in
-                        Button {
-                            mainViewState.selectedExercise = exercise
-                        } label: {
-                            HStack {
-                                Text(exercise.name)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                Image(systemName: "chevron.right")
+                if !singleExercises.isEmpty {
+                    Section("Exercises") {
+                        ForEach(singleExercises, id: \.persistentModelID) { exercise in
+                            Button {
+                                mainViewState.selectedExercise = exercise
+                            } label: {
+                                HStack {
+                                    Text(exercise.name)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Image(systemName: "chevron.right")
+                                }
                             }
                         }
                     }
@@ -82,5 +85,13 @@ struct TrainingsView: View {
                 TrainingCreationView()
             }
         }
+    }
+
+    private var CreateTrainingButton: some View {
+        Button("Create a new training", systemImage: "plus") {
+            isTrainingCreationShow = true
+        }
+        .glassButton()
+        .frame(maxWidth: .infinity)
     }
 }
