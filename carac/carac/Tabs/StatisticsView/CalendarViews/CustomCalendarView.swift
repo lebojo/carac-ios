@@ -17,7 +17,10 @@ struct CustomCalendarView: View {
     }
 
     private var weekdaySymbols: [String] {
-        calendar.shortWeekdaySymbols
+        let calendar = Calendar.current
+        let symbols = calendar.shortWeekdaySymbols
+        let shift = calendar.firstWeekday - 1
+        return Array(symbols[shift...] + symbols[..<shift])
     }
 
     private var startOffset: Int {
