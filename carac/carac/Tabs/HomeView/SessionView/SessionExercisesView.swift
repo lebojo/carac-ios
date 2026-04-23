@@ -22,6 +22,7 @@ struct SessionExercisesView: View {
             }
             .scrollTargetLayout()
         }
+        .caracBackground()
         .scrollTargetBehavior(.viewAligned)
         .modifier(NextPageDiscoveryViewModifier())
     }

@@ -29,6 +29,7 @@ struct ExerciseDraftView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
                     .cardStyle()
+                    .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                 }
                 .opacity(0.5)
@@ -48,15 +49,18 @@ struct ExerciseDraftView: View {
                             .disabled(exercise.sets.count <= 1)
                         }
                         .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
                 }
                 .onDelete(perform: deleteSets)
             } header: {
                 Text("Sets: \(exercise.sets.count)")
             } footer: {
                 AddSetsButton(exercise: $exercise)
+                    .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
             }
         }
+        .caracListStyle()
         .navigationTitle(exercise.name)
         .scrollIndicators(.never)
         .listStyle(.plain)

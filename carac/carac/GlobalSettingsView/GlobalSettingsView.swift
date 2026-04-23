@@ -38,6 +38,7 @@ struct GlobalSettingsView: View {
                     ImportDataFromJsonButtonView()
                 }
             }
+            .caracListStyle()
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .closeButton()

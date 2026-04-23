@@ -76,6 +76,7 @@ struct TrainingsView: View {
 
                 OrphanExercisesSectionView(correctExercisesName: singleExercises.map(\.name))
             }
+            .caracListStyle()
             .toolbar { HomeToolbarView() }
             .navigationTitle("Carac Training\(trainings.count > 1 ? "s" : "")")
             .navigationDestination(for: Training.self) { training in

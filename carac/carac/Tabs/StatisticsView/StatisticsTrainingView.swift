@@ -120,6 +120,7 @@ struct StatisticsTrainingView: View {
                 Text("This action cannot be undone")
             }
         }
+        .caracListStyle()
         .navigationTitle("\(trainingTitle)")
     }
 

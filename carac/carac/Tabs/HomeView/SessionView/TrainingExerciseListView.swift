@@ -32,6 +32,7 @@ struct TrainingExerciseListView: View {
             }
             .onMove(perform: moveExercises)
         }
+        .caracListStyle()
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Close", systemImage: "xmark") {

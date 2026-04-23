@@ -27,6 +27,7 @@ struct HomeView: View {
                     WeekSectionHomeView(trainings: trainings)
                 }
             }
+            .caracListStyle()
             .navigationTitle("Carac Home")
             .toolbar { HomeToolbarView() }
         }

@@ -75,6 +75,7 @@ struct StatisticsView: View {
                     ContentUnavailableView("No stats for now", systemImage: "chart.line.downtrend.xyaxis")
                 }
             }
+            .caracListStyle()
             .navigationTitle("Carac teristics")
             .toolbar { HomeToolbarView() }
             .navigationDestination(for: Training.self) { training in

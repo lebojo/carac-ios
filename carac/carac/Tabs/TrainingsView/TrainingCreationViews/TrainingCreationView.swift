@@ -44,6 +44,7 @@ struct TrainingCreationView: View {
 
                 ExercisesGridSection(trainingExercises: $newTraining.exercises)
             }
+            .caracListStyle()
             .animation(.easeInOut, value: newTraining.exercises)
             .navigationTitle("New training")
             .navigationBarTitleDisplayMode(.inline)
