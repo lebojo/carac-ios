@@ -45,6 +45,7 @@ struct ExerciseDraftView: View {
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
+                            .disabled(exercise.sets.count <= 1)
                         }
                         .listRowSeparator(.hidden)
                 }
