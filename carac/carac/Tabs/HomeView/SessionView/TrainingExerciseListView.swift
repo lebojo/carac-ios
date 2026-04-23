@@ -18,8 +18,17 @@ struct TrainingExerciseListView: View {
     var body: some View {
         List {
             ForEach(session.training.exercises) { exercise in
-                Text(exercise.name)
-                    .foregroundStyle(exercise.sets.count > 1 ? .gray : .primary)
+                HStack {
+                    Text(exercise.name)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    if let firstSet = exercise.sets.first {
+                        Text("\(firstSet.weight.maxDigits(2)) kg")
+                            .italic()
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .foregroundStyle(exercise.sets.count > 1 ? .gray : .primary)
             }
             .onMove(perform: moveExercises)
         }
