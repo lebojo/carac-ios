@@ -14,7 +14,7 @@ struct AddSetsButton: View {
         guard let lastSet = exercise.sets.last, lastSet.weight > 1 else {
             return 1
         }
-        guard lastSet.reps > 8 else {
+        guard lastSet.reps >= 8 else {
             return lastSet.weight - exercise.weightSteps
         }
 
