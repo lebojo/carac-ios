@@ -11,6 +11,7 @@ struct NewExerciseButton: View {
     @EnvironmentObject var mainViewState: MainViewState
     
     @State private var showCreateExercise: Bool = false
+    var onCreated: ((Exercise) -> Void)? = nil
     
     var body: some View {
         Button("New", systemImage: "plus") {
@@ -22,7 +23,7 @@ struct NewExerciseButton: View {
         .clipShape(RoundedRectangle(cornerRadius: 16.0))
         .shadow(radius: 5.0)
         .sheet(isPresented: $showCreateExercise) {
-            CreateAnExerciseSheetView(isPresented: $showCreateExercise)
+            CreateAnExerciseSheetView(isPresented: $showCreateExercise, onCreated: onCreated)
         }
     }
 }

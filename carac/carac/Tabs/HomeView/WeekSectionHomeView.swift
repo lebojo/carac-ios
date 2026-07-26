@@ -27,7 +27,7 @@ struct WeekSectionHomeView: View {
             ForEach(RepeatDay.allCases.filter { $0 != .noRepeat }, id: \.self) { day in
                 if let trainings = trainingDays[day] {
                     HStack {
-                        Text(day.title)
+                        Text(day.localizedTitle)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
                         MenuButtonView(trainings: trainings)
@@ -37,7 +37,7 @@ struct WeekSectionHomeView: View {
             }
 
             if !emptyDays.isEmpty {
-                Text(emptyDays.map(\.title).joined(separator: ", "))
+                Text(emptyDays.map(\.localizedTitle).joined(separator: ", "))
                     .italic()
             }
         } header: {
