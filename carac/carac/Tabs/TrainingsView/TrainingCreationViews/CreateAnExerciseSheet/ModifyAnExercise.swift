@@ -40,20 +40,38 @@ struct ModifyAnExercise: View {
                     }
                 }
 
-                Section {
-                    VStack {
-                        Stepper("Wheight step: **\(exercise.weightSteps.formatted())**", value: $exercise.weightSteps, step: 0.1)
-
-                        Picker("Picker template", selection: $exercise.weightSteps) {
-                            ForEach([1, 2.5, 5, 10], id: \.self) { num in
-                                Text(num, format: .number.precision(.fractionLength(1)))
-                                    .tag(num)
-                            }
+                Section("Type & Equipment") {
+                    Picker("Exercise Type", selection: $exercise.exerciseType) {
+                        ForEach(ExerciseType.allCases) { type in
+                            Label(type.title, systemImage: type.systemImage)
+                                .tag(type.rawValue)
                         }
-                        .pickerStyle(.segmented)
                     }
-                } footer: {
-                    Text("Wheight step is used to precisely measure the weight of the exercise.")
+                    
+                    Picker("Equipment", selection: $exercise.equipment) {
+                        ForEach(EquipmentType.allCases) { eq in
+                            Label(eq.title, systemImage: eq.systemImage)
+                                .tag(eq.rawValue)
+                        }
+                    }
+                }
+                
+                if exercise.exerciseType == ExerciseType.strength.rawValue || exercise.exerciseType == ExerciseType.calisthenics.rawValue {
+                    Section {
+                        VStack {
+                            Stepper("Wheight step: **\(exercise.weightSteps.formatted())**", value: $exercise.weightSteps, step: 0.1)
+                            
+                            Picker("Picker template", selection: $exercise.weightSteps) {
+                                ForEach([1, 2.5, 5, 10], id: \.self) { num in
+                                    Text(num, format: .number.precision(.fractionLength(1)))
+                                        .tag(num)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                    } footer: {
+                        Text("Wheight step is used to precisely measure the weight of the exercise.")
+                    }
                 }
 
                 Text("This exercise is used in:\n\(Set(trainings.map(\.title)).joined(separator: "\n"))")

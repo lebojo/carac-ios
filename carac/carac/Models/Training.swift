@@ -22,7 +22,9 @@ final class Training: Identifiable {
     }
 
     var repeatDaysStringified: String {
-        repeatDays.joined(separator: ", ")
+        repeatDays
+            .compactMap { RepeatDay(rawValue: $0)?.localizedTitle }
+            .joined(separator: ", ")
     }
 
     init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {
@@ -35,7 +37,7 @@ final class Training: Identifiable {
         self.title = copy.title
         self.repeatDays = copy.repeatDays
         
-        self.exercises = copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }
+        self.exercises = copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps, equipment: EquipmentType(rawValue: $0.equipment) ?? .other, exerciseType: ExerciseType(rawValue: $0.exerciseType) ?? .strength) }
     }
     
     init(from draft: TrainingDraft) {
@@ -50,3 +52,4 @@ final class Training: Identifiable {
         repeatDays = draft.repeatDays
     }
 }
+

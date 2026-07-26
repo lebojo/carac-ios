@@ -1,5 +1,5 @@
 //
-//  HomeToolbarView.swift
+//  SettingsToolbarView.swift
 //  carac
 //
 //  Created by Jordan on 08.03.2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeToolbarView: View {
+struct SettingsToolbarView: View {
     @EnvironmentObject var mainViewState: MainViewState
 
     @State private var isSettingsVisible: Bool = false

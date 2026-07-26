@@ -12,25 +12,65 @@ struct TrainingExerciseListView: View {
 
     @State private var showConfirmation: Bool = false
     @State private var alertType: EndSessionAlertViewModifier.EndSessionType = .save
+    @State private var isShowingAddExercise: Bool = false
 
     @Binding var session: SessionDraft
 
     var body: some View {
         List {
-            ForEach(session.training.exercises) { exercise in
-                HStack {
-                    Text(exercise.name)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            if session.training.exercises.isEmpty {
+                ContentUnavailableView(
+                    "No exercises in session",
+                    systemImage: "dumbbell",
+                    description: Text("Tap below to add your first exercise.")
+                )
+            } else {
+                ForEach($session.training.exercises) { $exercise in
+                    NavigationLink {
+                        ExerciseDraftView(exercise: $exercise)
+                    } label: {
+                        HStack {
+                            let type = ExerciseType(rawValue: exercise.exerciseType) ?? .strength
+                            Image(systemName: type.systemImage)
+                                .foregroundStyle(.secondary)
 
-                    if let firstSet = exercise.sets.first {
-                        Text("\(firstSet.weight.maxDigits(2)) kg")
-                            .italic()
-                            .foregroundStyle(.secondary)
+                            Text(exercise.name)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                            if let firstSet = exercise.sets.first {
+                                if exercise.exerciseType == ExerciseType.cardio.rawValue {
+                                    Text("\((firstSet.duration ?? 15.0).maxDigits(1)) min - \((firstSet.distance ?? 3.0).maxDigits(2)) km")
+                                        .italic()
+                                        .foregroundStyle(.secondary)
+                                } else {
+                                    Text("\(firstSet.weight.maxDigits(2)) kg")
+                                        .italic()
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
                     }
                 }
-                .foregroundStyle(exercise.sets.count > 1 ? .gray : .primary)
+                .onDelete { indexSet in
+                    session.training.exercises.remove(atOffsets: indexSet)
+                }
+                .onMove(perform: moveExercises)
             }
-            .onMove(perform: moveExercises)
+
+            Section {
+                Button {
+                    isShowingAddExercise = true
+                } label: {
+                    Label("Add exercise to session", systemImage: "plus.circle.fill")
+                        .foregroundStyle(.primary)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.vertical, 4)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+            }
         }
         .caracListStyle()
         .toolbar {
@@ -54,8 +94,11 @@ struct TrainingExerciseListView: View {
                 }
             }
         }
+        .sheet(isPresented: $isShowingAddExercise) {
+            AddExerciseToSessionSheetView(exercises: $session.training.exercises)
+        }
         .endSessionAlert(isPresented: $showConfirmation, sessionDraft: session, type: alertType)
-        .navigationTitle("Session of \(session.date.formatted(.dateTime.day().month()))")
+        .navigationTitle(session.training.title)
     }
 
     func moveExercises(from source: IndexSet, to destination: Int) {

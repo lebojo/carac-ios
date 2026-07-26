@@ -24,7 +24,7 @@ struct RepeatDayPicker: View {
                     toggleDay(day)
                 } label: {
                     HStack {
-                        Text("Every \(day.title)")
+                        Text("Every \(day.localizedTitle)")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundStyle(.foreground)
                         if newTraining.repeatDays.contains(day.rawValue) {

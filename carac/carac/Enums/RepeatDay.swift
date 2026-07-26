@@ -65,6 +65,10 @@ enum RepeatDay: String, CaseIterable {
         }
     }
 
+    var localizedTitle: String {
+        NSLocalizedString(title, comment: "")
+    }
+
     static func from(date: Date) -> RepeatDay {
         let weekday = Calendar(identifier: .gregorian).component(.weekday, from: date)
         switch weekday {

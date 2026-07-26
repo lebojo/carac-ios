@@ -22,9 +22,13 @@ struct ExerciseDraftView: View {
             if let lastExerciseSet {
                 Section("Last time best") {
                     VStack(alignment: .leading, spacing: 20) {
-                        Label("Weight: \(lastExerciseSet.weight.maxDigits(2))kg", systemImage: "dumbbell.fill")
-
-                        Label("Reps: \(lastExerciseSet.reps)", systemImage: "arrow.triangle.2.circlepath")
+                        if exercise.exerciseType == ExerciseType.cardio.rawValue {
+                            Label("Duration: \((lastExerciseSet.duration ?? 15.0).maxDigits(1)) min", systemImage: "clock.fill")
+                            Label("Distance: \((lastExerciseSet.distance ?? 3.0).maxDigits(2)) km", systemImage: "road.lanes")
+                        } else {
+                            Label("Weight: \(lastExerciseSet.weight.maxDigits(2))kg", systemImage: "dumbbell.fill")
+                            Label("Reps: \(lastExerciseSet.reps)", systemImage: "arrow.triangle.2.circlepath")
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
@@ -37,7 +41,7 @@ struct ExerciseDraftView: View {
 
             Section {
                 ForEach($exercise.sets.sorted { $0.id < $1.id }) { set in
-                    SetView(set: set, exerciseWeightStep: exercise.weightSteps)
+                    SetView(set: set, exerciseWeightStep: exercise.weightSteps, exerciseType: exercise.exerciseType)
                         .contextMenu {
                             Button(role: .destructive) {
                                 if let setIndex = exercise.sets.firstIndex(of: set.wrappedValue) {
@@ -68,7 +72,11 @@ struct ExerciseDraftView: View {
             setLastBestSetIfAvailable()
 
             if exercise.sets.isEmpty {
-                exercise.sets.append(ExerciseSetDraft(id: 0, weight: lastExerciseSet?.weight ?? exercise.weightSteps))
+                if exercise.exerciseType == ExerciseType.cardio.rawValue {
+                    exercise.sets.append(ExerciseSetDraft(id: 0, duration: lastExerciseSet?.duration ?? 15.0, distance: lastExerciseSet?.distance ?? 3.0))
+                } else {
+                    exercise.sets.append(ExerciseSetDraft(id: 0, weight: lastExerciseSet?.weight ?? exercise.weightSteps))
+                }
             }
         }
     }
@@ -87,8 +95,14 @@ struct ExerciseDraftView: View {
             }
             .max(by: { $0.date < $1.date })
 
-        if let sets = lastSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
-            lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
+        if let ex = lastSession?.training.exercises.first(where: { $0.name == exercise.name }) {
+            let sortedSets: [ExerciseSet]
+            if exercise.exerciseType == ExerciseType.cardio.rawValue {
+                sortedSets = ex.sets.sorted(by: { ($0.distance ?? 0) > ($1.distance ?? 0) })
+            } else {
+                sortedSets = ex.sets.sorted(by: { $0.weight > $1.weight })
+            }
+            lastExerciseSet = sortedSets.count > 1 ? sortedSets[1] : sortedSets.first
         } else {
             lastExerciseSet = nil
         }

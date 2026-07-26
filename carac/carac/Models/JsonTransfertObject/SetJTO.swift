@@ -10,13 +10,18 @@ import Foundation
 struct SetJTO: Codable {
     let repetition: Int
     let weight: Double
+    let duration: Double?
+    let distance: Double?
 
-    private init(repetition: Int, weight: Double) {
+    private init(repetition: Int, weight: Double, duration: Double?, distance: Double?) {
         self.repetition = repetition
         self.weight = weight
+        self.duration = duration
+        self.distance = distance
     }
 
     init(from set: ExerciseSet) {
-        self.init(repetition: set.reps, weight: set.weight)
+        self.init(repetition: set.reps, weight: set.weight, duration: set.duration, distance: set.distance)
     }
 }
+
