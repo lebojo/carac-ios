@@ -11,6 +11,9 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var mainViewState: MainViewState
 
+    @State private var isShowingAddExerciseSheet: Bool = false
+    @State private var isShowingAddTrainingSheet: Bool = false
+
     @Query(filter: #Predicate<Training> { training in training.sessions.isEmpty })
     private var trainings: [Training]
 
@@ -29,7 +32,21 @@ struct HomeView: View {
             }
             .caracListStyle()
             .navigationTitle("Carac Home")
-            .toolbar { HomeToolbarView() }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    SettingsToolbarView()
+                }
+                AddToolbarView(
+                    isShowingAddExerciseSheet: $isShowingAddExerciseSheet,
+                    isShowingAddTrainingSheet: $isShowingAddTrainingSheet
+                )
+            }
+            .sheet(isPresented: $isShowingAddExerciseSheet) {
+                CreateAnExerciseSheetView(isPresented: $isShowingAddExerciseSheet)
+            }
+            .sheet(isPresented: $isShowingAddTrainingSheet) {
+                TrainingCreationView()
+            }
         }
     }
 }
