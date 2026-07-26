@@ -12,17 +12,23 @@ import SwiftData
 final class Exercise: Identifiable {
     var name: String
     var weightSteps: Double
+    var equipment: String = EquipmentType.other.rawValue
+    var exerciseType: String = ExerciseType.strength.rawValue
     @Relationship(deleteRule: .cascade) var sets: [ExerciseSet]
 
-    init(name: String = "", weightSteps: Double = 1, sets: [ExerciseSet] = []) {
+    init(name: String = "", weightSteps: Double = 1, equipment: EquipmentType = .other, exerciseType: ExerciseType = .strength, sets: [ExerciseSet] = []) {
         self.name = name
         self.weightSteps = weightSteps
+        self.equipment = equipment.rawValue
+        self.exerciseType = exerciseType.rawValue
         self.sets = sets
     }
     
     init(from draft: ExerciseDraft) {
         name = draft.name
         weightSteps = draft.weightSteps
+        equipment = draft.equipment
+        exerciseType = draft.exerciseType
         sets = draft.sets.map { ExerciseSet(from: $0) }
     }
 
@@ -30,3 +36,4 @@ final class Exercise: Identifiable {
         sets.reduce(0) { $0 + ($1.weight * Double($1.reps)) }
     }
 }
+
