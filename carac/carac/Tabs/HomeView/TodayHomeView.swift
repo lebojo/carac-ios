@@ -59,13 +59,28 @@ struct TodayHomeView: View {
             ContentUnavailableView(
                 "Free day!",
                 systemImage: "sun.dust",
-                description: Text("Chill, it's \(RepeatDay.today.title.lowercased()). You have nothing to do today.")
+                description: Text("Chill, it's \(RepeatDay.today.localizedTitle.lowercased()). You have nothing to do today.")
             )
         }
+
+        Button {
+            createFreeSession()
+        } label: {
+            Label("Entraînement libre", systemImage: "figure.step.training")
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+        }
+        .controlSize(.large)
+        .glassButton()
     }
 
     private func createSession(_ training: Training) {
         let draft = SessionDraft(training: TrainingDraft(from: training))
+        mainViewState.currentSession = draft
+    }
+
+    private func createFreeSession() {
+        let draft = SessionDraft(training: TrainingDraft("Entraînement libre"))
         mainViewState.currentSession = draft
     }
 }
