@@ -9,31 +9,24 @@ import SwiftData
 import SwiftUI
 
 struct OrphanExercisesSectionView: View {
-    @Query var exercises: [Exercise]
-
     @State private var selectedOrphanExercise: Exercise? = nil
+
+    @Query(filter: #Predicate<Exercise> { !$0.sets.isEmpty }) private var exercisesWithSets: [Exercise]
 
     let correctExercisesName: [String]
 
     private var orphanExercises: [Exercise] {
         let correctExercisesNameSet = Set(correctExercisesName)
-        return exercises.filter { exercise in
-            !correctExercisesNameSet.contains(exercise.name) && !exercise.sets.isEmpty
-        }
+        return exercisesWithSets.filter { !correctExercisesNameSet.contains($0.name) }
     }
 
     var body: some View {
+        let orphanExercises = orphanExercises
         if !orphanExercises.isEmpty {
             Section("Orphan exercises") {
                 ForEach(orphanExercises, id: \.persistentModelID) { exercise in
-                    Button {
+                    ChevronRowButton(title: exercise.name) {
                         selectedOrphanExercise = exercise
-                    } label: {
-                        HStack {
-                            Text(exercise.name)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            Image(systemName: "chevron.right")
-                        }
                     }
                 }
             }

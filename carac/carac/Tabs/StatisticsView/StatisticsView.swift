@@ -59,14 +59,8 @@ struct StatisticsView: View {
                         Label("Total exercices: **\(trainings.done.flatMap(\.exercises).count)**", systemImage: "dumbbell")
 
                         ForEach(singleTrainings, id: \.persistentModelID) { training in
-                            Button {
+                            ChevronRowButton(title: training.title) {
                                 statisticsViewState.navPath.append(training)
-                            } label: {
-                                HStack {
-                                    Text(training.title)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Image(systemName: "chevron.right")
-                                }
                             }
                         }
                     }
@@ -77,7 +71,7 @@ struct StatisticsView: View {
             }
             .caracListStyle()
             .navigationTitle("Carac teristics")
-            .toolbar { HomeToolbarView() }
+            .globalSettingsToolbar()
             .navigationDestination(for: Training.self) { training in
                 StatisticsTrainingView(trainingTitle: training.title, currentSession: nil)
             }

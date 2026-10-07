@@ -13,10 +13,14 @@ struct ExercisesGridSection: View {
 
     @EnvironmentObject var mainViewState: MainViewState
 
-    @Query(filter: #Predicate<Exercise> { $0.sets.isEmpty })
-    private var exercises: [Exercise]
+    @Query(filter: Training.donePredicate) private var doneTrainings: [Training]
+    @Query(filter: Exercise.withoutSetsPredicate) private var exercisesWithoutSets: [Exercise]
 
     @Binding var trainingExercises: [Exercise]
+
+    private var exercises: [Exercise] {
+        exercisesWithoutSets.excludingSessionCopies(from: doneTrainings)
+    }
 
     var body: some View {
         Section("Selected exercises \(trainingExercises.count)") { // TODO: Find a better way to show it

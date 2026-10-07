@@ -30,3 +30,18 @@ final class Exercise: Identifiable {
         sets.reduce(0) { $0 + ($1.weight * Double($1.reps)) }
     }
 }
+
+extension Exercise {
+    /// Template exercises, plus session copies of exercises skipped during a session.
+    static var withoutSetsPredicate: Predicate<Exercise> {
+        #Predicate { $0.sets.isEmpty }
+    }
+}
+
+extension [Exercise] {
+    /// Removes the exercise copies owned by done trainings, keeping only the templates.
+    func excludingSessionCopies(from doneTrainings: [Training]) -> [Exercise] {
+        let sessionExerciseIDs = Set(doneTrainings.flatMap(\.exercises).map(\.persistentModelID))
+        return filter { !sessionExerciseIDs.contains($0.persistentModelID) }
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  carac
 //
 //  Created by Jordan on 02.03.2025.
@@ -11,8 +11,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var mainViewState: MainViewState
 
-    @Query(filter: #Predicate<Training> { training in training.sessions.isEmpty })
-    private var trainings: [Training]
+    @Query(filter: Training.templatePredicate) private var trainings: [Training]
 
     private var todayTrainings: [Training] {
         trainings.filter { $0.repeatDays.contains(RepeatDay.today.rawValue) }
@@ -29,7 +28,7 @@ struct HomeView: View {
             }
             .caracListStyle()
             .navigationTitle("Carac Home")
-            .toolbar { HomeToolbarView() }
+            .globalSettingsToolbar()
         }
     }
 }

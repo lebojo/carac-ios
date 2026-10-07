@@ -50,3 +50,13 @@ final class Training: Identifiable {
         repeatDays = draft.repeatDays
     }
 }
+
+extension Training {
+    static var templatePredicate: Predicate<Training> {
+        #Predicate { $0.sessions.isEmpty }
+    }
+
+    static var donePredicate: Predicate<Training> {
+        #Predicate { !$0.sessions.isEmpty }
+    }
+}

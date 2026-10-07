@@ -1,5 +1,5 @@
 //
-//  ExercisesView.swift
+//  TrainingsView.swift
 //  carac
 //
 //  Created by Jordan on 14.03.2025.
@@ -9,90 +9,84 @@ import SwiftData
 import SwiftUI
 
 struct TrainingsView: View {
-    @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var mainViewState: MainViewState
+    @State private var activeSheet: Segment?
+    @State private var selectedSegment: Segment = .trainings
 
-    @Query private var trainings: [Training]
-    @Query private var exercises: [Exercise]
-
-    @State private var navigationPath = NavigationPath()
-    @State private var isTrainingCreationShow = false
-
-    private var singleTrainings: [Training] {
-        trainings.filter { $0.sessions.isEmpty }
-    }
+    @Query(filter: Training.templatePredicate) private var singleTrainings: [Training]
+    @Query(filter: Training.donePredicate) private var doneTrainings: [Training]
+    @Query(filter: Exercise.withoutSetsPredicate) private var exercisesWithoutSets: [Exercise]
 
     private var singleExercises: [Exercise] {
-        exercises.filter(\.sets.isEmpty)
+        exercisesWithoutSets.excludingSessionCopies(from: doneTrainings)
     }
 
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack {
             List {
-                if !singleTrainings.isEmpty {
-                    Section {
-                        ForEach(singleTrainings, id: \.persistentModelID) { training in
-                            Button {
-                                navigationPath.append(training)
-                            } label: {
-                                HStack {
-                                    Text(training.title)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Image(systemName: "chevron.right")
-                                }
-                            }
-                        }
-                        .onDelete { indexSet in
-                            for index in indexSet {
-                                let trainingToDelete = singleTrainings[index]
-                                modelContext.delete(trainingToDelete)
-                            }
-                        }
-                    } header: {
-                        Text("Trainings")
-                    } footer: {
-                        CreateTrainingButton
-                    }
-                } else {
-                    CreateTrainingButton
-                        .controlSize(.extraLarge)
+                switch selectedSegment {
+                case .trainings:
+                    TrainingsSectionView(
+                        trainings: singleTrainings,
+                        onCreate: { activeSheet = .trainings }
+                    )
+                case .exercises:
+                    ExercisesSectionView(
+                        exercises: singleExercises,
+                        onCreate: { activeSheet = .exercises }
+                    )
                 }
-
-                if !singleExercises.isEmpty {
-                    Section("Exercises") {
-                        ForEach(singleExercises, id: \.persistentModelID) { exercise in
-                            Button {
-                                mainViewState.selectedExercise = exercise
-                            } label: {
-                                HStack {
-                                    Text(exercise.name)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Image(systemName: "chevron.right")
-                                }
-                            }
-                        }
-                    }
-                }
-
-                OrphanExercisesSectionView(correctExercisesName: singleExercises.map(\.name))
             }
             .caracListStyle()
-            .toolbar { HomeToolbarView() }
-            .navigationTitle("Carac Training\(trainings.count > 1 ? "s" : "")")
+            .globalSettingsToolbar(placement: .topBarLeading)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Picker("Display", selection: $selectedSegment.animation()) {
+                        ForEach(Segment.allCases) { segment in
+                            Text(segment.title).tag(segment)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Add", systemImage: "plus") {
+                        activeSheet = selectedSegment
+                    }
+                }
+            }
+            .navigationTitle(selectedSegment.navigationTitle)
             .navigationDestination(for: Training.self) { training in
                 TrainingModificationView(training: training)
             }
-            .sheet(isPresented: $isTrainingCreationShow) {
-                TrainingCreationView()
+            .sheet(item: $activeSheet) { segment in
+                switch segment {
+                case .trainings:
+                    TrainingCreationView()
+                case .exercises:
+                    CreateAnExerciseSheetView()
+                }
             }
         }
     }
 
-    private var CreateTrainingButton: some View {
-        Button("Create a new training", systemImage: "plus") {
-            isTrainingCreationShow = true
+    enum Segment: CaseIterable, Identifiable, Sendable {
+        case trainings
+        case exercises
+
+        var id: Self { self }
+
+        var title: LocalizedStringKey {
+            switch self {
+                case .trainings: "Trainings"
+                case .exercises: "Exercises"
+            }
         }
-        .glassButton()
-        .frame(maxWidth: .infinity)
+
+        var navigationTitle: LocalizedStringKey {
+            switch self {
+                case .trainings: "Carac Trainings"
+                case .exercises: "Carac Exercises"
+            }
+        }
     }
 }
