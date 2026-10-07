@@ -60,7 +60,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
 
         do {
             try modelContext.save()
-            mainViewState.backHome()
+            mainViewState.saveSession()
         } catch {
             print("Failed to save session")
         }

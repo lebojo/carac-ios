@@ -12,6 +12,7 @@ struct GlobalSettingsView: View {
 
     @AppStorage("tintColor") var tintColor = "#007AFF"
     @AppStorage("preferedTheme") var theme: DeviceTheme = .systemDefault
+    @AppStorage(WorkoutManager.isEnabledKey) var isWorkoutEnabled = WorkoutManager.isEnabledDefault
 
     var body: some View {
         NavigationStack {
@@ -29,6 +30,14 @@ struct GlobalSettingsView: View {
                                 .tag(theme)
                         }
                     }
+                }
+
+                Section {
+                    Toggle("Record workouts in Apple Fitness", isOn: $isWorkoutEnabled)
+                } header: {
+                    Text("Apple Health")
+                } footer: {
+                    Text("Starts a strength training workout when a session begins and saves it when the session is saved.")
                 }
 
                 HelpUsSection()

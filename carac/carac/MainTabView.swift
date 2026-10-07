@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject private var mainViewState: MainViewState
+
     @AppStorage("isFirstTime") private var isFirstTime: Bool = true
     @State private var selectedTab = 1
 
@@ -34,6 +36,11 @@ struct MainTabView: View {
         .sideBarAdaptableIfAvailable()
         .homeStateDestination()
         .onBoarding(isPresented: $isFirstTime)
+        .alert("Workout not saved", isPresented: $mainViewState.workoutSaveFailed) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Your session is saved in Carac, but the workout could not be recorded in Apple Fitness.")
+        }
     }
 }
 
