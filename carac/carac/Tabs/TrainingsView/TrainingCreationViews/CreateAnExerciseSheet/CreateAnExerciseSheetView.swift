@@ -1,19 +1,18 @@
 //
-//  CreateAnExerciseView.swift
+//  CreateAnExerciseSheetView.swift
 //  carac
 //
 //  Created by Jordan on 02.03.2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct CreateAnExerciseSheetView: View {
-    @EnvironmentObject var mainViewState: MainViewState
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
 
     @State private var newExercise = Exercise()
-    
-    @Binding var isPresented: Bool
 
     var body: some View {
         NavigationView {
@@ -49,7 +48,7 @@ struct CreateAnExerciseSheetView: View {
             .closeButton()
             .bottomButton(title: "Create now", systemName: "calendar.badge.plus", disabled: newExercise.name.isEmpty) {
                 modelContext.insert(newExercise)
-                isPresented = false
+                dismiss()
             }
         }
     }
@@ -57,6 +56,8 @@ struct CreateAnExerciseSheetView: View {
 
 #Preview {
     NavigationStack {
-        CreateAnExerciseSheetView(isPresented: .constant(true))
+        CreateAnExerciseSheetView()
     }
+    .modelContainer(for: Exercise.self, inMemory: true)
+    .environmentObject(sampleMainViewState)
 }

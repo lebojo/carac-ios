@@ -22,7 +22,7 @@ struct NewExerciseButton: View {
         .clipShape(RoundedRectangle(cornerRadius: 16.0))
         .shadow(radius: 5.0)
         .sheet(isPresented: $showCreateExercise) {
-            CreateAnExerciseSheetView(isPresented: $showCreateExercise)
+            CreateAnExerciseSheetView()
         }
     }
 }

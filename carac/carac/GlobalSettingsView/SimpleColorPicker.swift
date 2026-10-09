@@ -1,5 +1,5 @@
 //
-//  MemoryColorPicker.swift
+//  SimpleColorPicker.swift
 //  carac
 //
 //  Created by Jordan on 16.03.2025.

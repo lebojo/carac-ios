@@ -1,5 +1,5 @@
 //
-//  CardStyle.swift
+//  CardStyleModifier.swift
 //  carac
 //
 //  Created by Jordan on 08.03.2025.

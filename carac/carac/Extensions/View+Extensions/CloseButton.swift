@@ -1,5 +1,5 @@
 //
-//  CloseFullScreen.swift
+//  CloseButton.swift
 //  carac
 //
 //  Created by Jordan on 13.04.2025.

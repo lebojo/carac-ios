@@ -1,3 +1,10 @@
+//
+//  DraftModels.swift
+//  carac
+//
+//  Created by Jordan on 31.10.2025.
+//
+
 import Foundation
 import SwiftData
 
