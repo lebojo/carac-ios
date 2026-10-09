@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-let sampleMainViewState = MainViewState()
+@MainActor let sampleMainViewState = MainViewState()
 
 // MARK: - Draft
 
