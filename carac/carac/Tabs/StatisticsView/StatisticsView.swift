@@ -71,7 +71,11 @@ struct StatisticsView: View {
             }
             .caracListStyle()
             .navigationTitle("Carac teristics")
-            .globalSettingsToolbar()
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    DataBackupMenu()
+                }
+            }
             .navigationDestination(for: Training.self) { training in
                 StatisticsTrainingView(trainingTitle: training.title, currentSession: nil)
             }

@@ -37,7 +37,6 @@ struct TrainingsView: View {
                 }
             }
             .caracListStyle()
-            .globalSettingsToolbar(placement: .topBarLeading)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Picker("Display", selection: $selectedSegment.animation()) {

@@ -18,11 +18,12 @@ struct GlobalJTO: Codable {
         self.sessions = sessions
     }
 
-    init(date: Date = .now, sessions: [Session]) {
-        let sessionJTOs: [SessionJTO] = sessions.map { SessionJTO(from: $0) }
-        let templates = Array(Set(sessions.map { TrainingJTO(from: $0.training).template }))
-
-        self.init(savingDate: date, templates: templates, sessions: sessionJTOs)
+    init(date: Date = .now, sessions: [Session], templates: [Training]) {
+        self.init(
+            savingDate: date,
+            templates: templates.map { TrainingJTO(from: $0).template },
+            sessions: sessions.map { SessionJTO(from: $0) }
+        )
     }
 
     var persistedSessions: [Session] {

@@ -41,11 +41,6 @@ struct GlobalSettingsView: View {
                 }
 
                 HelpUsSection()
-
-                Section("Your data") {
-                    ExportDataToJsonButtonView()
-                    ImportDataFromJsonButtonView()
-                }
             }
             .caracListStyle()
             .navigationTitle("Settings")

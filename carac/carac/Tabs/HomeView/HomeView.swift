@@ -11,6 +11,8 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var mainViewState: MainViewState
 
+    @State private var isSettingsVisible = false
+
     @Query(filter: Training.templatePredicate) private var trainings: [Training]
 
     private var todayTrainings: [Training] {
@@ -28,7 +30,17 @@ struct HomeView: View {
             }
             .caracListStyle()
             .navigationTitle("Carac Home")
-            .globalSettingsToolbar()
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button("Global settings", systemImage: "gear") {
+                        isSettingsVisible = true
+                    }
+                }
+            }
+            .sheet(isPresented: $isSettingsVisible) {
+                GlobalSettingsView()
+                    .presentationDragIndicator(.visible)
+            }
         }
     }
 }
