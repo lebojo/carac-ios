@@ -83,11 +83,11 @@ struct ExerciseDraftView: View {
         let lastSession = sessions
             .filter { $0.persistentModelID != mainViewState.currentSession?.persistedSession?.persistentModelID }
             .filter { session in
-                session.training.exercises.contains { $0.name == exercise.name }
+                session.training?.exercises?.contains { $0.name == exercise.name } ?? false
             }
             .max(by: { $0.date < $1.date })
 
-        if let sets = lastSession?.training.exercises.first(where: { $0.name == exercise.name })?.sets.sorted(by: { $0.weight > $1.weight }) {
+        if let sets = lastSession?.training?.exercises?.first(where: { $0.name == exercise.name })?.sets?.sorted(by: { $0.weight > $1.weight }) {
             lastExerciseSet = sets.count > 1 ? sets[1] : sets.first
         } else {
             lastExerciseSet = nil

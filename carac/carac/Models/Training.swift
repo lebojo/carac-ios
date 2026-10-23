@@ -10,15 +10,19 @@ import SwiftData
 
 @Model
 final class Training: Identifiable {
-    var title: String
-    var exercises: [Exercise]
-    var repeatDays: [String]
+    var title: String = ""
+    @Relationship(inverse: \Exercise.trainings) var exercises: [Exercise]? = []
+    var repeatDays: [String] = []
 
     @Relationship(deleteRule: .nullify, inverse: \Session.training)
-    var sessions: [Session] = []
+    var sessions: [Session]? = []
 
     var totalWeightPulled: Double {
-        sessions.reduce(0) { $0 + $1.totalWeightPulled }
+        (sessions ?? []).reduce(0) { $0 + $1.totalWeightPulled }
+    }
+
+    var isTemplate: Bool {
+        sessions?.isEmpty ?? true
     }
 
     var repeatDaysStringified: String {
@@ -35,7 +39,7 @@ final class Training: Identifiable {
         self.title = copy.title
         self.repeatDays = copy.repeatDays
         
-        self.exercises = copy.exercises.map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }
+        self.exercises = (copy.exercises ?? []).map { Exercise(name: $0.name, weightSteps: $0.weightSteps) }
     }
     
     init(from draft: TrainingDraft) {
@@ -53,10 +57,10 @@ final class Training: Identifiable {
 
 extension Training {
     static var templatePredicate: Predicate<Training> {
-        #Predicate { $0.sessions.isEmpty }
+        #Predicate { $0.sessions?.count == 0 }
     }
 
     static var donePredicate: Predicate<Training> {
-        #Predicate { !$0.sessions.isEmpty }
+        #Predicate { $0.sessions?.count != 0 }
     }
 }

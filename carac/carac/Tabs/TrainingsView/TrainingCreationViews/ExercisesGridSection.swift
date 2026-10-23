@@ -16,20 +16,20 @@ struct ExercisesGridSection: View {
     @Query(filter: Training.donePredicate) private var doneTrainings: [Training]
     @Query(filter: Exercise.withoutSetsPredicate) private var exercisesWithoutSets: [Exercise]
 
-    @Binding var trainingExercises: [Exercise]
+    @Binding var trainingExercises: [Exercise]?
 
     private var exercises: [Exercise] {
         exercisesWithoutSets.excludingSessionCopies(from: doneTrainings)
     }
 
     var body: some View {
-        Section("Selected exercises \(trainingExercises.count)") { // TODO: Find a better way to show it
+        Section("Selected exercises \(trainingExercises?.count ?? 0)") {
 
             NewExerciseButton()
                 .frame(maxWidth: .infinity)
 
             ForEach(exercises) { exercise in
-                ExerciseCell(exercise: exercise, trainingExercises: $trainingExercises, isSelected: trainingExercises.contains(where: { $0.id == exercise.id }))
+                ExerciseCell(exercise: exercise, trainingExercises: $trainingExercises, isSelected: trainingExercises?.contains(where: { $0.id == exercise.id }) ?? false)
                     .listRowSeparator(.hidden)
             }
         }
@@ -41,16 +41,16 @@ struct ExerciseCell: View {
 
     @EnvironmentObject var mainViewState: MainViewState
     let exercise: Exercise
-    @Binding var trainingExercises: [Exercise]
+    @Binding var trainingExercises: [Exercise]?
 
     let isSelected: Bool
 
     var body: some View {
         Button {
-            if let index = trainingExercises.firstIndex(of: exercise) {
-                trainingExercises.remove(at: index)
+            if let index = trainingExercises?.firstIndex(of: exercise) {
+                trainingExercises?.remove(at: index)
             } else {
-                trainingExercises.append(exercise)
+                trainingExercises?.append(exercise)
             }
         } label: {
             Text("\(exercise.name)")
@@ -63,10 +63,10 @@ struct ExerciseCell: View {
             }
 
             Button("Delete", systemImage: "trash", role: .destructive) {
-                if let index = trainingExercises.firstIndex(
+                if let index = trainingExercises?.firstIndex(
                     of: exercise
                 ) {
-                    trainingExercises.remove(at: index)
+                    trainingExercises?.remove(at: index)
                 }
                 modelContext.delete(exercise)
             }

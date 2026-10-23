@@ -10,9 +10,10 @@ import SwiftData
 
 @Model
 final class ExerciseSet: Identifiable {
-    var id: Int
-    var reps: Int
-    var weight: Double // In KG
+    var id: Int = 0
+    var reps: Int = 1
+    var weight: Double = 1
+    var exercise: Exercise?
 
     init(id: Int, reps: Int = 1, weight: Double = 1) {
         self.id = id

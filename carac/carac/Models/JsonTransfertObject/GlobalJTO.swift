@@ -22,7 +22,7 @@ struct GlobalJTO: Codable {
         self.init(
             savingDate: date,
             templates: templates.map { TrainingJTO(from: $0).template },
-            sessions: sessions.map { SessionJTO(from: $0) }
+            sessions: sessions.compactMap { SessionJTO(from: $0) }
         )
     }
 

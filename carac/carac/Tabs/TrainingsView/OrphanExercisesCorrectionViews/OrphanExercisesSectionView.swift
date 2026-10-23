@@ -11,7 +11,7 @@ import SwiftUI
 struct OrphanExercisesSectionView: View {
     @State private var selectedOrphanExercise: Exercise? = nil
 
-    @Query(filter: #Predicate<Exercise> { !$0.sets.isEmpty }) private var exercisesWithSets: [Exercise]
+    @Query(filter: #Predicate<Exercise> { $0.sets?.count != 0 }) private var exercisesWithSets: [Exercise]
 
     let correctExercisesName: [String]
 

@@ -31,7 +31,7 @@ struct TodayHomeView: View {
         if !trainings.isEmpty {
             Section("Today") {
                 ForEach(todaySessions, id: \.persistentModelID) { todaySession in
-                    Button("Modify \(todaySession.training.title) at \(todaySession.date.twoDigitsHour)", systemImage: "pencil") {
+                    Button("Modify \(todaySession.training?.title ?? "") at \(todaySession.date.twoDigitsHour)", systemImage: "pencil") {
                         let draftSession = SessionDraft(from: todaySession)
                         mainViewState.currentSession = draftSession
                     }

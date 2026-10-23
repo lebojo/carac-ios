@@ -16,25 +16,21 @@ struct StatisticsView: View {
     @State private var currentDate: Date = .now
 
     private var currentDateDoneSession: [Session] {
-        trainings.flatMap(\.sessions).filter { Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day) }
+        trainings.flatMap { $0.sessions ?? [] }.filter { Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day) }
     }
 
     private var currentDateDoneExercises: [Exercise] {
-        trainings.flatMap(\.sessions).filter { Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day) }.flatMap(\.training.exercises)
+        trainings.flatMap { $0.sessions ?? [] }.filter { Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day) }.flatMap { $0.training?.exercises ?? [] }
     }
 
     private var totalWeightPulled: Double {
-        trainings.flatMap(\.exercises).flatMap(\.sets).reduce(0.0) { total, set in
+        trainings.flatMap { $0.exercises ?? [] }.flatMap { $0.sets ?? [] }.reduce(0.0) { total, set in
             total + set.weight * Double(set.reps)
         }
     }
 
     private var currentDateTotalWeightPulled: Double {
         currentDateDoneSession.reduce(0) { $0 + $1.totalWeightPulled }
-    }
-
-    private var singleTrainings: [Training] {
-        trainings.filter { $0.sessions.isEmpty }
     }
 
     var body: some View {
@@ -55,10 +51,10 @@ struct StatisticsView: View {
                             .padding()
                             .listRowSeparator(.hidden)
 
-                        Label("Total sessions: **\(trainings.done.flatMap(\.sessions).count)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(trainings.done.flatMap(\.exercises).count)**", systemImage: "dumbbell")
+                        Label("Total sessions: **\(trainings.done.flatMap { $0.sessions ?? [] }.count)**", systemImage: "figure.run")
+                        Label("Total exercices: **\(trainings.done.flatMap { $0.exercises ?? [] }.count)**", systemImage: "dumbbell")
 
-                        ForEach(singleTrainings, id: \.persistentModelID) { training in
+                        ForEach(trainings.templates, id: \.persistentModelID) { training in
                             ChevronRowButton(title: training.title) {
                                 statisticsViewState.navPath.append(training)
                             }
@@ -85,10 +81,10 @@ struct StatisticsView: View {
 
 extension [Training] {
     var done: [Training] {
-        self.filter { !$0.sessions.isEmpty }
+        self.filter { !$0.isTemplate }
     }
 
     var templates: [Training] {
-        self.filter { $0.sessions.isEmpty }
+        self.filter(\.isTemplate)
     }
 }

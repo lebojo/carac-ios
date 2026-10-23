@@ -21,7 +21,7 @@ struct StatisticsTrainingView: View {
     let currentSession: SessionDraft?
 
     private var sessions: [Session] {
-        dataSessions.filter { $0.training.title == trainingTitle }
+        dataSessions.filter { $0.training?.title == trainingTitle }
     }
 
     private var sessionsCount: Int {
@@ -55,7 +55,6 @@ struct StatisticsTrainingView: View {
         let sorted = sessions.sorted { $0.date < $1.date }
         guard sorted.count > 1 else { return nil }
 
-        // Crée des paires (Session N, Session N+1)
         var changes = zip(sorted, sorted.dropFirst()).compactMap { prev, curr -> Double? in
             guard prev.totalWeightPulled > 0 else { return nil }
 

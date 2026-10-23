@@ -10,12 +10,8 @@ import SwiftData
 
 @MainActor let sampleMainViewState = MainViewState()
 
-// MARK: - Draft
-
 let sampleExerciseDraft = ExerciseDraft(name: "Curl series draft", weightSteps: 2, sets: [ExerciseSetDraft(id: 0)])
 let sampleTrainingDraft = TrainingDraft("Sample training draft", exercises: [sampleExerciseDraft])
-
-// MARK: - Model
 
 let sampleExercise = Exercise(name: "Curl series", weightSteps: 2, sets: [ExerciseSet(id: 0)])
 let sampleTraining = Training("Sample training", exercises: [sampleExercise])
@@ -47,7 +43,7 @@ class Faker {
             let exercisesCount = Int.random(in: 1...tmpTemplatesExercises.count)
             let emptyTraining = Training(title.1, exercises: [], repeatDays: [title.0])
 
-            modelContext.insert(emptyTraining) // Training and exercises in same context
+            modelContext.insert(emptyTraining)
 
             emptyTraining.exercises = tmpTemplatesExercises.shuffled().prefix(exercisesCount).map(\.self)
 
@@ -57,8 +53,6 @@ class Faker {
         templatesExercises = tmpTemplatesExercises
     }
 
-    /// Create a fake activity in the modelContext
-    /// With random sessions on randoms days
     func fakeAppActivity() {
         let 📅 = Calendar.current
         let today = 📅.startOfDay(for: Date())
@@ -72,7 +66,7 @@ class Faker {
             let trainings = templatesTrainings.filter { $0.repeatDays.contains(repeatDay.rawValue) }
 
             let fakeTrainings = trainings.map { training in
-                Training(training.title, exercises: training.exercises.map { exercise in
+                Training(training.title, exercises: (training.exercises ?? []).map { exercise in
                     Exercise(name: exercise.name, weightSteps: exercise.weightSteps, sets: [
                         ExerciseSet(id: 0, reps: 12, weight: exercise.weightSteps),
                         ExerciseSet(id: 1, reps: 12, weight: exercise.weightSteps * 2),

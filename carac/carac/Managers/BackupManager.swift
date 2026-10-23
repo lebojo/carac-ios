@@ -34,8 +34,7 @@ enum BackupManager {
     private static func importTemplates(_ source: [TrainingJTO], into modelContext: ModelContext) throws {
         guard !source.isEmpty else { return }
 
-        let existingTrainings = try modelContext.fetch(FetchDescriptor<Training>())
-        let templateTrainings = existingTrainings.filter { $0.sessions.isEmpty }
+        let templateTrainings = try modelContext.fetch(FetchDescriptor<Training>(predicate: Training.templatePredicate))
         let trainingsByTitle = Dictionary(templateTrainings.map { ($0.title, $0) }, uniquingKeysWith: { first, _ in first })
 
         let doneTrainings = try modelContext.fetch(FetchDescriptor<Training>(predicate: Training.donePredicate))
@@ -72,7 +71,7 @@ enum BackupManager {
         guard !source.isEmpty else { return }
 
         let existingSessions = try modelContext.fetch(FetchDescriptor<Session>())
-        var sessionKeys = Set(existingSessions.map { "\($0.date)_\($0.training.title)_\(String(format: "%.2f", $0.totalWeightPulled))" })
+        var sessionKeys = Set(existingSessions.map { "\($0.date)_\($0.training?.title ?? "")_\(String(format: "%.2f", $0.totalWeightPulled))" })
 
         for session in source {
             let sessionKey = "\(session.date)_\(session.training.name)_\(String(format: "%.2f", session.totalWeightPulled))"

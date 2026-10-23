@@ -17,7 +17,7 @@ struct ModifyAnExercise: View {
     @Bindable var exercise: Exercise
 
     private var trainings: [Training] {
-        allTrainings.filter { $0.exercises.contains { $0.name == exercise.name } }
+        allTrainings.filter { $0.exercises?.contains { $0.name == exercise.name } ?? false }
     }
 
     var body: some View {
@@ -32,7 +32,7 @@ struct ModifyAnExercise: View {
                         }
                         .multilineTextAlignment(.trailing)
                         .onChange(of: exercise.name) { oldValue, newValue in
-                            trainings.flatMap(\.exercises).forEach { exercise in
+                            trainings.flatMap { $0.exercises ?? [] }.forEach { exercise in
                                 guard exercise.name == oldValue else { return }
                                 exercise.name = newValue
                             }

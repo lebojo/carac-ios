@@ -17,11 +17,11 @@ struct StatisticsDateView: View {
     var body: some View {
         List {
             if sessions.count == 1, let firstSession = sessions.first {
-                forEachExercises(firstSession.training.exercises)
+                forEachExercises(firstSession.training?.exercises ?? [])
             } else {
                 ForEach(sessions) { session in
                     Section("\(session.date.formatted(.dateTime))") {
-                        forEachExercises(session.training.exercises)
+                        forEachExercises(session.training?.exercises ?? [])
                     }
                 }
             }

@@ -22,7 +22,7 @@ struct TrainingJTO: Codable, Hashable {
         self.init(
             name: training.title,
             repeatDays: training.repeatDays,
-            exercises: training.exercises.map { ExerciseJTO(from: $0) }
+            exercises: (training.exercises ?? []).map { ExerciseJTO(from: $0) }
         )
     }
 

@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - JTOs
-
 struct SessionJTO: Codable {
     let date: Date
     let training: TrainingJTO
@@ -18,10 +16,12 @@ struct SessionJTO: Codable {
         self.training = training
     }
 
-    init(from session: Session) {
+    init?(from session: Session) {
+        guard let training = session.training else { return nil }
+
         self.init(
             date: session.date,
-            training: TrainingJTO(from: session.training).noRepeatDays
+            training: TrainingJTO(from: training).noRepeatDays
         )
     }
 

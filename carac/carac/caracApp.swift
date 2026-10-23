@@ -16,28 +16,24 @@ struct caracApp: App {
     @StateObject var mainViewState = MainViewState()
 
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema(
-            [
-                Session.self,
-                Exercise.self,
-                ExerciseSet.self,
-                Training.self
-            ]
-        )
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: {
-                #if DEBUG
-                    true
-                #else
-                    false
-                #endif
-            }()
-        )
+        let schema = Schema(versionedSchema: CaracSchemaV2.self)
+        #if DEBUG
+            let modelConfiguration = ModelConfiguration(
+                schema: schema,
+                isStoredInMemoryOnly: true,
+                cloudKitDatabase: .none
+            )
+        #else
+            let modelConfiguration = ModelConfiguration(
+                schema: schema,
+                cloudKitDatabase: .automatic
+            )
+        #endif
 
         do {
             let container = try ModelContainer(
                 for: schema,
+                migrationPlan: CaracMigrationPlan.self,
                 configurations: [modelConfiguration]
             )
 

@@ -22,7 +22,7 @@ struct ExerciseJTO: Codable {
         self.init(
             name: exercise.name,
             weightSteps: exercise.weightSteps,
-            sets: exercise.sets.map { SetJTO(from: $0) }
+            sets: (exercise.sets ?? []).map { SetJTO(from: $0) }
         )
     }
 

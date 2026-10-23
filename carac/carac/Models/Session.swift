@@ -10,8 +10,8 @@ import SwiftData
 
 @Model
 final class Session {
-    var date: Date
-    @Relationship(deleteRule: .cascade) var training: Training
+    var date: Date = Date.now
+    @Relationship(deleteRule: .cascade) var training: Training?
 
     init(date: Date = .now, training: Training) {
         self.date = date
@@ -24,11 +24,16 @@ final class Session {
     }
 
     var totalWeightPulled: Double {
-        training.exercises.reduce(0) { $0 + $1.totalPulledWeight }
+        (training?.exercises ?? []).reduce(0) { $0 + $1.totalPulledWeight }
     }
 
     func update(with draft: SessionDraft) {
         date = draft.date
-        training.update(with: draft.training)
+
+        if let training {
+            training.update(with: draft.training)
+        } else {
+            training = Training(from: draft.training)
+        }
     }
 }
