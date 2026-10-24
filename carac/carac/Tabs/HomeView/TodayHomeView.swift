@@ -28,7 +28,7 @@ struct TodayHomeView: View {
     }
 
     var body: some View {
-        if !trainings.isEmpty {
+        if !trainings.isEmpty || !todaySessions.isEmpty {
             Section("Today") {
                 ForEach(todaySessions, id: \.persistentModelID) { todaySession in
                     Button("Modify \(todaySession.training?.title ?? "") at \(todaySession.date.twoDigitsHour)", systemImage: "pencil") {
