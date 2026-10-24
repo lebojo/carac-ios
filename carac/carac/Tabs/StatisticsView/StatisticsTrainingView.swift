@@ -11,7 +11,7 @@ import SwiftUI
 struct StatisticsTrainingView: View {
     @Environment(\.modelContext) private var modelContext
 
-    @Query private var dataSessions: [Session]
+    @Query(sort: \Session.date) private var dataSessions: [Session]
 
     @State private var isShowingConfirmation: Bool = false
     @State private var sessionToDelete: Session? = nil

@@ -24,7 +24,7 @@ struct TodayHomeView: View {
 
         _todaySessions = Query(filter: #Predicate<Session> { session in
             session.date >= start && session.date < end
-        })
+        }, sort: \.date)
     }
 
     var body: some View {
