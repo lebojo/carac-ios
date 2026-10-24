@@ -9,11 +9,10 @@ import SwiftUI
 
 struct CaracListStyleModifier: ViewModifier {
     @Environment(\.colorScheme) private var colorScheme
-    @AppStorage("tintColor") var tintColor = "#007AFF"
 
     func body(content: Content) -> some View {
         content
-            .background(colorScheme == .dark ? nil : Color(hex: tintColor)?.opacity(0.05).ignoresSafeArea())
+            .background(colorScheme == .dark ? nil : Color.accentColor.opacity(0.05).ignoresSafeArea())
     }
 }
 
