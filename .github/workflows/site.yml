@@ -1,0 +1,59 @@
+name: Deploy website to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["Site/**", ".github/workflows/site.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: Site
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Site/package-lock.json
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://carac.jordan-chap.com/
+      - name: Publish static files to gh-pages
+        run: |
+          touch out/.nojekyll
+          pages="$RUNNER_TEMP/pages"
+          if git fetch origin gh-pages; then
+            git worktree add --detach "$pages" FETCH_HEAD
+          else
+            git worktree add --detach "$pages"
+            git -C "$pages" checkout --orphan gh-pages
+            git -C "$pages" rm -rf --quiet .
+          fi
+          rsync -a --delete --exclude='.git' out/ "$pages/"
+          git -C "$pages" config user.name 'github-actions[bot]'
+          git -C "$pages" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$pages" add -A
+          if ! git -C "$pages" diff --cached --quiet; then
+            git -C "$pages" commit -m "Publish site from ${GITHUB_SHA}"
+            git -C "$pages" push origin HEAD:gh-pages
+          fi
+      - name: Request Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" \
+            || echo "::warning::Pages build request failed. Enable GitHub Pages on the gh-pages branch in the repository settings."

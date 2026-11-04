@@ -1,0 +1,65 @@
+{
+  "name": "carac-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Carac, a strength training log for iPhone and iPad",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "node ./scripts/add_directory_indexes.mjs out",
+    "start": "next start",
+    "lint": "eslint ./app ./src --ext .ts,.tsx,.js,.jsx",
+    "take-og-snapshot": "node ./scripts/take_og_snapshot.mjs",
+    "generate-favicon": "node ./scripts/generate_favicon.mjs",
+    "import-screenshots": "node ./scripts/import_screenshots.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lebojo/carac-ios.git",
+    "directory": "Site"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/lebojo/carac-ios/issues"
+  },
+  "homepage": "https://carac.jordan-chap.com/",
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "16.3.4",
+    "@plausible-analytics/tracker": "^0.4.4",
+    "@telemetrydeck/sdk": "^2.0.4",
+    "@types/mdx": "^2.0.13",
+    "@vercel/analytics": "^1.6.1",
+    "chroma-js": "^3.2.0",
+    "next": "16.3.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^5.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@svgr/webpack": "8.1.0",
+    "@types/chroma-js": "^3.1.2",
+    "@types/node": "25.3.5",
+    "@types/react": "19.3.0",
+    "baseline-browser-mapping": "^2.10.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.4",
+    "sharp": "^0.35.4",
+    "typescript": "5.9.3"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not op_mini all",
+    "last 2 versions",
+    "not dead"
+  ],
+  "overrides": {
+    "@types/react": "19.3.0"
+  }
+}

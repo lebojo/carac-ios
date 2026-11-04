@@ -1,0 +1,115 @@
+.hero {
+	--media-min-height: 640px;
+
+	max-width: var(--base-width);
+	display: grid;
+	grid-template-columns: 1fr 310px;
+	grid-template-rows: minmax(var(--media-min-height), 1fr);
+	grid-template-areas: "content video";
+	gap: 80px;
+	padding: 0px 100px 0 60px;
+	margin-bottom: 40px;
+}
+
+.content {
+	grid-area: content;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	padding-bottom: 40px;
+
+	.title {
+		font-size: 66px;
+		line-height: 1.03;
+		font-weight: 900;
+
+		&.whimsical {
+			font-size: 92px;
+		}
+
+		&.cursive {
+			font-size: 88px;
+		}
+	}
+
+	.subtitle {
+		font-size: 26px;
+		line-height: 1.1;
+		font-weight: 300;
+		margin-top: 16px;
+	}
+
+	.action {
+		width: 100%;
+		margin-top: 32px;
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		gap: 16px;
+	}
+}
+
+.media {
+	display: flex;
+	align-items: center;
+	grid-area: video;
+	width: 100%;
+	max-width: 310px;
+	min-height: var(--media-min-height);
+}
+
+.badges {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 24px;
+	row-gap: 50px;
+	margin-bottom: 32px;
+}
+
+@container root (width < 768px) {
+	.hero {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto minmax(var(--media-min-height), auto);
+		grid-template-areas:
+			"content"
+			"video";
+		gap: 40px;
+		padding: 0 30px;
+	}
+
+	.content {
+		padding: 0 20px;
+		align-items: center;
+		text-align: center;
+
+		.title {
+			font-size: 52px;
+
+			&.whimsical {
+				font-size: 72px;
+			}
+
+			&.cursive {
+				font-size: 68px;
+			}
+		}
+
+		.subtitle {
+			font-size: 20px;
+		}
+
+		.action {
+			align-items: center;
+		}
+	}
+
+	.media {
+		justify-self: center;
+	}
+
+	.badges {
+		justify-content: center;
+	}
+}

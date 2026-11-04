@@ -1,0 +1,209 @@
+.overlaidCard {
+  position: relative;
+  display: flex;
+
+  &.leading {
+    align-items: center;
+    justify-content: start;
+    text-align: start;
+  }
+
+  &.center {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &.trailing {
+    align-items: center;
+    justify-content: end;
+    text-align: end;
+  }
+
+  &.topLeading {
+    align-items: start;
+    justify-content: start;
+    text-align: start;
+  }
+
+  &.topCenter {
+    align-items: start;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &.topTrailing {
+    align-items: start;
+    justify-content: end;
+    text-align: end;
+  }
+
+  &.bottomLeading {
+    align-items: end;
+    justify-content: start;
+    text-align: start;
+  }
+
+  &.bottomCenter {
+    align-items: end;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &.bottomTrailing {
+    align-items: end;
+    justify-content: end;
+    text-align: end;
+  }
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  padding: 30px;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.1s ease 0.3s;
+
+  --overlaid-card-text-backdrop-color: #000000;
+  color: #ffffff;
+
+  &.darkBackgroundImage {
+    --overlaid-card-text-backdrop-color: color-mix(in srgb, var(--color-fill-1) 20%, #000000);
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  &.lightBackgroundImage {
+    --overlaid-card-text-backdrop-color: color-mix(in srgb, var(--color-fill-1) 80%, #ffffff);
+    color: #000000;
+    opacity: 1;
+  }
+
+  &.bottomLeading,
+  &.bottomCenter,
+  &.bottomTrailing {
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 110%;
+      background-color: var(--overlaid-card-text-backdrop-color);
+      mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 90%
+      );
+      z-index: -1;
+			opacity: 0.8;
+    }
+  }
+
+  &.topLeading,
+  &.topCenter,
+  &.topTrailing {
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 110%;
+      background-color: var(--overlaid-card-text-backdrop-color);
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 90%
+      );
+      z-index: -1;
+			opacity: 0.8;
+    }
+  }
+}
+
+
+@container root style(--color-scheme: dark) {
+  .text {
+    &.darkBackgroundImage {
+      --overlaid-card-text-backdrop-color: color-mix(in srgb, var(--color-fill-1) 85%, #000000);
+    }
+
+    &.lightBackgroundImage {
+      --overlaid-card-text-backdrop-color: color-mix(in srgb, var(--color-fill-1) 15%, #ffffff);
+    }
+  }
+}
+
+.title {
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 800;
+
+  &.whimsical {
+    font-size: 32px;
+  }
+
+  &.cursive {
+    font-size: 30px;
+  }
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.15;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+@container mediaCard (width >= 580px) {
+  .text {
+    .title {
+      font-size: 44px;
+      font-weight: 900;
+
+      &.whimsical {
+        font-size: 52px;
+      }
+
+      &.cursive {
+        font-size: 50px;
+      }
+    }
+
+    .description {
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    &.topLeading,
+    &.bottomLeading {
+      padding-right: 30%;
+    }
+
+    &.topTrailing,
+    &.bottomTrailing {
+      padding-left: 30%;
+    }
+
+    &.center,
+    &.topCenter,
+    &.bottomCenter {
+      padding-left: 20%;
+      padding-right: 20%;
+    }
+  }
+}

@@ -1,0 +1,76 @@
+.instructions {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 2rem 0 0.75rem;
+  }
+
+  h1 {
+    font-size: clamp(32px, 4vw, 50px);
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 2vw, 1.9rem);
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    font-size: 1.1rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  p {
+    margin: 26px 0;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0 1rem 1.5rem;
+    padding: 0;
+  }
+
+  li + li {
+    margin-top: 0.4rem;
+  }
+
+  a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: opacity 150ms ease-in-out;
+  }
+
+  a:hover {
+    opacity: 0.6;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 14px;
+    background: #F2F2F7;
+    border-radius: 3px;
+    padding: 2px 6px;
+  }
+}

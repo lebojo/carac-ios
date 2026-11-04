@@ -1,0 +1,28 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin: 40px 0;
+}
+
+.button {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background-color: var(--color-accent-brand);
+  color: var(--color-text-accent-brand);
+  font-weight: 400;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: transparent;
+  border: 1px solid var(--color-accent-brand);
+  color: var(--color-accent-brand);
+}

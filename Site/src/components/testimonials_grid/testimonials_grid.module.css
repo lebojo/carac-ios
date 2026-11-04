@@ -1,0 +1,27 @@
+.testimonialsGrid {
+  --column-gap: 70px;
+  --column-width: calc(
+    (100% - var(--column-gap) * (var(--column-count) - 1)) / var(--column-count)
+  );
+
+  max-width: var(--base-width);
+  display: grid;
+  grid-template-columns: repeat(var(--column-count), var(--column-width));
+  column-gap: var(--column-gap);
+  row-gap: 80px;
+  padding: 0 30px;
+
+  margin: 28px 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+@container root (width < 768px) {
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
+}

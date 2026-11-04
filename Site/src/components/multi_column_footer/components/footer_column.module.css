@@ -1,0 +1,27 @@
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 14px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  text-decoration: none;
+  opacity: 1.0;
+  transition: opacity 0.05s ease-in-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,63 @@
+.actionButton {
+  &:link,
+  &:visited {
+    display: block;
+    color: var(--color-text-accent-brand);
+    background-color: var(--color-accent-brand);
+    border-radius: 999px;
+    border: none;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  .label {
+    position: relative;
+    left: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .actionLabel {
+    font-weight: 500;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &.small {
+    padding: 8px 18px;
+
+		.label {
+			gap: 8px;
+		}
+
+    .actionLabel {
+      font-size: 16px;
+    }
+  }
+
+  &.medium {
+    padding: 10px 20px;
+
+		.label {
+			gap: 8px;
+		}
+
+    .actionLabel {
+      font-size: 18px;
+    }
+  }
+
+  &.large {
+    padding: 14px 26px;
+
+		.label {
+			gap: 10px;
+		}
+
+    .actionLabel {
+      font-size: 22px;
+    }
+  }
+}

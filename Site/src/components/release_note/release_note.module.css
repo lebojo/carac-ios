@@ -1,0 +1,18 @@
+.releaseNote {
+  scroll-margin-top: 150px;
+
+  .publishDate {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    margin-top: 0;
+  }
+}
+
+.releaseNote:first-of-type,
+.releaseNote + .releaseNote {
+  margin-top: 60px;
+}

@@ -1,0 +1,23 @@
+.icon {
+  &.small {
+    font-size: 18px;
+  }
+
+  &.medium {
+    font-size: 24px;
+  }
+
+  &.large {
+    font-size: 36px;
+  }
+}
+
+.iconOutlined {
+  font-size: inherit;
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 30;
+}
+
+.iconFilled {
+  font-size: inherit;
+  font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 30;
+}

@@ -1,0 +1,61 @@
+.multiColumnFooter {
+  width: 100%;
+  max-width: var(--base-width);
+  padding: 0 20px;
+  margin-bottom: 40px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 16px;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 64px 48px 32px;
+  background-color: var(--color-fill-2);
+  border-radius: 32px;
+}
+
+.linkColumns {
+  display: flex;
+  gap: 64px;
+}
+
+.footnotes {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 32px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+
+  a {
+    text-decoration: underline;
+    transition: color 0.05s ease-in-out;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+}
+
+@container root (width < 768px) {
+  .main {
+    flex-direction: column;
+    padding: 32px 32px 48px 32px;
+    gap: 48px;
+  }
+
+  .linkColumns {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footnotes {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 0;
+    text-align: center;
+  }
+}

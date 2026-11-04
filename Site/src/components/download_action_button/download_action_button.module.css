@@ -1,0 +1,86 @@
+.downloadActionButton {
+  &:link,
+  &:visited {
+    display: block;
+    color: var(--color-text-accent-brand);
+    background-color: var(--color-accent-brand);
+    border-radius: 999px;
+    border: none;
+    transition: transform 0.15s ease-in-out;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  .label {
+    position: relative;
+    left: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .appleLogo {
+    position: relative;
+    top: -1px;
+  }
+
+  .downloadLabel {
+    font-weight: 500;
+  }
+
+  &.small {
+    padding: 8px 18px;
+
+    .label {
+      gap: 8px;
+    }
+
+    .downloadLabel {
+      font-size: 16px;
+    }
+  }
+
+  &.medium {
+    padding: 10px 20px;
+
+    .label {
+      gap: 8px;
+    }
+
+    .downloadLabel {
+      font-size: 18px;
+    }
+  }
+
+  &.large {
+    padding: 14px 26px;
+
+    .label {
+      gap: 10px;
+    }
+
+    .downloadLabel {
+      font-size: 22px;
+    }
+  }
+}
+
+@container root (width < 768px) {
+  .downloadActionButton.collapsesLabel {
+    padding: 9px 11px;
+
+    .label {
+      left: 0;
+    }
+
+    .downloadLabel {
+      display: none;
+    }
+  }
+}

@@ -22,6 +22,18 @@ Carac exists to make sports tracking simple, intuitive, and accessible. Built wi
 
 You can test it here: [TestFlight](https://testflight.apple.com/join/cnudJaMH)
 
+# Repository Layout
+
+This repository is a monorepo:
+
+| Folder | Content |
+| --- | --- |
+| `carac/` | The iOS and iPadOS app (Xcode project) |
+| `Site/` | The website, a Next.js static export built on the licensed [AppView](https://appview.dev) template, deployed to GitHub Pages by `.github/workflows/site.yml` |
+| `AppStore/` | App Store listing: metadata, screenshots and the iOS 27 header and search results creatives |
+
+`Site/` and `AppStore/` live outside the `carac/carac` synchronized folder, so Xcode never compiles them, and the iOS build workflow ignores changes to them.
+
 # Developer Usage
 
 ## Prerequisites

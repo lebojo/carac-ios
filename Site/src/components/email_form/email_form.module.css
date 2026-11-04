@@ -1,0 +1,256 @@
+.emailForm {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.controls {
+  --offset: 10px;
+
+  position: relative;
+  left: calc(var(--offset) * -1);
+  width: calc(100% + var(--offset));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+
+  &.invalid {
+    animation: shake 0.32s ease;
+  }
+}
+
+.defaultHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  color: var(--color-text);
+
+  .appleLogo {
+    position: relative;
+    top: -1px;
+  }
+}
+
+.footer {
+  font-size: 14px;
+  display: grid;
+  position: relative;
+}
+
+.footerMessage {
+  grid-area: 1 / 1;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition-delay: 0.5s;
+  text-align: start;
+}
+
+.footerPrimary {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--color-text-secondary);
+}
+
+.footerSecondary {
+  opacity: 0;
+  transform: translateY(6px);
+  color: var(--color-text);
+}
+
+.footerError {
+  opacity: 0;
+  transform: translateY(6px);
+  color: var(--color-accent-orange);
+}
+
+.footer.sent {
+  .footerPrimary {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  .footerSecondary {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer.error {
+  .footerMessage {
+    transition-delay: 0s;
+  }
+
+  .footerPrimary,
+  .footerSecondary {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  .footerError {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emailInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-fill-0);
+  border: 1px solid var(--color-fill-0);
+  box-shadow: inset 0 0 20px var(--color-fill-0),
+    0 4px 48px 0 color(display-p3 0 0 0 / 0.06);
+  border-radius: 999px;
+  padding: 0 46px 0 24px;
+  font-size: 16px;
+  font-weight: 400;
+  transition: border-color 0.25s ease-out;
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent-brand);
+  }
+}
+
+.sendButton {
+  --icon-size: 26px;
+
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-brand);
+  color: var(--color-text-accent-brand);
+  border-radius: 999px;
+  cursor: default;
+  overflow: hidden;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sendIcon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  font-size: var(--icon-size);
+  line-height: var(--icon-size);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 7px;
+  left: 10.5px;
+  transform: rotate(-35deg);
+  transform-origin: center;
+  cursor: default;
+}
+
+.checkIcon {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  font-size: var(--icon-size);
+  line-height: var(--icon-size);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.sent .sendIcon {
+  animation: planeFly 1.35s cubic-bezier(0.25, 0.8, 0.35, 1) forwards;
+}
+
+.sent .checkIcon {
+  animation: checkReveal 0.4s ease-out 0.25s forwards;
+}
+
+@keyframes planeFly {
+  0% {
+    transform: translate(0, 0) rotate(-35deg);
+    filter: blur(0px);
+  }
+  12% {
+    transform: translate(-8px, 6px) rotate(-35deg);
+    filter: blur(0px);
+  }
+  100% {
+    transform: translate(140px, -90px) scale(1.06) rotate(-35deg);
+    filter: blur(4px);
+  }
+}
+
+@keyframes checkReveal {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(0.4);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@container root (width < 768px) {
+  .emailForm {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footerMessage {
+    text-align: center;
+  }
+}
+
+@container root style(--color-scheme: dark) {
+  .emailInput {
+    background-color: color-mix(in srgb, var(--color-fill-3) 70%, transparent);
+		border: 1px solid var(--color-fill-3);
+    box-shadow: inset 0 0 25px var(--color-fill-3);
+  }
+}

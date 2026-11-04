@@ -1,0 +1,37 @@
+.ogBuilder {
+  --content-max-width: calc(1280px * 0.5 - 60px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: white;
+  color: #000000;
+}
+
+.preview {
+  --preview-scale-factor: 0.5;
+
+  position: relative;
+  width: calc(1280px * var(--preview-scale-factor));
+  height: calc(720px * var(--preview-scale-factor));
+  overflow: hidden;
+}
+
+
+.sectionTitle {
+  width: 100%;
+  max-width: var(--content-max-width);
+  font-size: 18px;
+  font-weight: 800;
+  margin: 80px 0 16px 0;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+
+.instructions {
+  width: 100%;
+  max-width: var(--content-max-width);
+}

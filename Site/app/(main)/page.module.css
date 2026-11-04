@@ -1,0 +1,34 @@
+.waitlistSpacer {
+  flex-grow: 1;
+}
+
+.storeButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.betaNote {
+  margin-top: 16px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+.previewCrop {
+  display: block;
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 20px 20px 0;
+}
+
+.previewCrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 18px 18px 0 0;
+}

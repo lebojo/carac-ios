@@ -1,0 +1,206 @@
+.content {
+  container-name: stackedCardContent;
+  container-type: style;
+
+  display: grid;
+
+  height: 100%;
+  width: 100%;
+
+  &.forward {
+    --media-position: top;
+
+    grid-template-rows: 3fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "text";
+  }
+
+  &.reverse {
+    --media-position: bottom;
+
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "text"
+      "media";
+  }
+
+  .media {
+    position: relative;
+    z-index: 0;
+    grid-area: media;
+  }
+
+  .text {
+    position: relative;
+    z-index: 1;
+    grid-area: text;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    .textContent {
+      text-align: start;
+    }
+
+    &.center {
+      align-items: center;
+      justify-content: center;
+
+      .textContent {
+        text-align: center;
+      }
+    }
+
+    &.trailing {
+      align-items: center;
+      justify-content: end;
+
+      .textContent {
+        text-align: end;
+      }
+    }
+
+    .title {
+      font-size: 24px;
+      line-height: 1.1;
+      font-weight: 700;
+
+      &.whimsical {
+        font-size: 32px;
+      }
+
+      &.cursive {
+        font-size: 30px;
+      }
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 500;
+      margin-top: 6px;
+    }
+  }
+}
+
+@container mediaCard (420px <= width < 580px) {
+  .content {
+    .text {
+      &.leading {
+        padding: 30px 120px 30px 30px;
+      }
+
+      &.center {
+        padding: 30px 60px;
+      }
+
+      &.trailing {
+        padding: 30px 30px 30px 120px;
+      }
+
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+
+        &.whimsical {
+          font-size: 44px;
+        }
+
+        &.cursive {
+          font-size: 42px;
+        }
+      }
+    }
+  }
+}
+
+@container mediaCard (width >= 580px) {
+  .content {
+    &.forward {
+      --media-position: leading;
+
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "media text";
+
+      .text {
+        padding: 40px 40px 40px 30px;
+      }
+    }
+
+    &.reverse {
+      --media-position: trailing;
+
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "text media";
+
+      .text {
+        padding: 40px 30px 40px 40px;
+      }
+    }
+
+    .text {
+      align-items: start;
+      justify-content: start;
+
+      .textContent {
+        text-align: start;
+      }
+
+      &.center {
+        align-items: center;
+        justify-content: start;
+
+        .textContent {
+          text-align: start;
+        }
+      }
+
+      &.trailing {
+        align-items: end;
+        justify-content: start;
+
+        .textContent {
+          text-align: start;
+        }
+      }
+
+      .title {
+        font-size: 44px;
+        font-weight: 900;
+
+        &.whimsical {
+          font-size: 52px;
+        }
+
+        &.cursive {
+          font-size: 50px;
+        }
+      }
+
+      .description {
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+@container mediaCard (width >= 700px) {
+  .content {
+    &.forward {
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas: "media text";
+    }
+    &.reverse {
+      grid-template-columns: 1fr 2fr;
+      grid-template-areas: "text media";
+    }
+  }
+}

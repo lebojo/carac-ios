@@ -1,0 +1,72 @@
+.openGraphPreview {
+	position: absolute;
+	top: 0;
+	left: 0;
+  width: 1280px;
+  height: 720px;
+  display: grid;
+  grid-template-columns: auto 640px;
+  grid-template-rows: 720px;
+  overflow: hidden;
+  background-color: var(--color-fill-1);
+  color: var(--color-text-primary);
+	border-radius: 32px;
+	transform-origin: top left;
+	transform: scale(var(--preview-scale-factor));
+}
+
+@supports (corner-shape: squircle) {
+	.openGraphPreview {
+		border-radius: 64px;
+		corner-shape: squircle;
+	}
+}
+
+.content {
+  padding: 80px 40px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+}
+
+.icon {
+}
+
+.title {
+  font-size: 78px;
+  line-height: 1.1;
+  font-weight: 700;
+
+  &.whimsical {
+    font-size: 94px;
+  }
+
+  &.cursive {
+    font-size: 90px;
+  }
+}
+
+.screenshot {
+  width: 100%;
+  height: 100%;
+}
+
+.screenshotCanvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 60px 60px 60px 0;
+
+  &.croppedTop {
+    object-position: top;
+    padding-top: 0;
+  }
+
+  &.croppedBottom {
+    object-position: bottom;
+    padding-bottom: 0;
+  }
+}

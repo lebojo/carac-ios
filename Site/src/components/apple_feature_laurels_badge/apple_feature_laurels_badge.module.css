@@ -1,0 +1,14 @@
+.header {
+  position: relative;
+  top: -3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: bold;
+  padding-right: 3px;
+}
+
+.featureName {
+  font-size: 14px;
+  font-weight: 400;
+}

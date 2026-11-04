@@ -1,0 +1,35 @@
+.heroImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.imageCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.shadow {
+  position: absolute;
+  z-index: 0;
+  bottom: calc(-7px + var(--bottom-offset));
+  left: 0;
+  opacity: 0;
+  animation: shadowFadeIn 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes shadowFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

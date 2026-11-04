@@ -1,0 +1,25 @@
+.appIcon {
+  position: relative;
+
+  &.grayscale {
+    filter: grayscale(100%);
+  }
+}
+
+.mask {
+  mask: url('/app_view/app_icon_mask.svg') center/contain no-repeat;
+}
+
+.tintOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-accent-brand);
+  opacity: 1.0;
+  pointer-events: none;
+  border-radius: inherit;
+  mix-blend-mode: hue;
+  mask: url('/app_view/app_icon_mask.svg') center/contain no-repeat;
+}
