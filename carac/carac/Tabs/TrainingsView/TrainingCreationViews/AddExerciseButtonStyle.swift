@@ -19,7 +19,7 @@ struct ExerciseButtonStyle: ButtonStyle {
             .buttonStyle(.plain)
             .frame(maxWidth: .infinity)
             .padding()
-            .foregroundStyle(.white)
+            .foregroundStyle(isActive ? Color.white : Color.primary)
             .background(isActive ? .green : .accentColor.opacity(0.2))
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 16))
