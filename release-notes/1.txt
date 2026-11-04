@@ -1,0 +1,100 @@
+1:"$Sreact.fragment"
+2:I[39756,["/_next/static/chunks/2e2n0wy891_-d.js"],"default"]
+3:I[37457,["/_next/static/chunks/2e2n0wy891_-d.js"],"default"]
+c:I[68027,[],"default",1]
+:HL["/_next/static/chunks/27_029j33cmrj.css","style"]
+:HL["/_next/static/chunks/1njxyva9nlkso.css","style"]
+:HL["/_next/static/media/406d3fc8d5ec9f59-s.p.0mnr43et3sf34.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/a85fe84266768609-s.p.0h6ig86gwutp4.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/chunks/0g5639ftkj1rq.css","style"]
+4:Ta8d,
+      :root,
+      :root[data-theme="light"] {
+        color-scheme: light;
+        --color-scheme: light;
+        --color-text-primary: oklch(19.99% 0.01 153.84deg);
+--color-text-secondary: oklch(48.08% 0.02 157.72deg);
+--color-fill-0: oklch(100% 0 none);
+--color-fill-1: oklch(97.85% 0.01 154.89deg);
+--color-fill-2: oklch(94.79% 0.02 154.8deg);
+--color-fill-3: oklch(90.14% 0.03 155.87deg);
+--color-accent-brand: oklch(73.03% 0.19 147.44deg);
+--color-accent-orange: oklch(75.33% 0.17 55.71deg);
+--color-accent-green: oklch(73.03% 0.19 147.44deg);
+--color-accent-red: oklch(65.42% 0.23 28.66deg);
+--color-accent-blue: oklch(60.27% 0.22 257.42deg);
+--color-accent-indigo: oklch(52.94% 0.19 278.34deg);
+--color-accent-mint: oklch(74.81% 0.13 189.02deg);
+--color-accent-purple: oklch(61.49% 0.21 312.42deg);
+--color-accent-pink: oklch(64.97% 0.24 17.9deg);
+--color-text-accent-brand: oklch(100% 0 none);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --color-scheme: dark;
+          --color-text-primary: oklch(100% 0 none);
+--color-text-secondary: oklch(94.3% 0.01 286.23deg / 0.6);
+--color-fill-0: oklch(0% 0 none);
+--color-fill-1: oklch(0% 0 none);
+--color-fill-2: oklch(22.73% 0 286.17deg);
+--color-fill-3: oklch(29.39% 0 286.28deg);
+--color-accent-brand: oklch(75.55% 0.21 146.98deg);
+--color-accent-orange: oklch(76.19% 0.17 57.05deg);
+--color-accent-green: oklch(75.55% 0.21 146.98deg);
+--color-accent-red: oklch(66.33% 0.22 28.29deg);
+--color-accent-blue: oklch(62.42% 0.21 255.48deg);
+--color-accent-indigo: oklch(55.64% 0.2 278.15deg);
+--color-accent-mint: oklch(85.14% 0.11 192.43deg);
+--color-accent-purple: oklch(65.6% 0.23 312.43deg);
+--color-accent-pink: oklch(65.77% 0.23 16.02deg);
+--color-text-accent-brand: oklch(100% 0 none);
+        }
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --color-scheme: dark;
+        --color-text-primary: oklch(100% 0 none);
+--color-text-secondary: oklch(94.3% 0.01 286.23deg / 0.6);
+--color-fill-0: oklch(0% 0 none);
+--color-fill-1: oklch(0% 0 none);
+--color-fill-2: oklch(22.73% 0 286.17deg);
+--color-fill-3: oklch(29.39% 0 286.28deg);
+--color-accent-brand: oklch(75.55% 0.21 146.98deg);
+--color-accent-orange: oklch(76.19% 0.17 57.05deg);
+--color-accent-green: oklch(75.55% 0.21 146.98deg);
+--color-accent-red: oklch(66.33% 0.22 28.29deg);
+--color-accent-blue: oklch(62.42% 0.21 255.48deg);
+--color-accent-indigo: oklch(55.64% 0.2 278.15deg);
+--color-accent-mint: oklch(85.14% 0.11 192.43deg);
+--color-accent-purple: oklch(65.6% 0.23 312.43deg);
+--color-accent-pink: oklch(65.77% 0.23 16.02deg);
+--color-text-accent-brand: oklch(100% 0 none);
+      }
+    a:X
+0:{"P":null,"c":["","release-notes","1"],"q":"","i":false,"f":[[["",{"children":["(main)",{"children":["release-notes",{"children":[["page","1","d",["content"]],{"children":["__PAGE__",{},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4624]},"$undefined","$undefined",4624],[["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/27_029j33cmrj.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/1njxyva9nlkso.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/0ja5-7tedjp30.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-theme":"system","children":[["$","head",null,{"children":[false,["$","link",null,{"rel":"icon","href":"/favicon.png","type":"image/png","sizes":"48x48"}],["$","style",null,{"children":"$4"}],"$L5"]}],"$L6"]}]]}],{"children":["$L7",{"children":["$L8",{"children":["$L9",{},null,false,null]},null,false,"$a"]},null,false,"$a"]},null,false,null]},null,false,"$a"],"$Lb",false]],"m":"$undefined","G":["$c",[]],"S":true,"h":null,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"yLF_MikEmTTbfVY8Cv-oy"}
+d:I[2913,["/_next/static/chunks/0ja5-7tedjp30.js"],"ThemeProvider"]
+e:I[805,["/_next/static/chunks/0ja5-7tedjp30.js"],"Navbar"]
+f:I[70417,["/_next/static/chunks/0ja5-7tedjp30.js"],"AppIcon"]
+14:I[97367,["/_next/static/chunks/2e2n0wy891_-d.js"],"OutletBoundary"]
+15:"$Sreact.suspense"
+17:I[97367,["/_next/static/chunks/2e2n0wy891_-d.js"],"ViewportBoundary"]
+19:I[97367,["/_next/static/chunks/2e2n0wy891_-d.js"],"MetadataBoundary"]
+:HL["https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0..1,0&icon_names=check_circle,cloud_sync,contrast,favorite,lock,mail,open_in_full,open_in_new,pause,play_arrow,save,send,star,target,translate","style"]
+5:["$","link",null,{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0..1,0&icon_names=check_circle,cloud_sync,contrast,favorite,lock,mail,open_in_full,open_in_new,pause,play_arrow,save,send,star,target,translate"}]
+6:["$","body",null,{"children":["$","$Ld",null,{"children":[["$","$Le",null,{"icon":["$","$Lf",null,{"src":"/app-icon.png"}],"appName":"Carac","links":[{"label":"Features","href":"#features"},{"label":"Release Notes","href":"/release-notes"},{"label":"Developer","href":"https://jordan-chap.com","external":true}],"action":["$","a",null,{"href":"https://testflight.apple.com/join/cnudJaMH","className":"download_action_button-module__bT0Qaa__downloadActionButton download_action_button-module__bT0Qaa__small ","target":"_blank","aria-label":"$undefined","children":["$","div",null,{"className":"download_action_button-module__bT0Qaa__label","children":[["$","div",null,{"className":"download_action_button-module__bT0Qaa__appleLogo","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":18,"height":18,"fill":"currentColor","viewBox":"0 0 16 16","children":[["$","path",null,{"d":"M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"}],["$","path",null,{"d":"M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"}]]}]}],["$","div",null,{"className":"download_action_button-module__bT0Qaa__downloadLabel","children":"TestFlight"}]]}]}]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","footer",null,{"className":"compact_footer-module__i1N2Ta__compactFooter","children":[["$","div",null,{"className":"compact_footer-module__i1N2Ta__main","children":[["$","div",null,{"className":"$undefined","aria-hidden":"true","children":["$","$Lf",null,{"src":"/app-icon.png"}]}],["$","div",null,{"className":"compact_footer-module__i1N2Ta__links","children":["$","ul",null,{"className":"compact_footer-module__i1N2Ta__links","children":[["$","li","/policy",{"children":["$","a",null,{"href":"/policy","className":"compact_footer-module__i1N2Ta__link","target":"_self","rel":"$undefined","children":"Privacy Policy"}]}],["$","li","/terms",{"children":["$","a",null,{"href":"/terms","className":"compact_footer-module__i1N2Ta__link","target":"_self","rel":"$undefined","children":"Terms of Use"}]}],["$","li","/release-notes",{"children":["$","a",null,{"href":"/release-notes","className":"compact_footer-module__i1N2Ta__link","target":"_self","rel":"$undefined","children":"Release Notes"}]}],"$L10","$L11"]}]}]]}],"$L12"]}]]}]}]
+7:["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+8:["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+9:["$","$1","c",{"children":["$L13",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0g5639ftkj1rq.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]]}]
+b:["$","$1","h",{"children":[null,["$","$L17",null,{"children":"$L18"}],["$","div",null,{"hidden":true,"children":["$","$L19",null,{"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1a"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+a:C
+10:["$","li","https://github.com/lebojo/carac-ios",{"children":["$","a",null,{"href":"https://github.com/lebojo/carac-ios","className":"compact_footer-module__i1N2Ta__link","target":"_blank","rel":"noopener noreferrer","children":"Source Code"}]}]
+11:["$","li","https://jordan-chap.com",{"children":["$","a",null,{"href":"https://jordan-chap.com","className":"compact_footer-module__i1N2Ta__link","target":"_blank","rel":"noopener noreferrer","children":"Developer"}]}]
+12:["$","div",null,{"className":"compact_footer-module__i1N2Ta__footnotes","children":[["$","div",null,{"className":"$undefined","children":"© 2026 Jordan Chapelle."}],["$","div",null,{"className":"$undefined","children":["Website is built with"," ",["$","a",null,{"target":"_blank","href":"https://appview.dev","children":"AppView"}]]}]]}]
+18:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+16:null
+1a:[["$","title","0",{"children":"Release Notes | Carac"}],["$","meta","1",{"name":"description","content":"What's new in each version of Carac."}],["$","meta","2",{"property":"og:title","content":"Carac"}],["$","meta","3",{"property":"og:description","content":"Carac is a free strength training log for iPhone and iPad. Plan your trainings by weekday, log every set in seconds and watch your progress."}],["$","meta","4",{"property":"og:url","content":"https://carac.jordan-chap.com"}],["$","meta","5",{"property":"og:image","content":"https://carac.jordan-chap.com/og-preview.png"}],["$","meta","6",{"property":"og:image:width","content":"1280"}],["$","meta","7",{"property":"og:image:height","content":"720"}],["$","meta","8",{"property":"og:image:alt","content":"Carac, a strength training log for iPhone and iPad"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","11",{"name":"twitter:title","content":"Carac"}],["$","meta","12",{"name":"twitter:description","content":"Carac is a free strength training log for iPhone and iPad. Plan your trainings by weekday, log every set in seconds and watch your progress."}],["$","meta","13",{"name":"twitter:image","content":"https://carac.jordan-chap.com/og-preview.png"}]]
+13:[[["$","article","carac-0-10-0",{"className":"article-module__ZSW_Uq__article release_note-module__r150Za__releaseNote","children":[["$","span",null,{"className":"release_note-module__r150Za__publishDate","children":"November 3, 2026"}],["$","h1",null,{"className":"release_note-module__r150Za__title","children":"Carac 0.10.0: iCloud sync and Apple Fitness"}],["$","ul",null,{"children":["\n",["$","li",null,{"children":"Your trainings and sessions now sync with iCloud across your iPhone and iPad."}],"\n",["$","li",null,{"children":"Sessions can be saved as strength training workouts in Apple Health and Fitness. Turn it on in Settings."}],"\n",["$","li",null,{"children":"The last weight of each exercise shows in the session list."}],"\n",["$","li",null,{"children":"Data backup has its own menu, separate from settings."}],"\n",["$","li",null,{"children":"Weeks now start on Monday."}],"\n",["$","li",null,{"children":"Carac is fully translated into French."}],"\n",["$","li",null,{"children":"Fixes: sessions are sorted by date, and today's sessions show up on a free day."}],"\n"]}]]}],["$","article","backup-your-data",{"className":"article-module__ZSW_Uq__article release_note-module__r150Za__releaseNote","children":[["$","span",null,{"className":"release_note-module__r150Za__publishDate","children":"January 24, 2026"}],["$","h1",null,{"className":"release_note-module__r150Za__title","children":"Back up your data"}],["$","ul",null,{"children":["\n",["$","li",null,{"children":"Export all your trainings and sessions to a JSON file."}],"\n",["$","li",null,{"children":"Import a backup to restore your data on any device."}],"\n",["$","li",null,{"children":"Clearer messages when a backup file can't be read."}],"\n"]}]]}],["$","article","train-any-day",{"className":"article-module__ZSW_Uq__article release_note-module__r150Za__releaseNote","children":[["$","span",null,{"className":"release_note-module__r150Za__publishDate","children":"January 16, 2026"}],["$","h1",null,{"className":"release_note-module__r150Za__title","children":"Train on any day"}],["$","ul",null,{"children":["\n",["$","li",null,{"children":"Tap a day of the week on the home screen to start its training, even if it isn't planned for today."}],"\n",["$","li",null,{"children":"Free days show up in the week, so you see your rest days at a glance."}],"\n",["$","li",null,{"children":"The statistics calendar only highlights the days you trained."}],"\n",["$","li",null,{"children":"Carac now asks for confirmation before you cancel a session."}],"\n"]}]]}],["$","article","statistics-for-every-training",{"className":"article-module__ZSW_Uq__article release_note-module__r150Za__releaseNote","children":[["$","span",null,{"className":"release_note-module__r150Za__publishDate","children":"December 23, 2025"}],["$","h1",null,{"className":"release_note-module__r150Za__title","children":"Statistics for every training"}],["$","ul",null,{"children":["\n",["$","li",null,{"children":"Each training gets its own statistics: a chart of the total weight lifted per session, total weight pulled, best session, average and average trend."}],"\n",["$","li",null,{"children":"Preview how today's session compares while you are still training."}],"\n",["$","li",null,{"children":"Choose between light, dark or system appearance."}],"\n"]}]]}],["$","article","session-history",{"className":"article-module__ZSW_Uq__article release_note-module__r150Za__releaseNote","children":[["$","span",null,{"className":"release_note-module__r150Za__publishDate","children":"November 25, 2025"}],["$","h1",null,{"className":"release_note-module__r150Za__title","children":"Your session history"}],["$","ul",null,{"children":["\n",["$","li",null,{"children":"New statistics tab with a calendar of your sessions."}],"\n",["$","li",null,{"children":"Each exercise shows your best set from last time, and your last values are prefilled."}],"\n",["$","li",null,{"children":"Delete a session you logged by mistake."}],"\n",["$","li",null,{"children":"The screen stays awake during a session."}],"\n","$L1b","\n"]}]]}]],false]
+1b:["$","li",null,{"children":"A short introduction welcomes you on first launch."}]

@@ -1,0 +1,115 @@
+1:"$Sreact.fragment"
+2:I[39756,["/_next/static/chunks/2e2n0wy891_-d.js"],"default"]
+3:I[37457,["/_next/static/chunks/2e2n0wy891_-d.js"],"default"]
+b:I[68027,[],"default",1]
+:HL["/_next/static/chunks/27_029j33cmrj.css","style"]
+:HL["/_next/static/chunks/1njxyva9nlkso.css","style"]
+:HL["/_next/static/chunks/0g5639ftkj1rq.css","style"]
+:HL["/_next/static/media/406d3fc8d5ec9f59-s.p.0mnr43et3sf34.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/a85fe84266768609-s.p.0h6ig86gwutp4.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+4:Ta8d,
+      :root,
+      :root[data-theme="light"] {
+        color-scheme: light;
+        --color-scheme: light;
+        --color-text-primary: oklch(19.99% 0.01 153.84deg);
+--color-text-secondary: oklch(48.08% 0.02 157.72deg);
+--color-fill-0: oklch(100% 0 none);
+--color-fill-1: oklch(97.85% 0.01 154.89deg);
+--color-fill-2: oklch(94.79% 0.02 154.8deg);
+--color-fill-3: oklch(90.14% 0.03 155.87deg);
+--color-accent-brand: oklch(73.03% 0.19 147.44deg);
+--color-accent-orange: oklch(75.33% 0.17 55.71deg);
+--color-accent-green: oklch(73.03% 0.19 147.44deg);
+--color-accent-red: oklch(65.42% 0.23 28.66deg);
+--color-accent-blue: oklch(60.27% 0.22 257.42deg);
+--color-accent-indigo: oklch(52.94% 0.19 278.34deg);
+--color-accent-mint: oklch(74.81% 0.13 189.02deg);
+--color-accent-purple: oklch(61.49% 0.21 312.42deg);
+--color-accent-pink: oklch(64.97% 0.24 17.9deg);
+--color-text-accent-brand: oklch(100% 0 none);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --color-scheme: dark;
+          --color-text-primary: oklch(100% 0 none);
+--color-text-secondary: oklch(94.3% 0.01 286.23deg / 0.6);
+--color-fill-0: oklch(0% 0 none);
+--color-fill-1: oklch(0% 0 none);
+--color-fill-2: oklch(22.73% 0 286.17deg);
+--color-fill-3: oklch(29.39% 0 286.28deg);
+--color-accent-brand: oklch(75.55% 0.21 146.98deg);
+--color-accent-orange: oklch(76.19% 0.17 57.05deg);
+--color-accent-green: oklch(75.55% 0.21 146.98deg);
+--color-accent-red: oklch(66.33% 0.22 28.29deg);
+--color-accent-blue: oklch(62.42% 0.21 255.48deg);
+--color-accent-indigo: oklch(55.64% 0.2 278.15deg);
+--color-accent-mint: oklch(85.14% 0.11 192.43deg);
+--color-accent-purple: oklch(65.6% 0.23 312.43deg);
+--color-accent-pink: oklch(65.77% 0.23 16.02deg);
+--color-text-accent-brand: oklch(100% 0 none);
+        }
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --color-scheme: dark;
+        --color-text-primary: oklch(100% 0 none);
+--color-text-secondary: oklch(94.3% 0.01 286.23deg / 0.6);
+--color-fill-0: oklch(0% 0 none);
+--color-fill-1: oklch(0% 0 none);
+--color-fill-2: oklch(22.73% 0 286.17deg);
+--color-fill-3: oklch(29.39% 0 286.28deg);
+--color-accent-brand: oklch(75.55% 0.21 146.98deg);
+--color-accent-orange: oklch(76.19% 0.17 57.05deg);
+--color-accent-green: oklch(75.55% 0.21 146.98deg);
+--color-accent-red: oklch(66.33% 0.22 28.29deg);
+--color-accent-blue: oklch(62.42% 0.21 255.48deg);
+--color-accent-indigo: oklch(55.64% 0.2 278.15deg);
+--color-accent-mint: oklch(85.14% 0.11 192.43deg);
+--color-accent-purple: oklch(65.6% 0.23 312.43deg);
+--color-accent-pink: oklch(65.77% 0.23 16.02deg);
+--color-text-accent-brand: oklch(100% 0 none);
+      }
+    9:X
+0:{"P":null,"c":["","policy"],"q":"","i":false,"f":[[["",{"children":["(main)",{"children":["policy",{"children":["__PAGE__",{},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4624]},"$undefined","$undefined",4624],[["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/27_029j33cmrj.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/1njxyva9nlkso.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/0ja5-7tedjp30.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-theme":"system","children":[["$","head",null,{"children":[false,["$","link",null,{"rel":"icon","href":"/favicon.png","type":"image/png","sizes":"48x48"}],["$","style",null,{"children":"$4"}],"$L5"]}],"$L6"]}]]}],{"children":["$L7",{"children":["$L8",{},null,false,null]},null,false,null]},null,false,null]},null,false,"$9"],"$La",false]],"m":"$undefined","G":["$b",[]],"S":true,"h":null,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"yLF_MikEmTTbfVY8Cv-oy"}
+c:I[2913,["/_next/static/chunks/0ja5-7tedjp30.js"],"ThemeProvider"]
+d:I[805,["/_next/static/chunks/0ja5-7tedjp30.js"],"Navbar"]
+e:I[70417,["/_next/static/chunks/0ja5-7tedjp30.js"],"AppIcon"]
+24:I[97367,["/_next/static/chunks/2e2n0wy891_-d.js"],"ViewportBoundary"]
+26:I[97367,["/_next/static/chunks/2e2n0wy891_-d.js"],"MetadataBoundary"]
+27:"$Sreact.suspense"
+:HL["https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0..1,0&icon_names=check_circle,cloud_sync,contrast,favorite,lock,mail,open_in_full,open_in_new,pause,play_arrow,save,send,star,target,translate","style"]
+5:["$","link",null,{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0..1,0&icon_names=check_circle,cloud_sync,contrast,favorite,lock,mail,open_in_full,open_in_new,pause,play_arrow,save,send,star,target,translate"}]
+6:["$","body",null,{"children":["$","$Lc",null,{"children":[["$","$Ld",null,{"icon":["$","$Le",null,{"src":"/app-icon.png"}],"appName":"Carac","links":[{"label":"Features","href":"#features"},{"label":"Release Notes","href":"/release-notes"},{"label":"Developer","href":"https://jordan-chap.com","external":true}],"action":["$","a",null,{"href":"https://testflight.apple.com/join/cnudJaMH","className":"download_action_button-module__bT0Qaa__downloadActionButton download_action_button-module__bT0Qaa__small ","target":"_blank","aria-label":"$undefined","children":["$","div",null,{"className":"download_action_button-module__bT0Qaa__label","children":[["$","div",null,{"className":"download_action_button-module__bT0Qaa__appleLogo","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":18,"height":18,"fill":"currentColor","viewBox":"0 0 16 16","children":[["$","path",null,{"d":"M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"}],["$","path",null,{"d":"M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"}]]}]}],["$","div",null,{"className":"download_action_button-module__bT0Qaa__downloadLabel","children":"TestFlight"}]]}]}]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:f:0:1:0:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","footer",null,{"className":"compact_footer-module__i1N2Ta__compactFooter","children":[["$","div",null,{"className":"compact_footer-module__i1N2Ta__main","children":[["$","div",null,{"className":"$undefined","aria-hidden":"true","children":["$","$Le",null,{"src":"/app-icon.png"}]}],["$","div",null,{"className":"compact_footer-module__i1N2Ta__links","children":["$","ul",null,{"className":"compact_footer-module__i1N2Ta__links","children":[["$","li","/policy",{"children":["$","a",null,{"href":"/policy","className":"compact_footer-module__i1N2Ta__link","target":"_self","rel":"$undefined","children":"Privacy Policy"}]}],["$","li","/terms",{"children":["$","a",null,{"href":"/terms","className":"compact_footer-module__i1N2Ta__link","target":"_self","rel":"$undefined","children":"Terms of Use"}]}],["$","li","/release-notes",{"children":["$","a",null,{"href":"/release-notes","className":"compact_footer-module__i1N2Ta__link","target":"_self","rel":"$undefined","children":"Release Notes"}]}],"$Lf","$L10"]}]}]]}],"$L11"]}]]}]}]
+7:["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0g5639ftkj1rq.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","article",null,{"className":"article-module__ZSW_Uq__article ","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]
+8:["$","$1","c",{"children":[[["$","h2",null,{"children":"Privacy Policy"}],"\n",["$","p",null,{"children":["$","em",null,{"children":"Last updated: November 3, 2026"}]}],"\n",["$","p",null,{"children":["This Privacy Policy explains how ",["$","strong",null,{"children":"Carac"}]," (the \"App\"), a strength training log for iPhone and iPad, handles information. The App is developed and published by Jordan Chapelle (\"we\", \"us\"), who is responsible for the processing described below."]}],"\n",["$","p",null,{"children":["In short: ",["$","strong",null,{"children":"the App has no accounts, no analytics, no advertising and no tracking. We do not collect, store or sell any personal data, and we run no server that receives your data."}]]}],"\n",["$","h3",null,{"children":"Information We Collect"}],"\n",["$","p",null,{"children":"We do not collect any personal information. The App does not ask for your name, email address, phone number, location, contacts or photos, and it contains no analytics, crash reporting or advertising SDKs."}],"\n",["$","h3",null,{"children":"Data Stored on Your Device and in Your iCloud"}],"\n",["$","p",null,{"children":"To work, the App saves the following information:"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"Your trainings, their exercises and the weekdays they are assigned to."}],"\n",["$","li",null,{"children":"Your sessions: the date, and the weight and repetitions of every set you log."}],"\n",["$","li",null,{"children":"Your preferences (theme, Apple Health setting)."}],"\n"]}],"\n",["$","p",null,{"children":["This data is stored ",["$","strong",null,{"children":"on your device"}],". If iCloud is enabled for the App in your device settings, it is also synced through ",["$","strong",null,{"children":"your own private iCloud database"}]," (Apple CloudKit) so it is available on your other iPhone and iPad devices signed in to the same Apple Account. This private database belongs to your Apple Account: we cannot see, access or modify its contents. iCloud is operated by Apple under the ",["$","a",null,{"href":"https://www.apple.com/legal/privacy/","children":"Apple Privacy Policy"}],"."]}],"\n",["$","h3",null,{"children":"Apple Health and Fitness"}],"\n",["$","p",null,{"children":["If you turn on ",["$","strong",null,{"children":"Record workouts in Apple Fitness"}]," in the App's settings and grant permission, the App saves each session as a strength training workout (with its active energy) in Apple Health, so it appears in Apple Health and Fitness. To complete these workouts, the App can read your heart rate and active energy during the session. The App only accesses the Apple Health data you allow in the system permission sheet. This data is read and written locally on your device, is never sent to us or to any third party, is not stored in the App's own data or iCloud sync, and is never used for advertising or marketing. You can turn the option off in the App, and change or revoke the permission at any time in the Settings app under Health."]}],"\n",["$","h3",null,{"children":"Backups You Export"}],"\n",["$","p",null,{"children":"The App lets you export all your trainings and sessions to a JSON backup file and import it again. The file is created on your device and only goes where you choose to save or share it. We never receive it."}],"\n",["$","h3",null,{"children":"How We Use Information"}],"\n",["$","p",null,{"children":"Because we do not collect personal data, we do not use it for any purpose. Data stored on your device and in your iCloud is used only to provide the App's features, such as showing today's training, prefilling your last weights and computing your statistics."}],"\n",["$","h3",null,{"children":"Sharing and Selling of Data"}],"\n","$L12","\n","$L13","\n","$L14","\n","$L15","\n","$L16","\n","$L17","\n","$L18","\n","$L19","\n","$L1a","\n","$L1b","\n","$L1c","\n","$L1d","\n","$L1e","\n","$L1f","\n","$L20","\n","$L21","\n","$L22"],null,"$L23"]}]
+a:["$","$1","h",{"children":[null,["$","$L24",null,{"children":"$L25"}],["$","div",null,{"hidden":true,"children":["$","$L26",null,{"children":["$","$27",null,{"name":"Next.Metadata","children":"$L28"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+29:I[97367,["/_next/static/chunks/2e2n0wy891_-d.js"],"OutletBoundary"]
+9:C
+f:["$","li","https://github.com/lebojo/carac-ios",{"children":["$","a",null,{"href":"https://github.com/lebojo/carac-ios","className":"compact_footer-module__i1N2Ta__link","target":"_blank","rel":"noopener noreferrer","children":"Source Code"}]}]
+10:["$","li","https://jordan-chap.com",{"children":["$","a",null,{"href":"https://jordan-chap.com","className":"compact_footer-module__i1N2Ta__link","target":"_blank","rel":"noopener noreferrer","children":"Developer"}]}]
+11:["$","div",null,{"className":"compact_footer-module__i1N2Ta__footnotes","children":[["$","div",null,{"className":"$undefined","children":"© 2026 Jordan Chapelle."}],["$","div",null,{"className":"$undefined","children":["Website is built with"," ",["$","a",null,{"target":"_blank","href":"https://appview.dev","children":"AppView"}]]}]]}]
+12:["$","p",null,{"children":"We do not sell, rent, trade or share any personal data with third parties. We do not use your data for advertising or profiling."}]
+13:["$","h3",null,{"children":"Tracking"}]
+14:["$","p",null,{"children":"The App does not track you across other companies' apps or websites and does not use advertising identifiers."}]
+15:["$","h3",null,{"children":"Data Retention and Deletion"}]
+16:["$","p",null,{"children":"We do not retain any data about you on our servers. You can delete individual sessions in the App at any time. Deleting the App removes its data from your device; to remove the synced copy as well, delete the App's data from iCloud in the Settings app (your name, then iCloud). Workouts saved to Apple Health can be deleted in the Health app."}]
+17:["$","h3",null,{"children":"Security"}]
+18:["$","p",null,{"children":"Data stored locally is protected by your device's built-in security features. Data synced with iCloud is protected by Apple's iCloud security."}]
+19:["$","h3",null,{"children":"Children's Privacy"}]
+1a:["$","p",null,{"children":"The App is suitable for all ages. We do not knowingly collect any personal information from anyone, including children under 13 (or the equivalent minimum age in your country)."}]
+1b:["$","h3",null,{"children":"Your Rights"}]
+1c:["$","p",null,{"children":"Depending on where you live, you may have rights under data protection laws such as the EU General Data Protection Regulation (GDPR), the Swiss Federal Act on Data Protection (FADP) or the California Consumer Privacy Act (CCPA), including the right to access, correct or delete your personal data. Since we do not hold any personal data about you, there is nothing for us to access, correct or delete, but you can contact us at any time with questions. You also have the right to lodge a complaint with your local data protection authority."}]
+1d:["$","h3",null,{"children":"This Website"}]
+1e:["$","p",null,{"children":["This website is a static site hosted on GitHub Pages. It sets no cookies and uses no analytics. GitHub may process technical request data, such as your IP address, to serve and protect the site, as described in the ",["$","a",null,{"href":"https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement","children":"GitHub Privacy Statement"}],". Its icons are loaded from Google Fonts, which receives the same kind of technical request data under the ",["$","a",null,{"href":"https://policies.google.com/privacy","children":"Google Privacy Policy"}],"."]}]
+1f:["$","h3",null,{"children":"Changes to This Policy"}]
+20:["$","p",null,{"children":"We may update this Privacy Policy from time to time, for example if the App gains new features. Any changes will be posted on this page with an updated \"Last updated\" date."}]
+21:["$","h3",null,{"children":"Contact"}]
+22:["$","p",null,{"children":["If you have any questions about this Privacy Policy, contact us at ",["$","a",null,{"href":"mailto:contact@jordan-chap.com","children":"contact@jordan-chap.com"}],"."]}]
+23:["$","$L29",null,{"children":["$","$27",null,{"name":"Next.MetadataOutlet","children":"$@2a"}]}]
+25:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+28:[["$","title","0",{"children":"Privacy Policy | Carac"}],["$","meta","1",{"name":"description","content":"How Carac handles your data on iPhone and iPad."}],["$","meta","2",{"property":"og:title","content":"Carac"}],["$","meta","3",{"property":"og:description","content":"Carac is a free strength training log for iPhone and iPad. Plan your trainings by weekday, log every set in seconds and watch your progress."}],["$","meta","4",{"property":"og:url","content":"https://carac.jordan-chap.com"}],["$","meta","5",{"property":"og:image","content":"https://carac.jordan-chap.com/og-preview.png"}],["$","meta","6",{"property":"og:image:width","content":"1280"}],["$","meta","7",{"property":"og:image:height","content":"720"}],["$","meta","8",{"property":"og:image:alt","content":"Carac, a strength training log for iPhone and iPad"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","11",{"name":"twitter:title","content":"Carac"}],["$","meta","12",{"name":"twitter:description","content":"Carac is a free strength training log for iPhone and iPad. Plan your trainings by weekday, log every set in seconds and watch your progress."}],["$","meta","13",{"name":"twitter:image","content":"https://carac.jordan-chap.com/og-preview.png"}]]
+2a:null
