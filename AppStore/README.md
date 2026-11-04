@@ -22,7 +22,7 @@ The support, marketing and privacy URLs point to the website in `Site/` at `http
 
 ## Screenshots
 
-The raw captures come from the iPhone 18 Pro Max (1320 × 2868, the 6.9" class) and the 13" iPad Pro (2064 × 2752) simulators, on iOS 27, with the status bar set to 9:41, full battery and full signal. They were taken from a Debug build seeded with eight weeks of realistic training history.
+The raw captures come from the iPhone 18 Pro Max (1320 × 2868, the 6.9" class), the iPhone Duo (1398 × 2034, its primary display) and the 13" iPad Pro (2064 × 2752) simulators, on iOS 27, with the status bar set to 9:41, full battery and full signal. They were taken from a Debug build seeded with eight weeks of realistic training history.
 
 | # | Raw file | English caption | French caption |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ The raw captures come from the iPhone 18 Pro Max (1320 × 2868, the 6.9" class) 
 | 5 | `05-calendar` | Every session, day by day | Chaque séance, jour après jour |
 | 6 | `06-trainings` | Build trainings your way | Vos entraînements, à votre façon |
 
-The final screenshots in `export/` have the caption and the device frame. Regenerate them after changing a caption or a capture:
+The final screenshots in `export/` have the caption and the device frame. The iPhone Duo set reuses the iPhone captions with the captures in `raw/duo/`. It has no bezel image, so its frame is drawn by the script, like the iPad one. Regenerate them after changing a caption or a capture:
 
 ```sh
 python3 AppStore/Scripts/make_screenshots.py
@@ -44,6 +44,7 @@ Upload them with the [`asc`](https://github.com/rorkai/App-Store-Connect-CLI) CL
 ```sh
 asc screenshots upload --version-localization LOCALIZATION_ID --path AppStore/Screenshots/export/en/iphone --device-type IPHONE_69 --replace --confirm --concurrency 1
 asc screenshots upload --version-localization LOCALIZATION_ID --path AppStore/Screenshots/export/en/ipad --device-type IPAD_PRO_3GEN_129 --replace --confirm --concurrency 1
+asc screenshots upload --version-localization LOCALIZATION_ID --path AppStore/Screenshots/export/en/duo --device-type IPHONE_DUO --replace --confirm --concurrency 1
 ```
 
 Keep `--concurrency 1`: parallel uploads can land out of order in the set.
