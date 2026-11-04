@@ -15,7 +15,7 @@ struct CreateAnExerciseSheetView: View {
     @State private var newExercise = Exercise()
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section("Carac") {
                     HStack {

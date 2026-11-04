@@ -14,7 +14,7 @@ struct SessionExercisesView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 0) {
                 ForEach($exercises) { exercise in
-                    NavigationView {
+                    NavigationStack {
                         ExerciseDraftView(exercise: exercise)
                     }
                     .containerRelativeFrame(.horizontal)
