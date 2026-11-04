@@ -36,7 +36,7 @@ struct AddSetsButton: View {
             } label: {
                 Text("Add Set")
             }
-            .buttonStyle(.borderedProminent)
+            .glassButton()
         }
         .frame(maxWidth: .infinity)
         .padding()

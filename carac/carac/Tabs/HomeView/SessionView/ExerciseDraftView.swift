@@ -1,10 +1,3 @@
-//
-//  ExerciseDraftView.swift
-//  carac
-//
-//  Created by Jordan on 07.03.2025.
-//
-
 import SwiftData
 import SwiftUI
 
@@ -54,14 +47,20 @@ struct ExerciseDraftView: View {
                 .onDelete(perform: deleteSets)
             } header: {
                 Text("Sets: \(exercise.sets.count)")
-            } footer: {
-                AddSetsButton(exercise: $exercise)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
             }
         }
         .caracListStyle()
-        .navigationTitle(exercise.name)
+        .topBar {
+            Text(exercise.name)
+                .font(.title2.bold())
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+        }
+        .bottomBar {
+            AddSetsButton(exercise: $exercise)
+        }
         .scrollIndicators(.never)
         .listStyle(.plain)
         .task {
