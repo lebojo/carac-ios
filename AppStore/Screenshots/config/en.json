@@ -1,0 +1,106 @@
+{
+  "appName": "Carac",
+  "fakeAppName": "Carac",
+  "bundleID": "ch.bojeux.carac",
+  "language": "en",
+  "variantName": "English",
+  "font": "ArialRoundedMTBold",
+  "fontSize": 140,
+  "textColor": "#FFFFFF",
+  "background": {
+    "type": "gradient",
+    "colors": [
+      "#34C759",
+      "#16803D"
+    ]
+  },
+  "groups": [
+    {
+      "device": "sixPointSevenInch",
+      "bezel": "iPhone Air",
+      "bezelColor": "Cloud White",
+      "size": [
+        1320,
+        2868
+      ],
+      "orientation": "portrait",
+      "defaults": {
+        "textY": 120,
+        "maxWidth": 1120,
+        "maxLines": 2,
+        "deviceY": 560,
+        "deviceScale": 0.82
+      },
+      "screenshots": [
+        {
+          "image": "../raw/iphone/en/light/01-home.png",
+          "caption": "Your training week, planned"
+        },
+        {
+          "image": "../raw/iphone/en/light/02-exercise.png",
+          "caption": "Log every set in a tap"
+        },
+        {
+          "image": "../raw/iphone/en/light/04-progress.png",
+          "caption": "Watch yourself get stronger"
+        },
+        {
+          "image": "../raw/iphone/en/light/03-session.png",
+          "caption": "Your whole session at a glance"
+        },
+        {
+          "image": "../raw/iphone/en/light/05-calendar.png",
+          "caption": "Every session, day by day"
+        },
+        {
+          "image": "../raw/iphone/en/light/06-trainings.png",
+          "caption": "Build trainings your way"
+        }
+      ]
+    },
+    {
+      "device": "iPadSixthGen",
+      "bezel": "iPad Pro 11\" (M4)",
+      "bezelColor": "Space Gray",
+      "size": [
+        2064,
+        2752
+      ],
+      "orientation": "portrait",
+      "defaults": {
+        "textY": 120,
+        "maxWidth": 1700,
+        "maxLines": 2,
+        "fontSize": 150,
+        "deviceY": 520,
+        "deviceScale": 0.74
+      },
+      "screenshots": [
+        {
+          "image": "../raw/ipad/en/light/01-home.png",
+          "caption": "Your training week, planned"
+        },
+        {
+          "image": "../raw/ipad/en/light/02-exercise.png",
+          "caption": "Log every set in a tap"
+        },
+        {
+          "image": "../raw/ipad/en/light/04-progress.png",
+          "caption": "Watch yourself get stronger"
+        },
+        {
+          "image": "../raw/ipad/en/light/03-session.png",
+          "caption": "Your whole session at a glance"
+        },
+        {
+          "image": "../raw/ipad/en/light/05-calendar.png",
+          "caption": "Every session, day by day"
+        },
+        {
+          "image": "../raw/ipad/en/light/06-trainings.png",
+          "caption": "Build trainings your way"
+        }
+      ]
+    }
+  ]
+}

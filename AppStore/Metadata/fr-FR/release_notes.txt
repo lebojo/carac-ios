@@ -1,0 +1,7 @@
+• Vos entraînements et séances se synchronisent avec iCloud sur tous vos appareils
+• Les séances peuvent être enregistrées comme entraînements dans Apple Forme
+• Le dernier poids de chaque exercice s'affiche dans la liste de la séance
+• La sauvegarde des données a son propre menu, séparé des réglages
+• La semaine commence désormais le lundi
+• Traduction française complète
+• Corrections : séances triées par date, séances du jour visibles un jour de repos

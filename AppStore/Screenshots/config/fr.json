@@ -1,0 +1,106 @@
+{
+  "appName": "Carac",
+  "fakeAppName": "Carac",
+  "bundleID": "ch.bojeux.carac",
+  "language": "fr",
+  "variantName": "Français",
+  "font": "ArialRoundedMTBold",
+  "fontSize": 140,
+  "textColor": "#FFFFFF",
+  "background": {
+    "type": "gradient",
+    "colors": [
+      "#34C759",
+      "#16803D"
+    ]
+  },
+  "groups": [
+    {
+      "device": "sixPointSevenInch",
+      "bezel": "iPhone Air",
+      "bezelColor": "Cloud White",
+      "size": [
+        1320,
+        2868
+      ],
+      "orientation": "portrait",
+      "defaults": {
+        "textY": 120,
+        "maxWidth": 1120,
+        "maxLines": 2,
+        "deviceY": 560,
+        "deviceScale": 0.82
+      },
+      "screenshots": [
+        {
+          "image": "../raw/iphone/fr/light/01-home.png",
+          "caption": "Votre semaine, planifiée"
+        },
+        {
+          "image": "../raw/iphone/fr/light/02-exercise.png",
+          "caption": "Chaque série notée d’un geste"
+        },
+        {
+          "image": "../raw/iphone/fr/light/04-progress.png",
+          "caption": "Voyez vos progrès"
+        },
+        {
+          "image": "../raw/iphone/fr/light/03-session.png",
+          "caption": "Toute la séance d’un coup d’œil"
+        },
+        {
+          "image": "../raw/iphone/fr/light/05-calendar.png",
+          "caption": "Chaque séance, jour après jour"
+        },
+        {
+          "image": "../raw/iphone/fr/light/06-trainings.png",
+          "caption": "Vos entraînements, à votre façon"
+        }
+      ]
+    },
+    {
+      "device": "iPadSixthGen",
+      "bezel": "iPad Pro 11\" (M4)",
+      "bezelColor": "Space Gray",
+      "size": [
+        2064,
+        2752
+      ],
+      "orientation": "portrait",
+      "defaults": {
+        "textY": 120,
+        "maxWidth": 1700,
+        "maxLines": 2,
+        "fontSize": 150,
+        "deviceY": 520,
+        "deviceScale": 0.74
+      },
+      "screenshots": [
+        {
+          "image": "../raw/ipad/fr/light/01-home.png",
+          "caption": "Votre semaine, planifiée"
+        },
+        {
+          "image": "../raw/ipad/fr/light/02-exercise.png",
+          "caption": "Chaque série notée d’un geste"
+        },
+        {
+          "image": "../raw/ipad/fr/light/04-progress.png",
+          "caption": "Voyez vos progrès"
+        },
+        {
+          "image": "../raw/ipad/fr/light/03-session.png",
+          "caption": "Toute la séance d’un coup d’œil"
+        },
+        {
+          "image": "../raw/ipad/fr/light/05-calendar.png",
+          "caption": "Chaque séance, jour après jour"
+        },
+        {
+          "image": "../raw/ipad/fr/light/06-trainings.png",
+          "caption": "Vos entraînements, à votre façon"
+        }
+      ]
+    }
+  ]
+}

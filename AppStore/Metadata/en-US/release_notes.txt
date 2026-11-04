@@ -1,0 +1,7 @@
+• Your trainings and sessions now sync with iCloud across your devices
+• Sessions can be saved as workouts in Apple Fitness
+• The last weight of each exercise shows in the session list
+• Data backup has its own menu, separate from settings
+• Weeks now start on Monday
+• Complete French translation
+• Fixes: sessions sorted by date, today's sessions shown on a free day
