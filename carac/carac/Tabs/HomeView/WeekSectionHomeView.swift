@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct WeekSectionHomeView: View {
-    let emptyDays: Set<RepeatDay>
+    let emptyDays: [RepeatDay]
     let trainingDays: [RepeatDay: [Training]]
 
     init(trainings: [Training]) {
-        trainingDays = Dictionary(uniqueKeysWithValues: RepeatDay.allCases.compactMap { day in
+        let trainingDays = Dictionary(uniqueKeysWithValues: RepeatDay.allCases.compactMap { day in
             let dayTraining = trainings
                 .filter { $0.repeatDays.contains(day.rawValue) }
 
             return dayTraining.isEmpty ? nil : (day, dayTraining)
         })
 
-        emptyDays = Set(RepeatDay.allCases).subtracting(trainingDays.keys).filter { $0 != .noRepeat }
+        self.trainingDays = trainingDays
+        emptyDays = RepeatDay.allCases.filter { $0 != .noRepeat && trainingDays[$0] == nil }
     }
 
     var body: some View {

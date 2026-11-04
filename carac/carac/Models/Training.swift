@@ -17,6 +17,10 @@ final class Training: Identifiable {
     @Relationship(deleteRule: .nullify, inverse: \Session.training)
     var sessions: [Session]? = []
 
+    var sortedExercises: [Exercise] {
+        (exercises ?? []).sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+    }
+
     var totalWeightPulled: Double {
         (sessions ?? []).reduce(0) { $0 + $1.totalWeightPulled }
     }

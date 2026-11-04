@@ -43,7 +43,7 @@ public struct ExerciseDraft: Identifiable, Hashable {
         self.id = UUID()
         self.name = model.name
         self.weightSteps = model.weightSteps
-        self.sets = (model.sets ?? []).map { ExerciseSetDraft(from: $0) }
+        self.sets = (model.sets ?? []).sorted { $0.id < $1.id }.map { ExerciseSetDraft(from: $0) }
     }
 }
 
@@ -64,9 +64,7 @@ public struct TrainingDraft: Identifiable, Hashable {
         self.id = UUID()
         self.title = training.title
         self.repeatDays = training.repeatDays
-        self.exercises = (training.exercises ?? []).map { ex in
-            ExerciseDraft(from: ex)
-        }
+        self.exercises = training.sortedExercises.map { ExerciseDraft(from: $0) }
     }
 }
 
