@@ -7,8 +7,9 @@ AppStore/
 ├── Metadata/<locale>/        name, subtitle, promotional text, description, keywords, release notes, URLs
 ├── Screenshots/
 │   ├── raw/<device>/<lang>/<light|dark>/   plain simulator captures, no bezel, no caption
-│   ├── config/<lang>.json                  captions and layout of the screenshot project
-│   └── Carac-<LANG>.pco                     screenshot project, open it to export the final PNGs
+│   ├── config/<lang>.json                  captions and layout of the screenshots
+│   ├── export/<lang>/<device>/NN.png        final screenshots uploaded to App Store Connect
+│   └── Carac-<LANG>.pco                     screenshot project, to fine tune them in the mockup app
 ├── Creatives/<lang>/          iOS 27 product page header and search results images
 └── Scripts/                   generators for the creatives
 ```
@@ -32,14 +33,29 @@ The raw captures come from the iPhone 18 Pro Max (1320 × 2868, the 6.9" class) 
 | 5 | `05-calendar` | Every session, day by day | Chaque séance, jour après jour |
 | 6 | `06-trainings` | Build trainings your way | Vos entraînements, à votre façon |
 
-Regenerate a screenshot project after changing a caption or a capture:
+The final screenshots in `export/` have the caption and the device frame. Regenerate them after changing a caption or a capture:
+
+```sh
+python3 AppStore/Scripts/make_screenshots.py
+```
+
+Upload them with the [`asc`](https://github.com/rorkai/App-Store-Connect-CLI) CLI, one set per locale and device:
+
+```sh
+asc screenshots upload --version-localization LOCALIZATION_ID --path AppStore/Screenshots/export/en/iphone --device-type IPHONE_69 --replace --confirm --concurrency 1
+asc screenshots upload --version-localization LOCALIZATION_ID --path AppStore/Screenshots/export/en/ipad --device-type IPAD_PRO_3GEN_129 --replace --confirm --concurrency 1
+```
+
+Keep `--concurrency 1`: parallel uploads can land out of order in the set.
+
+The `.pco` projects hold the same captions for the mockup app. Regenerate them with:
 
 ```sh
 python3 ~/.claude/skills/appstore-screenshots-pco/generate_pco.py AppStore/Screenshots/config/en.json AppStore/Screenshots/Carac-EN.pco
 python3 ~/.claude/skills/appstore-screenshots-pco/generate_pco.py AppStore/Screenshots/config/fr.json AppStore/Screenshots/Carac-FR.pco
 ```
 
-Then open the `.pco` to fine tune and export the PNGs for App Store Connect. The dark captures are not used on the App Store; the website uses them for its dark theme.
+The dark captures are not used on the App Store; the website uses them for its dark theme.
 
 ## Product page header and search results (iOS 27)
 
