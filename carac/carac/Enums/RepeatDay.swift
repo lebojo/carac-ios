@@ -47,21 +47,21 @@ enum RepeatDay: String, CaseIterable {
     var title: String {
         switch self {
         case .monday:
-            return "Monday"
+            return String(localized: "Monday")
         case .tuesday:
-            return "Tuesday"
+            return String(localized: "Tuesday")
         case .wednesday:
-            return "Wednesday"
+            return String(localized: "Wednesday")
         case .thursday:
-            return "Thursday"
+            return String(localized: "Thursday")
         case .friday:
-            return "Friday"
+            return String(localized: "Friday")
         case .saturday:
-            return "Saturday"
+            return String(localized: "Saturday")
         case .sunday:
-            return "Sunday"
+            return String(localized: "Sunday")
         case .noRepeat:
-            return "No repeat"
+            return String(localized: "No repeat")
         }
     }
 

@@ -59,7 +59,7 @@ struct TodayHomeView: View {
             ContentUnavailableView(
                 "Free day!",
                 systemImage: "sun.dust",
-                description: Text("Chill, it's \(RepeatDay.today.title.lowercased()). You have nothing to do today.")
+                description: Text("Chill, it's \(RepeatDay.today.title.localizedLowercase). You have nothing to do today.")
             )
         }
     }

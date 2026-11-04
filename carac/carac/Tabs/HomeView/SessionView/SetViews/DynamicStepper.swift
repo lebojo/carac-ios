@@ -12,7 +12,7 @@ struct DynamicStepper: View {
     let value: Binding<Double>
     let step: Double
 
-    let text: String
+    let text: LocalizedStringKey
     let systemImage: String
 
     let isFinished: Bool

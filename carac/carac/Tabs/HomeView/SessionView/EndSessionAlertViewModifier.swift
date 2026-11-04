@@ -71,7 +71,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
         case modify
         case cancel
 
-        var title: String {
+        var title: LocalizedStringKey {
             switch self {
                 case .save:
                     "Save session?"
@@ -82,7 +82,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
             }
         }
 
-        var message: String {
+        var message: LocalizedStringKey {
             switch self {
                 case .save:
                     "Terminate the session now and save all your stats ?"
@@ -93,7 +93,7 @@ struct EndSessionAlertViewModifier: ViewModifier {
             }
         }
 
-        var actionTitle: String {
+        var actionTitle: LocalizedStringKey {
             switch self {
                 case .save, .modify:
                     "Save"

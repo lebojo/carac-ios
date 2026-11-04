@@ -44,7 +44,7 @@ struct WeekSectionHomeView: View {
         } header: {
             Text("This week")
         } footer: {
-            Text("Press a day to start his training")
+            Text("Press a day to start a training")
         }
     }
 }

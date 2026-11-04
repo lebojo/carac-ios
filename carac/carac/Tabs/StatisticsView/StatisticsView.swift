@@ -43,7 +43,7 @@ struct StatisticsView: View {
                     Section("Today stats") {
                         Label("Total pulled: **\(currentDateTotalWeightPulled.maxDigits())**", systemImage: "trophy")
                         Label("Total sessions: **\(currentDateDoneSession.count)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(currentDateDoneExercises.count)**", systemImage: "dumbbell")
+                        Label("Total exercises: **\(currentDateDoneExercises.count)**", systemImage: "dumbbell")
                     }
 
                     Section("Global stats") {
@@ -52,7 +52,7 @@ struct StatisticsView: View {
                             .listRowSeparator(.hidden)
 
                         Label("Total sessions: **\(trainings.done.flatMap { $0.sessions ?? [] }.count)**", systemImage: "figure.run")
-                        Label("Total exercices: **\(trainings.done.flatMap { $0.exercises ?? [] }.count)**", systemImage: "dumbbell")
+                        Label("Total exercises: **\(trainings.done.flatMap { $0.exercises ?? [] }.count)**", systemImage: "dumbbell")
 
                         ForEach(trainings.templates, id: \.persistentModelID) { training in
                             ChevronRowButton(title: training.title) {

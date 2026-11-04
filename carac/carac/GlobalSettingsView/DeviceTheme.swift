@@ -23,7 +23,7 @@ enum DeviceTheme: String, Codable, CaseIterable {
         }
     }
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
             case .systemDefault:
                 return "System default"

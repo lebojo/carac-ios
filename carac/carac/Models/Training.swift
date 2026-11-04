@@ -30,7 +30,10 @@ final class Training: Identifiable {
     }
 
     var repeatDaysStringified: String {
-        repeatDays.joined(separator: ", ")
+        repeatDays
+            .compactMap(RepeatDay.init(rawValue:))
+            .map(\.title)
+            .formatted(.list(type: .and))
     }
 
     init(_ title: String, exercises: [Exercise] = [], repeatDays: [RepeatDay] = []) {

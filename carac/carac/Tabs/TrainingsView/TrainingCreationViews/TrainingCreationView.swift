@@ -37,7 +37,7 @@ struct TrainingCreationView: View {
                         && !newTraining.repeatDays.isEmpty
                     {
                         Text(
-                            "\(newTraining.title) should be done every \(newTraining.repeatDays.joined(separator: ", "))"
+                            "\(newTraining.title) should be done every \(newTraining.repeatDaysStringified)"
                         )
                     }
                 }
