@@ -7,6 +7,6 @@
 
 extension Double {
     func maxDigits(_ fractionDigits: Int = 2) -> String {
-        self.formatted(.number.precision(.fractionLength(fractionDigits))).replacingOccurrences(of: ".00", with: "")
+        formatted(.number.precision(.fractionLength(0...fractionDigits)))
     }
 }

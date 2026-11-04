@@ -24,9 +24,15 @@ struct StatisticsTrainingView: View {
         dataSessions.filter { $0.training?.title == trainingTitle }
     }
 
+    private var startedCurrentSession: SessionDraft? {
+        guard let currentSession, currentSession.totalWeightPulled > 0 else { return nil }
+
+        return currentSession
+    }
+
     private var sessionsCount: Int {
         let sessionsCount = sessions.count
-        if let currentSession, currentSession.totalWeightPulled > 0 {
+        if startedCurrentSession != nil {
             return sessionsCount + 1
         }
         return sessionsCount
@@ -34,10 +40,14 @@ struct StatisticsTrainingView: View {
 
     private var totalWeightPulled: Double {
         let totalSessionWeightPulled = sessions.reduce(0) { $0 + $1.totalWeightPulled }
-        if let currentSession, currentSession.totalWeightPulled > 0 {
-            return currentSession.totalWeightPulled + totalSessionWeightPulled
+        if let startedCurrentSession {
+            return startedCurrentSession.totalWeightPulled + totalSessionWeightPulled
         }
         return totalSessionWeightPulled
+    }
+
+    private var averageWeightPulled: Double {
+        sessionsCount > 0 ? totalWeightPulled / Double(sessionsCount) : 0
     }
 
     private var bestSession: (weightPulled: Double, date: Date)? {
@@ -63,8 +73,8 @@ struct StatisticsTrainingView: View {
 
         guard !changes.isEmpty else { return nil }
 
-        if let currentSession, let last = sorted.last {
-            changes.append((currentSession.totalWeightPulled - last.totalWeightPulled) / last.totalWeightPulled)
+        if let startedCurrentSession, let last = sorted.last, last.totalWeightPulled > 0 {
+            changes.append((startedCurrentSession.totalWeightPulled - last.totalWeightPulled) / last.totalWeightPulled)
         }
 
         let average = changes.reduce(0, +) / Double(changes.count)
@@ -77,17 +87,17 @@ struct StatisticsTrainingView: View {
             if sessions.count > 1 {
                 SessionChart(data: sessions.map {
                     ($0.totalWeightPulled, $0.date)
-                }, currentSessionData: currentSession.map { ($0.totalWeightPulled, $0.date) })
+                }, currentSessionData: startedCurrentSession.map { ($0.totalWeightPulled, $0.date) })
                     .padding()
             }
 
-            Section(currentSession != nil ? "Global training stats with today" : "Global training stats") {
+            Section(startedCurrentSession != nil ? "Global training stats with today" : "Global training stats") {
                 HallOfGloryView(totalWeightPulled: totalWeightPulled)
                 Text("Total times done: **\(sessionsCount)**")
                 if let bestSession {
-                    Text("Best: **\(bestSession.weightPulled)** at **\(bestSession.date.formatted(date: .abbreviated, time: .omitted))**")
+                    Text("Best: **\(bestSession.weightPulled.maxDigits()) kg** at **\(bestSession.date.formatted(date: .abbreviated, time: .omitted))**")
                 }
-                Text("Average: **\(sessionsCount > 0 ? totalWeightPulled / Double(sessionsCount) : 0)**")
+                Text("Average: **\(averageWeightPulled.maxDigits()) kg**")
                 if let averageTrend {
                     Text("Average trend: \(coloredAverageTrend(averageTrend))")
                 }
